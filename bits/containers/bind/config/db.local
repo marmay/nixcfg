@@ -1,0 +1,24 @@
+$TTL    3600
+local.  IN      SOA     dns.local.      root.local. (
+        1               ; Serial
+        3600            ; Refresh
+        600             ; Retry
+        86400           ; Expire
+        600             ; Negative Cache TTL
+);
+
+local.          IN      NS      dns.local.
+;@              IN      MX      10      dns.local.
+dns             IN      A       10.0.0.250
+keller          IN      A       10.0.0.10
+nas             IN      A       10.0.0.80
+media           IN      A       10.0.0.81
+tv              IN      A       10.0.0.82
+ldap            IN      A       10.0.0.83
+share           IN      A       10.0.0.84
+crosstrainer    IN      A       10.0.0.85
+music           IN      A       10.0.0.86
+superspotify    IN      A       10.0.0.86
+raphi-cd        IN      A       10.0.0.30
+BRW4CD577B1CE33	IN	A	10.0.0.230
+

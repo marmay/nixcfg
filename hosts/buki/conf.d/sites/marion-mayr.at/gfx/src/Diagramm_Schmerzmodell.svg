@@ -1,0 +1,1181 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1000"
+   height="1000"
+   viewBox="0 0 1000 1000"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="Diagramm_Schmerzmodell.svg">
+  <defs
+     id="defs4">
+    <marker
+       inkscape:stockid="Arrow2Mstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow2Mstart"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4451"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round;stroke:#004400;stroke-opacity:1;fill:#004400;fill-opacity:1"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="scale(0.6) translate(0,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker5739"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path5741"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#004400;fill-opacity:1;fill-rule:evenodd;stroke:#004400;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path5055"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#004400;fill-opacity:1;fill-rule:evenodd;stroke:#004400;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mstart"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path5052"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#004400;fill-opacity:1;fill-rule:evenodd;stroke:#004400;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(0.4,0,0,0.4,4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path5073"
+         style="fill:#004400;fill-opacity:1;fill-rule:evenodd;stroke:#004400;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5418"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#004400;fill-opacity:1;fill-rule:evenodd;stroke:#004400;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path5420"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5414"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#004400;fill-opacity:1;fill-rule:evenodd;stroke:#004400;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path5416"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5410"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#004400;fill-opacity:1;fill-rule:evenodd;stroke:#004400;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path5412"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5406"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#004400;fill-opacity:1;fill-rule:evenodd;stroke:#004400;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path5408"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5402"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#004400;fill-opacity:1;fill-rule:evenodd;stroke:#004400;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path5404"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5398"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#004400;fill-opacity:1;fill-rule:evenodd;stroke:#004400;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path5400"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5394"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#004400;fill-opacity:1;fill-rule:evenodd;stroke:#004400;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path5396"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5388"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Send">
+      <path
+         transform="matrix(-0.3,0,0,-0.3,0.69,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#004400;fill-opacity:1;fill-rule:evenodd;stroke:#004400;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path5390"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5384"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Send">
+      <path
+         transform="matrix(-0.3,0,0,-0.3,0.69,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#004400;fill-opacity:1;fill-rule:evenodd;stroke:#004400;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path5386"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5380"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Send">
+      <path
+         transform="matrix(-0.3,0,0,-0.3,0.69,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#004400;fill-opacity:1;fill-rule:evenodd;stroke:#004400;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path5382"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5376"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Send">
+      <path
+         transform="matrix(-0.3,0,0,-0.3,0.69,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#004400;fill-opacity:1;fill-rule:evenodd;stroke:#004400;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path5378"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5372"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Send">
+      <path
+         transform="matrix(-0.3,0,0,-0.3,0.69,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#004400;fill-opacity:1;fill-rule:evenodd;stroke:#004400;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path5374"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5368"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Send">
+      <path
+         transform="matrix(-0.3,0,0,-0.3,0.69,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#004400;fill-opacity:1;fill-rule:evenodd;stroke:#004400;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path5370"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5364"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Send">
+      <path
+         transform="matrix(-0.3,0,0,-0.3,0.69,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#004400;fill-opacity:1;fill-rule:evenodd;stroke:#004400;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path5366"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5358"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#004400;fill-opacity:1;fill-rule:evenodd;stroke:#004400;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path5360"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5354"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path5356"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5350"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path5352"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5346"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path5348"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5342"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path5344"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5338"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path5340"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5334"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path5336"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5328"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path5330"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5324"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path5326"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5320"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path5322"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5316"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path5318"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5312"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path5314"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5308"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path5310"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5304"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path5306"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-5"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5073-6"
+         style="fill:#004400;fill-opacity:1;fill-rule:evenodd;stroke:#004400;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-5-6"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5073-6-7"
+         style="fill:#004400;fill-opacity:1;fill-rule:evenodd;stroke:#004400;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mstart-3"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5052-0"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#004400;fill-opacity:1;fill-rule:evenodd;stroke:#004400;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(0.4,0,0,0.4,4,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend-9"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5055-4"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#004400;fill-opacity:1;fill-rule:evenodd;stroke:#004400;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker5739-2"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5741-1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#004400;fill-opacity:1;fill-rule:evenodd;stroke:#004400;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Drop Shadow"
+       id="filter6968">
+      <feFlood
+         flood-opacity="0.513726"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood6970" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite6972" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="7.9"
+         result="blur"
+         id="feGaussianBlur6974" />
+      <feOffset
+         dx="2.4"
+         dy="2.4"
+         result="offset"
+         id="feOffset6976" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite6978" />
+    </filter>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-2"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path5073-0"
+         style="fill:#004400;fill-opacity:1;fill-rule:evenodd;stroke:#004400;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-2-2"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path5073-0-0"
+         style="fill:#004400;fill-opacity:1;fill-rule:evenodd;stroke:#004400;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Drop Shadow"
+       id="filter6968-6">
+      <feFlood
+         flood-opacity="0.513726"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood6970-2" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite6972-1" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="7.9"
+         result="blur"
+         id="feGaussianBlur6974-2" />
+      <feOffset
+         dx="2.4"
+         dy="2.4"
+         result="offset"
+         id="feOffset6976-0" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite6978-6" />
+    </filter>
+    <marker
+       inkscape:stockid="Arrow2Mstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mstart-3"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4451-9"
+         style="fill:#004400;fill-opacity:1;fill-rule:evenodd;stroke:#004400;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(0.6,0.6)" />
+    </marker>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Drop Shadow"
+       id="filter6968-6-8">
+      <feFlood
+         flood-opacity="0.513726"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood6970-2-4" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite6972-1-7" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="7.9"
+         result="blur"
+         id="feGaussianBlur6974-2-8" />
+      <feOffset
+         dx="2.4"
+         dy="2.4"
+         result="offset"
+         id="feOffset6976-0-2" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite6978-6-1" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter4724">
+      <feFlood
+         flood-opacity="0.513726"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood4726" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite4728" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="7.9"
+         result="blur"
+         id="feGaussianBlur4730" />
+      <feOffset
+         dx="2.4"
+         dy="2.4"
+         result="offset"
+         id="feOffset4732" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite4734" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="314.50876"
+     inkscape:cy="442.76711"
+     inkscape:document-units="px"
+     inkscape:current-layer="g6912"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:connector-spacing="8"
+     units="px">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4470" />
+    <sodipodi:guide
+       position="1272.8572,361.42858"
+       orientation="0,1"
+       id="guide5608" />
+    <sodipodi:guide
+       position="724.28572,408.57144"
+       orientation="1,0"
+       id="guide5610" />
+    <sodipodi:guide
+       position="988.57144,622.85716"
+       orientation="1,0"
+       id="guide5612" />
+    <sodipodi:guide
+       position="925.71429,520.00001"
+       orientation="0,1"
+       id="guide5614" />
+    <sodipodi:guide
+       position="935.71429,842.85716"
+       orientation="1,0"
+       id="guide5706" />
+    <sodipodi:guide
+       position="1142.8572,692.85716"
+       orientation="1,0"
+       id="guide5708" />
+    <sodipodi:guide
+       position="145.71429,291.42857"
+       orientation="1,0"
+       id="guide4361" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-52.362161)">
+    <g
+       id="g6912"
+       style="filter:url(#filter6968)">
+      <g
+         transform="translate(70.999989,72.857144)"
+         id="g4151"
+         inkscape:export-filename="/home/markus/devel/psyhp/sites/marion/static/gfx/schmerzmodell_bauch.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90">
+        <rect
+           style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#004400;stroke-width:6;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect4136"
+           width="294.28568"
+           height="102.85713"
+           x="65.120674"
+           y="94.90506"
+           ry="30" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:'Droid Sans';-inkscape-font-specification:'Droid Sans';letter-spacing:0px;word-spacing:0px;fill:#004400;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           x="211.25558"
+           y="140.93362"
+           id="text4138"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan4140"
+             x="211.25558"
+             y="140.93362"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.5px;font-family:'Josefin Sans';-inkscape-font-specification:'Josefin Sans';text-align:center;text-anchor:middle;fill:#004400;fill-opacity:1">Besondere <tspan
+   style="font-weight:bold;fill:#004400;fill-opacity:1"
+   id="tspan4149">Empfindsamkeit</tspan></tspan><tspan
+             sodipodi:role="line"
+             x="211.25558"
+             y="169.05862"
+             id="tspan4142"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.5px;font-family:'Josefin Sans';-inkscape-font-specification:'Josefin Sans';text-align:center;text-anchor:middle;fill:#004400;fill-opacity:1">der <tspan
+   style="font-weight:bold;fill:#004400;fill-opacity:1"
+   id="tspan4147">Darmfunktion</tspan></tspan></text>
+      </g>
+      <g
+         id="g4212"
+         transform="translate(488.42863,72.857144)"
+         inkscape:export-filename="/home/markus/devel/psyhp/sites/marion/static/gfx/schmerzmodell_bauch.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90">
+        <rect
+           style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#004400;stroke-width:6;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect4136-0"
+           width="294.28568"
+           height="102.85713"
+           x="65.120674"
+           y="94.90506"
+           ry="30" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:'Droid Sans';-inkscape-font-specification:'Droid Sans';letter-spacing:0px;word-spacing:0px;fill:#004400;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           x="211.25558"
+           y="140.93362"
+           id="text4138-9"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             x="211.25558"
+             y="140.93362"
+             id="tspan4142-3"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;font-family:'Josefin Sans';-inkscape-font-specification:'Josefin Sans';text-align:center;text-anchor:middle;fill:#004400;fill-opacity:1">Auslöser</tspan><tspan
+             id="tspan4195"
+             sodipodi:role="line"
+             x="211.25558"
+             y="169.05862"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.5px;font-family:'Josefin Sans';-inkscape-font-specification:'Josefin Sans';text-align:center;text-anchor:middle;fill:#004400;fill-opacity:1">• Ernäherung • Stress • Angst</tspan></text>
+      </g>
+      <g
+         transform="translate(279.7143,287.9619)"
+         id="g4212-5"
+         inkscape:export-filename="/home/markus/devel/psyhp/sites/marion/static/gfx/schmerzmodell_bauch.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90">
+        <rect
+           style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#004400;stroke-width:6;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect4136-0-1"
+           width="294.28568"
+           height="102.85713"
+           x="65.120674"
+           y="94.90506"
+           ry="30" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:'Droid Sans';-inkscape-font-specification:'Droid Sans';letter-spacing:0px;word-spacing:0px;fill:#004400;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           x="211.25558"
+           y="140.93362"
+           id="text4138-9-6"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             x="211.25558"
+             y="140.93362"
+             id="tspan4142-3-4"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;font-family:'Josefin Sans';-inkscape-font-specification:'Josefin Sans';text-align:center;text-anchor:middle;fill:#004400;fill-opacity:1">körperliche Veränderungen</tspan><tspan
+             id="tspan4195-9"
+             sodipodi:role="line"
+             x="211.25558"
+             y="169.05862"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.5px;font-family:'Josefin Sans';-inkscape-font-specification:'Josefin Sans';text-align:center;text-anchor:middle;fill:#004400;fill-opacity:1">• Symptome • Körperreaktionen</tspan></text>
+      </g>
+      <g
+         id="g6724"
+         inkscape:export-filename="/home/markus/devel/psyhp/sites/marion/static/gfx/schmerzmodell_bauch.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90"
+         transform="translate(-651.42857,174.28572)">
+        <g
+           transform="translate(922.57145,121.02858)"
+           id="g4479">
+          <rect
+             ry="30"
+             y="517.76221"
+             x="73.692093"
+             height="102.85713"
+             width="294.28568"
+             id="rect4136-0-9-3"
+             style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#004400;stroke-width:6;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+          <text
+             sodipodi:linespacing="125%"
+             id="text4138-9-2-6"
+             y="549.72827"
+             x="219.82704"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:'Droid Sans';-inkscape-font-specification:'Droid Sans';letter-spacing:0px;word-spacing:0px;fill:#004400;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+             xml:space="preserve"><tspan
+               id="tspan4290-1"
+               style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;font-family:'Josefin Sans';-inkscape-font-specification:'Josefin Sans';text-align:center;text-anchor:middle;fill:#004400;fill-opacity:1"
+               y="549.72827"
+               x="219.82704"
+               sodipodi:role="line">Fehlinterpretation</tspan><tspan
+               id="tspan4324"
+               style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;font-family:'Josefin Sans';-inkscape-font-specification:'Josefin Sans';text-align:center;text-anchor:middle;fill:#004400;fill-opacity:1"
+               y="577.85327"
+               x="219.82704"
+               sodipodi:role="line">als bedrohliches</tspan><tspan
+               id="tspan4326"
+               style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;font-family:'Josefin Sans';-inkscape-font-specification:'Josefin Sans';text-align:center;text-anchor:middle;fill:#004400;fill-opacity:1"
+               y="605.97827"
+               x="219.82704"
+               sodipodi:role="line">Krankeitszeichen</tspan></text>
+        </g>
+      </g>
+      <g
+         id="g4472"
+         transform="translate(285.42859,223.28989)"
+         inkscape:export-filename="/home/markus/devel/psyhp/sites/marion/static/gfx/schmerzmodell_bauch.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90">
+        <rect
+           style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#004400;stroke-width:6;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect4136-0-9"
+           width="294.28568"
+           height="102.85713"
+           x="59.406387"
+           y="374.68185"
+           ry="30" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:'Droid Sans';-inkscape-font-specification:'Droid Sans';letter-spacing:0px;word-spacing:0px;fill:#004400;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           x="205.54131"
+           y="406.64792"
+           id="text4138-9-2"
+           sodipodi:linespacing="125%"><tspan
+             id="tspan4195-3"
+             sodipodi:role="line"
+             x="205.54131"
+             y="406.64792"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;font-family:'Josefin Sans';-inkscape-font-specification:'Josefin Sans';text-align:center;text-anchor:middle;fill:#004400;fill-opacity:1">Erleben</tspan><tspan
+             sodipodi:role="line"
+             x="205.54131"
+             y="434.77292"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;font-family:'Josefin Sans';-inkscape-font-specification:'Josefin Sans';text-align:center;text-anchor:middle;fill:#004400;fill-opacity:1"
+             id="tspan4288">der auftretenden</tspan><tspan
+             sodipodi:role="line"
+             x="205.54131"
+             y="462.89792"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;font-family:'Josefin Sans';-inkscape-font-specification:'Josefin Sans';text-align:center;text-anchor:middle;fill:#004400;fill-opacity:1"
+             id="tspan4290">Bauchschmerzen</tspan></text>
+      </g>
+      <g
+         transform="translate(147.14286,555.92381)"
+         id="g4380"
+         inkscape:export-filename="/home/markus/devel/psyhp/sites/marion/static/gfx/schmerzmodell_bauch.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90">
+        <rect
+           style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#004400;stroke-width:6;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect4136-0-9-3-4"
+           width="294.28568"
+           height="102.85713"
+           x="555.12067"
+           y="42.047924"
+           ry="30" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:'Droid Sans';-inkscape-font-specification:'Droid Sans';letter-spacing:0px;word-spacing:0px;fill:#004400;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           x="701.25562"
+           y="74.013992"
+           id="text4138-9-2-6-6"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             x="701.25562"
+             y="74.013992"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;font-family:'Josefin Sans';-inkscape-font-specification:'Josefin Sans';text-align:center;text-anchor:middle;fill:#004400;fill-opacity:1"
+             id="tspan4326-1">Verstärkte Wahrnehmung</tspan><tspan
+             sodipodi:role="line"
+             x="701.25562"
+             y="102.13899"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;font-family:'Josefin Sans';-inkscape-font-specification:'Josefin Sans';text-align:center;text-anchor:middle;fill:#004400;fill-opacity:1"
+             id="tspan4360">der Schmerzen</tspan><tspan
+             sodipodi:role="line"
+             x="701.25562"
+             y="130.26399"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.5px;font-family:'Josefin Sans';-inkscape-font-specification:'Josefin Sans';text-align:center;text-anchor:middle;fill:#004400;fill-opacity:1"
+             id="tspan4378">(Symptomverstärkung)</tspan><tspan
+             sodipodi:role="line"
+             x="701.25562"
+             y="158.38899"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;font-family:'Josefin Sans';-inkscape-font-specification:'Josefin Sans';text-align:center;text-anchor:middle;fill:#004400;fill-opacity:1"
+             id="tspan4362" /></text>
+      </g>
+      <g
+         transform="translate(-551.71428,555.92381)"
+         id="g4380-3"
+         inkscape:export-filename="/home/markus/devel/psyhp/sites/marion/static/gfx/schmerzmodell_bauch.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90">
+        <g
+           id="g5620">
+          <rect
+             ry="30"
+             y="42.047924"
+             x="555.12067"
+             height="102.85713"
+             width="294.28568"
+             id="rect4136-0-9-3-4-7"
+             style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#004400;stroke-width:6;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+          <text
+             sodipodi:linespacing="125%"
+             id="text4138-9-2-6-6-0"
+             y="74.013992"
+             x="701.25562"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:'Droid Sans';-inkscape-font-specification:'Droid Sans';letter-spacing:0px;word-spacing:0px;fill:#004400;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+             xml:space="preserve"><tspan
+               id="tspan4360-1"
+               style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;font-family:'Josefin Sans';-inkscape-font-specification:'Josefin Sans';text-align:center;text-anchor:middle;fill:#004400;fill-opacity:1"
+               y="74.013992"
+               x="701.25562"
+               sodipodi:role="line">Krankheitsverhalten bzw.</tspan><tspan
+               style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;font-family:'Josefin Sans';-inkscape-font-specification:'Josefin Sans';text-align:center;text-anchor:middle;fill:#004400;fill-opacity:1"
+               y="102.13899"
+               x="701.25562"
+               sodipodi:role="line"
+               id="tspan4423">Aufrechterhaltung</tspan><tspan
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.5px;font-family:'Josefin Sans';-inkscape-font-specification:'Josefin Sans';text-align:center;text-anchor:middle;fill:#004400;fill-opacity:1"
+               y="130.26399"
+               x="701.25562"
+               sodipodi:role="line"
+               id="tspan4425">• Schonverhalten • Inaktivität</tspan><tspan
+               id="tspan4378-1"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.5px;font-family:'Josefin Sans';-inkscape-font-specification:'Josefin Sans';text-align:center;text-anchor:middle;fill:#004400;fill-opacity:1"
+               y="158.38899"
+               x="701.25562"
+               sodipodi:role="line" /><tspan
+               id="tspan4362-8"
+               style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;font-family:'Josefin Sans';-inkscape-font-specification:'Josefin Sans';text-align:center;text-anchor:middle;fill:#004400;fill-opacity:1"
+               y="186.51399"
+               x="701.25562"
+               sodipodi:role="line" /></text>
+        </g>
+      </g>
+      <path
+         inkscape:connector-curvature="0"
+         id="path5616"
+         d="m 337.14286,865.21935 c -191.42857,0 -191.42858,-154.53081 -191.42858,-154.53081"
+         style="fill:none;fill-rule:evenodd;stroke:#004400;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Mend);filter:url(#filter4724)"
+         inkscape:export-filename="/home/markus/devel/psyhp/sites/marion/static/gfx/schmerzmodell_bauch.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90"
+         sodipodi:nodetypes="cc" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5712"
+         d="m 284.28571,276.64792 152.85712,98.57143"
+         style="fill:none;fill-rule:evenodd;stroke:#004400;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
+         inkscape:export-filename="/home/markus/devel/psyhp/sites/marion/static/gfx/schmerzmodell_bauch.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5712-2"
+         d="m 702.42993,276.64792 -152.8572,98.57143"
+         style="fill:none;fill-rule:evenodd;stroke:#004400;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Mend-9)"
+         inkscape:export-filename="/home/markus/devel/psyhp/sites/marion/static/gfx/schmerzmodell_bauch.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5737"
+         d="m 491.42863,490.36221 0,97.85714"
+         style="fill:none;fill-rule:evenodd;stroke:#004400;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker5739)"
+         inkscape:export-filename="/home/markus/devel/psyhp/sites/marion/static/gfx/schmerzmodell_bauch.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5737-8"
+         d="m 491.42863,705.04052 0,97.85714"
+         style="fill:none;fill-rule:evenodd;stroke:#004400;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker5739-2)"
+         inkscape:export-filename="/home/markus/devel/psyhp/sites/marion/static/gfx/schmerzmodell_bauch.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5616-1"
+         d="M 289.66358,888.20111 C 98.23501,888.20111 98.235,733.6703 98.235,733.6703"
+         style="fill:none;fill-rule:evenodd;stroke:#004400;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Mend-2);filter:url(#filter6968)"
+         inkscape:export-filename="/home/markus/devel/psyhp/sites/marion/static/gfx/schmerzmodell_bauch.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90"
+         sodipodi:nodetypes="cc"
+         transform="matrix(-1,0,0,1,936.716,-21.314748)" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5616-1-1"
+         d="M 289.66358,888.20111 C 98.23501,888.20111 98.235,733.6703 98.235,733.6703"
+         style="fill:none;fill-rule:evenodd;stroke:#004400;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Arrow2Mstart);filter:url(#filter6968-6)"
+         inkscape:export-filename="/home/markus/devel/psyhp/sites/marion/static/gfx/schmerzmodell_bauch.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90"
+         sodipodi:nodetypes="cc"
+         transform="matrix(-1,0,0,-1,939.48245,1325.8764)" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5616-1-1-4"
+         d="M 289.66358,888.20111 C 98.23501,888.20111 98.235,733.6703 98.235,733.6703"
+         style="fill:none;fill-rule:evenodd;stroke:#004400;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Arrow2Mstart-3);filter:url(#filter6968-6-8)"
+         inkscape:export-filename="/home/markus/devel/psyhp/sites/marion/static/gfx/schmerzmodell_bauch.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90"
+         sodipodi:nodetypes="cc"
+         transform="matrix(1,0,0,-1,45.294419,1325.8561)" />
+    </g>
+  </g>
+</svg>

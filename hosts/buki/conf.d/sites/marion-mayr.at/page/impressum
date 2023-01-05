@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="author" content="Marion Mayr" />
+<meta name="keywords" content="Datenschutz, Datenschutzerklärung, Impressum, Kontaktdaten, Anschrift, Psychologe, Psychologin, Marion Mayr" />
+<meta name="description" content="Informationen zum Herausgeber" />
+<title>Datenschutz & Impressum | Psychologin Marion Mayr</title>
+<link rel="stylesheet" type="text/css" href="https://marion-mayr.at//style/hires.css" media="(min-width: 1280px)" />
+<link rel="stylesheet" type="text/css" href="https://marion-mayr.at//style/lores.css" media="(max-width: 1279px)" />
+<link rel="stylesheet" type="text/css" href="https://marion-mayr.at//style/common.css" />
+<link href='https://marion-mayr.at//style/fonts.css' rel='stylesheet' type='text/css' />
+<script>
+var propagate = 1;
+
+function make_visible( parentId, childId ) {
+  var parentElement = document.getElementById( parentId );
+  var childElement = document.getElementById( childId );
+  childElement.style.display = 'block';
+  parentElement.style.height = childElement.offsetHeight + 30;
+}
+
+function make_invisible( parentId, childId ) {
+  var parentElement = document.getElementById( parentId );
+  var childElement = document.getElementById( childId );
+  childElement.style.display = 'none';
+  parentElement.style.height = 30;
+}
+
+function toggle_visibility( parentId, childId ) {
+  var parentElement = document.getElementById( parentId );
+  var childElement = document.getElementById( childId );
+  if( childElement.style.display === 'none' ) {
+    childElement.style.display = 'block';
+    parentElement.style.height = childElement.offsetHeight + 30;
+  }
+  else {
+    childElement.style.display = 'none';
+    parentElement.style.height = 30;
+  }
+}
+
+function is_mobile() {
+  return ! window.matchMedia( '(min-width: 1279px)' ).matches;
+}
+
+function on_menu_click() {
+  if( is_mobile() )
+  {
+    make_invisible( "address", "address_details" );
+    toggle_visibility( "menu", "main_menu" );
+    propagate = 0;
+  }
+}
+
+function on_address_click() {
+  if( is_mobile() )
+  {
+    make_invisible( "menu", "main_menu" );
+    toggle_visibility( "address", "address_details" );
+    propagate = 0;
+  }
+}
+
+function on_body_click() {
+  if( is_mobile() && propagate )
+  {
+    make_invisible( "menu", "main_menu" );
+    make_invisible( "address", "address_details" );
+  }
+  propagate = 1;
+}
+
+function same_size_list( elements, pd ) {
+  // Ensures that all link boxes on the page have the same height.
+  var maxHeight = 0;
+  for( var i = 0; i < elements.length; ++i )
+  {
+    if( elements[ i ].clientHeight - pd > maxHeight )
+    {
+      maxHeight = elements[ i ].clientHeight - pd;
+    }
+  }
+  for( var i = 0; i < elements.length; ++i )
+  {
+    elements[ i ].style.height = maxHeight + "px";
+  }
+}
+
+function same_size_class( className, pd ) {
+  same_size_list( document.getElementsByClassName( className ), pd );
+}
+
+function on_resize() {
+  if( is_mobile() ) {
+    make_invisible( "menu", "main_menu" );
+    make_invisible( "address", "address_details" );
+  }
+  else {
+    same_size_class( 'col', 0 );
+    make_visible( "menu", "main_menu" );
+    make_visible( "address", "address_details" );
+  }
+}
+</script>
+</head>
+<body lang="de" onload="on_resize();" onresize="on_resize();" onclick="on_body_click();">
+<div id="header" itemscope itemtype="http://schema.org/LocalBusiness"> 
+<header class="light-background dark">
+<div>
+<div class="ausbildung">Mag. rer. nat.</div>
+<div class="name" itemprop="name">Marion Mayr</div>
+<div class="ausbildung" hidden>Psychologin</div>
+<div class="ausbildung">Klinische und Gesundheitspsychologin</div>
+<div class="ausbildung">Sportpsychologin</div>
+</div>
+<div id="motto">
+<span>Schritt für Schritt gemeinsam Ziele erreichen ...</span>
+</div>
+<nav><a href="https://marion-mayr.at//page/impressum">Datenschutz & Impressum</a>
+
+
+</nav>
+<div id="portrait"></div>
+<div id="address" onclick="on_address_click();">
+<address id="address_details">
+  <div class="detail"><span class="icon mail"></span><span class="content"><a href="mailto:kontakt@marion-mayr.at"><span itemprop="email">kontakt@marion-mayr.at</span></a></span></div>
+  <div class="detail"><span class="icon phone"></span><span class="content"><a href="tel:+4367761800106"><span itemprop="telephone">+43 677 618 001 06</span></a></span></div>
+  <div class="detail double"><span class="icon address"></span><span class="content" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><span itemprop="streetAddress">Abt-Zedinek-Straße 361</span><br /><span itemprop="postalCode">3511</span> <span itemprop="addressLocality">Furth bei Göttweig</span><span hidden itemprop="addressCountry">AT</span></span></div>
+  <div hidden itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+    <!-- Office address -->
+    <span itemprop="streetAddress">Franz Veiglstraße 2/1</span>
+    <span itemprop="postalCode">3495</span>
+    <span itemprop="addressLocality">Rohrendorf bei Krems</span>
+    <span itemprop="addressCountry">AT</span>
+  </div>
+  <div hidden itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+    <!-- Offering home visits -->
+    <span itemprop="postalCode">3500</span>
+    <span itemprop="addressLocality">Krems an der Donau</span>
+    <span itemprop="addressCountry">AT</span>
+  </div>
+</address>
+</div>
+</header>
+<div id="menu" onclick="on_menu_click();">
+<nav id="main_menu">
+<span class="menu_item"><a href="https://marion-mayr.at//page/ueber_mich">Startseite</a></span>
+<span class="menu_item"><a href="https://marion-mayr.at//page/schmerzen">Schmerztraining</a></span>
+<span class="menu_item"><a href="https://marion-mayr.at//page/online_beratung">Online-Beratung</a></span>
+<span class="menu_item"><a href="https://marion-mayr.at//page/sportpsychologie">Sportpsychologie</a></span>
+<span class="menu_item"><a href="https://marion-mayr.at//page/sonstiges">Andere Leistungen</a></span>
+<span class="menu_item"><a href="https://marion-mayr.at//page/praxis">Kontakt</a></span>
+</nav>
+</div>
+</div>
+
+<div id="content">
+<div id="title_bar">
+<span id="main_title">
+<div class="breadcrumbtrace">
+<a href="https://marion-mayr.at//page/ueber_mich">Startseite</a>
+</div>
+
+<h1>Datenschutz & Impressum</h1>
+</span>
+<div id="left_column" class="col">
+<h2>Datenschutzerklärung</h2><p>Wir verarbeiten Ihre Daten ausschließlich auf Grundlage der gesetzlichen Bestimmungen (DSGVO, TKG 2003). In diesen Datenschutzinformationen informieren wir Sie über die wichtigsten Aspekte der Datenverarbeitung im Rahmen unserer Webseite.</p><p>Wir nehmen den Schutz Ihrer persönlichen Daten überaus ernst:</p><ul><li><p>Wir verzichten auf die Nutzung von Cookies.</p></li><li><p>Wir binden keine Ressourcen von Drittanbietern in unser Webangebot ein.</p></li><li><p>Wir verschlüsseln die Datenübertragung zu Ihrem Rechner hin konsequent.</p></li></ul><h3>Kontakt mit uns</h3><p>Wir erheben personenbezogene Daten nur im Rahmen einer Kontaktaufnahme ihrerseits über Telefon, SMS oder E-Mail. Zwecks Bearbeitung von Anfragen und für den Fall anschließender Korrespondenz werden Ihre Daten 6 Monate gespeichert. Diese Daten werden ohne Ihre Einwilligung nicht weitergegeben.</p><p>Im Zuge der Kontaktaufnahme oder des Erstgesprächs informiere ich Sie gerne, welche Daten bei der Erbringung weiterer Leistungen erhoben oder weitergegeben werden und wie lange diese aufbewahrt werden.</p><h3>Automatische Datenverarbeitung zur Nutzungsanalyse</h3><p>Unser Anliegen im Sinne der DSGVO (berechtigtes Interesse) ist die Verbesserung unseres Angebotes und unseres Webauftritts. Da uns die Privatsphäre unserer Nutzer wichtig ist, werden die Nutzerdaten anonymisiert. Erhoben werden: (1.) Zeit und Datum des Zugriffes; (2.) Die Adresse (URL) der Webseite oder Ressource, auf die zugegriffen wird; (3.) Die Adresse der Webseite, auf die zuvor zugegriffen wurde (Referrer URL); (4.) Ob es sich um einen automatischen (Bot) oder manuellen Zugriff handelt. Die Daten werden für einen Zeitraum von höchstens 6 Wochen gespeichert.</p><h3>Ihre Rechte</h3><p>Ihnen stehen bezüglich Ihrer im Zuge der Nutzung dieser Webseite bei uns gespeicherten Daten grundsätzlich die Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit, Widerruf und Widerspruch zu.</p><p>Wenn Sie glauben, dass die Verarbeitung Ihrer Daten gegen das Datenschutzrecht verstößt oder Ihre datenschutzrechtlichen Ansprüche sonst in einer Weise verletzt worden sind, können Sie sich bei uns oder der Datenschutzbehörde beschweren.</p></div>
+<div id="right_column" class="col">
+<h2>Diese Seite wird herausgegeben von</h2><p>Marion Mayr<br /> Franz Veiglstraße 2/1<br /> 3495 Rohrendorf bei Krems<br /> E-Mail: <a href="mailto:office@marion-mayr.at">office@marion-mayr.at</a></p><h2>Bitte beachten Sie ...</h2><p>An der angegebenen Adresse befindet sich lediglich mein Büro. Um einen Termin betreffend psychologischer Leistungen zu vereinbaren, nutzen Sie bitte die Informationen auf der Kontakt-Seite.</p><p>
+<a class="wide_link_box" href="https://marion-mayr.at//page/praxis">
+  <strong>Kontakt</strong><br />
+  Erfahren Sie, wie Sie am besten mit mir Kontakt aufnehmen, ob per Telefon, E-Mail oder SMS. Außerdem stelle ich meine Praxis vor und beschreibe den Anfahrtsweg.
+</a>
+
+</p></div>
+<div>
+<footer>
+(C)opyright 2016-2020, Marion Mayr<br />
+<a href="https://marion-mayr.at//page/impressum">Datenschutz & Impressum</a>
+
+
+ | <a href="https://marion-mayr.at//page/sitemap">Sitemap</a>
+
+
+
+</footer>
+</div>
+</div>
+
+</body>
+</html>
+

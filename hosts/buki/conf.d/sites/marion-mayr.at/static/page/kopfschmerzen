@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<title>Marion Mayr | </title>
+<link rel="stylesheet" type="text/css" href="/style/palette.css" />
+<link rel="stylesheet" type="text/css" href="/style/boxes.css" />
+<link rel="stylesheet" type="text/css" href="/style/elements.css" />
+<link href='http://fonts.googleapis.com/css?family=Josefin+Sans&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div id="header"> 
+<header class="light-background dark">
+<div>
+<div class="tiny sc">Mag. rer. nat.</div>
+<div class="large">Marion Mayr</div>
+<div class="tiny sc">Klinische und Gesundheitspsychologin</div>
+<div class="tiny sc">Sportpsychologin</div>
+</div>
+<address class="tiny">
+  &commat; <a href="mailto:kontakt@marion-mayr.at">kontakt@marion-mayr.at</a><br />
+  &phone; +43 650 99 422 98<br />
+  ✉ Franz Veiglstraße 2/1<br /> &nbsp; &nbsp; 3495 Rohrendorf bei Krems
+  <br /><br />
+  <nav><a href="#">Impressum</a> | <a href="#">Sitemap</a></nav>
+</address>
+<div id="footsteps"></div>
+<div id="motto">
+Schritt für Schritt gemeinsam Ziele erreichen ...
+</div>
+</header>
+</div>
+<div id="menu">
+<nav>
+<span class="menu_item"><a href="/page/ueber_mich">Startseite</a></span>
+<span class="menu_item"><a href="/page/schmerzen">Schmerzen</a></span>
+<span class="menu_item"><a href="/page/sportpsychologie">Sport</a></span>
+<span class="menu_item"><a href="/page/sonstiges">Sonstiges</a></span>
+<span class="menu_item"><a href="/page/praxis">Anfahrt</a></span>
+</nav>
+</div>
+
+<div id="content">
+<h1>Chronische Kopfschmerzen</h1>
+<div id="right_column">
+</div>
+<div id="left_column">
+</div>
+</div>
+<div>
+<footer>
+(C)opyright 2016, Marion Mayr
+</footer>
+</div>
+
+</body>
+</html>
+

@@ -1,0 +1,137 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  overflow-y: scroll;
+}
+
+header address {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+header .name {
+  text-align: center;
+}
+
+header .ausbildung {
+  text-align: center;
+  font-variant: small-caps;
+}
+
+#header {
+  position: relative;
+  width: 100%;
+  height: 126px;
+  top: -10px;
+}
+
+#header header nav {
+  text-align: center;
+}
+
+header #motto {
+  display: none;
+  text-align: center;
+}
+
+header #motto span {
+  font-size: 18px;
+}
+
+header #portrait {
+  display: none;
+}
+
+#menu {
+  position: relative;
+  float: left;
+  left: 5px;
+  top: -27px;
+  min-height: 30px;
+  min-width: 30px;
+  background-image: url( '../gfx/menu.png' );
+  background-repeat: no-repeat;
+}
+
+#main_menu {
+  position: absolute;
+  top: 27px;
+  left: -5px;
+  width: 95vw;
+  display: none;
+}
+
+#main_menu a {
+  position: relative;
+  display: block;
+  height: 25px;
+  width: 100%;
+  color: #004400;
+  background-color: #88cc88;
+  border: 4px solid;
+  border-color: #88cc88;
+  text-decoration: none;
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+#main_menu a:hover {
+  border-color: #ffaaaa;
+  background-color: #ffaaaa;
+  color: #550000;
+}
+
+#address {
+  position: relative;
+  float: right;
+  min-width: 30px;
+  top: -32px;
+  right: 5px;
+  min-height: 30px;
+  background-image: url( '../gfx/contact.png' );
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+#address_details {
+  position: absolute;
+  top: 30px;
+  right: -5px;
+  width: 95vw;
+  display: none;
+  background-color: #88cc88;
+  padding-top: 30px;
+  padding-bottom: 10px;
+}
+
+#footsteps {
+  display: none;
+}
+
+#content {
+  width: 100%;
+}
+
+#right_column {
+  margin: auto;
+  width: 90%;
+}
+
+#left_column {
+  margin: auto;
+  width: 90%;
+}
+
+#main_title {
+  display: block;
+  width: 100%;
+}
+
+#social_buttons {
+  display: block;
+  margin-top: -20px;
+  width: 100%;
+  text-align: center;
+}
+

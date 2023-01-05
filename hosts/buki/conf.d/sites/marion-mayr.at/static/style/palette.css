@@ -1,0 +1,35 @@
+/*
+ * Basic color palette:
+ *
+ * 88cc88     -     light
+ * 2d882d     -     normal
+ * 004400     -     dark
+ * ffaaaa     -     complementary light
+ * aa3939     -     complementary normal
+ * 550000     -     complementary dark
+ */
+
+.light-background {
+  background-color: #88cc88;
+}
+
+.normal-background {
+  background-color: #2d882d;
+}
+
+.dark-background {
+  background-color: #004400;
+}
+
+.light {
+  color: #88cc88;
+}
+
+.normal {
+  color: #2d882d;
+}
+
+.dark {
+  color: #004400;
+}
+

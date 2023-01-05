@@ -1,0 +1,3 @@
+{
+  servicesRoot = "/srv/data/services"
+}

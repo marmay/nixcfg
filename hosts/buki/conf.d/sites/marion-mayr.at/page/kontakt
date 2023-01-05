@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="author" content="Marion Mayr" />
+<meta name="keywords" content="" />
+<meta name="description" content="Praxis, Kontaktaufnahme, Anfahrt" />
+<title>Marion Mayr | Praxis, Kontaktaufnahme, Anfahrt</title>
+<link rel="stylesheet" type="text/css" href="file:///home/markus/devel/psyhp/sites/marion/static/style/hires.css" media="(min-width: 1280px)" />
+<link rel="stylesheet" type="text/css" href="file:///home/markus/devel/psyhp/sites/marion/static/style/lores.css" media="(max-width: 1279px)" />
+<link rel="stylesheet" type="text/css" href="file:///home/markus/devel/psyhp/sites/marion/static/style/common.css" />
+<link href='http://fonts.googleapis.com/css?family=Josefin+Sans&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<script>
+function toggle_visibility( parentId, childId ) {
+  if( window.matchMedia( 'min-width: 1279px' ) )
+  {
+    var parentElement = document.getElementById( parentId );
+    var childElement = document.getElementById( childId );
+    if( childElement.style.display === 'block' )
+    {
+      childElement.style.display = 'none';
+      parentElement.style.height = 30;
+    }
+    else
+    {
+      childElement.style.display = 'block';
+      parentElement.style.height = childElement.offsetHeight + 30;
+    }
+  }
+}
+</script>
+<script>
+function same_size_list( elements, pd ) {
+  // Ensures that all link boxes on the page have the same height.
+  var maxHeight = 0;
+  for( var i = 0; i < elements.length; ++i )
+  {
+    if( elements[ i ].clientHeight - pd > maxHeight )
+    {
+      maxHeight = elements[ i ].clientHeight - pd;
+    }
+  }
+  console.log( "Maximum height is " + maxHeight );
+  for( var i = 0; i < elements.length; ++i )
+  {
+    elements[ i ].style.height = maxHeight + "px";
+  }
+}
+
+function same_size_class( className, pd ) {
+  same_size_list( document.getElementsByClassName( className ), pd );
+}
+</script>
+</head>
+<body onload="same_size_class( 'link_box', 40 ); same_size_class( 'col', 0 );">
+<div id="header"> 
+<header class="light-background dark">
+<div>
+<div class="ausbildung">Mag. rer. nat.</div>
+<div class="name">Marion Mayr</div>
+<div class="ausbildung">Klinische und Gesundheitspsychologin</div>
+<div class="ausbildung">Sportpsychologin</div>
+</div>
+<div id="motto">
+<span>Schritt für Schritt gemeinsam Ziele erreichen ...</span>
+</div>
+<nav><a href="file:///home/markus/devel/psyhp/sites/marion/static/page/impressum">Impressum</a>
+
+
+ | <a href="file:///home/markus/devel/psyhp/sites/marion/static/page/sitemap">Sitemap</a>
+
+
+</nav>
+<div id="portrait"></div>
+<div id="address" onclick="toggle_visibility( 'address', 'address_details' );">
+<address id="address_details">
+  <div class="detail"><span class="icon mail"></span><span class="content"><a href="mailto:kontakt@marion-mayr.at">kontakt@marion-mayr.at</a></span></div>
+  <div class="detail"><span class="icon phone"></span><span class="content"><a href="tel:00436509942298">+43 650 / 99 422 98</a></span></div>
+  <div class="detail double"><span class="icon address"></span><span class="content">Franz Veiglstraße 2/1<br />3495 Rohrendorf bei Krems</span></div>
+</address>
+</div>
+</header>
+<div id="menu" onclick="toggle_visibility( 'menu', 'main_menu' );">
+<nav id="main_menu">
+<span class="menu_item"><a href="file:///home/markus/devel/psyhp/sites/marion/static/page/ueber_mich">Startseite</a></span>
+<span class="menu_item"><a href="file:///home/markus/devel/psyhp/sites/marion/static/page/schmerzen">Schmerzen</a></span>
+<span class="menu_item"><a href="file:///home/markus/devel/psyhp/sites/marion/static/page/sportpsychologie">Sport</a></span>
+<span class="menu_item"><a href="file:///home/markus/devel/psyhp/sites/marion/static/page/kontakt">Kontakt</a></span>
+<span class="menu_item"><a href="file:///home/markus/devel/psyhp/sites/marion/static/page/sonstiges">Sonstiges</a></span>
+<span class="menu_item"><a href="file:///home/markus/devel/psyhp/sites/marion/static/page/praxis">Anfahrt</a></span>
+</nav>
+</div>
+</div>
+
+<div id="content">
+
+<h1>Praxis, Kontaktaufnahme, Anfahrt</h1>
+<div id="left_column" class="col">
+</div>
+<div id="right_column" class="col">
+</div>
+<div>
+<footer>
+(C)opyright 2016, Marion Mayr
+</footer>
+</div>
+</div>
+
+</body>
+</html>
+

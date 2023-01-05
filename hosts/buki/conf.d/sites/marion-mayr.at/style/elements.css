@@ -1,0 +1,16 @@
+body {
+  font-family: 'Josefin Sans'
+}
+
+.sc {
+  font-variant: small-caps;
+}
+
+.large {
+  font-size: 36pt;
+}
+
+.tiny {
+  font-size: 10pt;
+}
+

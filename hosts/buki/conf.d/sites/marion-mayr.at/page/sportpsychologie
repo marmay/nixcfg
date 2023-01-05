@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="author" content="Marion Mayr" />
+<meta name="keywords" content="Sportpsychologie, Zielsetzung, Motivation, Teambildung, Entspannung, Aktivierung, Konzentration, Selbstbewusstsein, Vorstellungstraining" />
+<meta name="description" content="Der Unterschied zwischen Sieg und Niederlage ist oft nur klein. Gerade deshalb sollte der große Unterschied, den eine sportpsychologische Betreuung machen kann, weder im Amateur- noch im Profisport vernachlässigt werden!" />
+<title>Sportpsychologie | Psychologin Marion Mayr</title>
+<link rel="stylesheet" type="text/css" href="https://marion-mayr.at//style/hires.css" media="(min-width: 1280px)" />
+<link rel="stylesheet" type="text/css" href="https://marion-mayr.at//style/lores.css" media="(max-width: 1279px)" />
+<link rel="stylesheet" type="text/css" href="https://marion-mayr.at//style/common.css" />
+<link href='https://marion-mayr.at//style/fonts.css' rel='stylesheet' type='text/css' />
+<script>
+var propagate = 1;
+
+function make_visible( parentId, childId ) {
+  var parentElement = document.getElementById( parentId );
+  var childElement = document.getElementById( childId );
+  childElement.style.display = 'block';
+  parentElement.style.height = childElement.offsetHeight + 30;
+}
+
+function make_invisible( parentId, childId ) {
+  var parentElement = document.getElementById( parentId );
+  var childElement = document.getElementById( childId );
+  childElement.style.display = 'none';
+  parentElement.style.height = 30;
+}
+
+function toggle_visibility( parentId, childId ) {
+  var parentElement = document.getElementById( parentId );
+  var childElement = document.getElementById( childId );
+  if( childElement.style.display === 'none' ) {
+    childElement.style.display = 'block';
+    parentElement.style.height = childElement.offsetHeight + 30;
+  }
+  else {
+    childElement.style.display = 'none';
+    parentElement.style.height = 30;
+  }
+}
+
+function is_mobile() {
+  return ! window.matchMedia( '(min-width: 1279px)' ).matches;
+}
+
+function on_menu_click() {
+  if( is_mobile() )
+  {
+    make_invisible( "address", "address_details" );
+    toggle_visibility( "menu", "main_menu" );
+    propagate = 0;
+  }
+}
+
+function on_address_click() {
+  if( is_mobile() )
+  {
+    make_invisible( "menu", "main_menu" );
+    toggle_visibility( "address", "address_details" );
+    propagate = 0;
+  }
+}
+
+function on_body_click() {
+  if( is_mobile() && propagate )
+  {
+    make_invisible( "menu", "main_menu" );
+    make_invisible( "address", "address_details" );
+  }
+  propagate = 1;
+}
+
+function same_size_list( elements, pd ) {
+  // Ensures that all link boxes on the page have the same height.
+  var maxHeight = 0;
+  for( var i = 0; i < elements.length; ++i )
+  {
+    if( elements[ i ].clientHeight - pd > maxHeight )
+    {
+      maxHeight = elements[ i ].clientHeight - pd;
+    }
+  }
+  for( var i = 0; i < elements.length; ++i )
+  {
+    elements[ i ].style.height = maxHeight + "px";
+  }
+}
+
+function same_size_class( className, pd ) {
+  same_size_list( document.getElementsByClassName( className ), pd );
+}
+
+function on_resize() {
+  if( is_mobile() ) {
+    make_invisible( "menu", "main_menu" );
+    make_invisible( "address", "address_details" );
+  }
+  else {
+    same_size_class( 'col', 0 );
+    make_visible( "menu", "main_menu" );
+    make_visible( "address", "address_details" );
+  }
+}
+</script>
+</head>
+<body lang="de" onload="on_resize();" onresize="on_resize();" onclick="on_body_click();">
+<div id="header" itemscope itemtype="http://schema.org/LocalBusiness"> 
+<header class="light-background dark">
+<div>
+<div class="ausbildung">Mag. rer. nat.</div>
+<div class="name" itemprop="name">Marion Mayr</div>
+<div class="ausbildung" hidden>Psychologin</div>
+<div class="ausbildung">Klinische und Gesundheitspsychologin</div>
+<div class="ausbildung">Sportpsychologin</div>
+</div>
+<div id="motto">
+<span>Schritt für Schritt gemeinsam Ziele erreichen ...</span>
+</div>
+<nav><a href="https://marion-mayr.at//page/impressum">Datenschutz & Impressum</a>
+
+
+</nav>
+<div id="portrait"></div>
+<div id="address" onclick="on_address_click();">
+<address id="address_details">
+  <div class="detail"><span class="icon mail"></span><span class="content"><a href="mailto:kontakt@marion-mayr.at"><span itemprop="email">kontakt@marion-mayr.at</span></a></span></div>
+  <div class="detail"><span class="icon phone"></span><span class="content"><a href="tel:+4367761800106"><span itemprop="telephone">+43 677 618 001 06</span></a></span></div>
+  <div class="detail double"><span class="icon address"></span><span class="content" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><span itemprop="streetAddress">Abt-Zedinek-Straße 361</span><br /><span itemprop="postalCode">3511</span> <span itemprop="addressLocality">Furth bei Göttweig</span><span hidden itemprop="addressCountry">AT</span></span></div>
+  <div hidden itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+    <!-- Office address -->
+    <span itemprop="streetAddress">Franz Veiglstraße 2/1</span>
+    <span itemprop="postalCode">3495</span>
+    <span itemprop="addressLocality">Rohrendorf bei Krems</span>
+    <span itemprop="addressCountry">AT</span>
+  </div>
+  <div hidden itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+    <!-- Offering home visits -->
+    <span itemprop="postalCode">3500</span>
+    <span itemprop="addressLocality">Krems an der Donau</span>
+    <span itemprop="addressCountry">AT</span>
+  </div>
+</address>
+</div>
+</header>
+<div id="menu" onclick="on_menu_click();">
+<nav id="main_menu">
+<span class="menu_item"><a href="https://marion-mayr.at//page/ueber_mich">Startseite</a></span>
+<span class="menu_item"><a href="https://marion-mayr.at//page/schmerzen">Schmerztraining</a></span>
+<span class="menu_item"><a href="https://marion-mayr.at//page/online_beratung">Online-Beratung</a></span>
+<span class="menu_item"><a href="https://marion-mayr.at//page/sportpsychologie">Sportpsychologie</a></span>
+<span class="menu_item"><a href="https://marion-mayr.at//page/sonstiges">Andere Leistungen</a></span>
+<span class="menu_item"><a href="https://marion-mayr.at//page/praxis">Kontakt</a></span>
+</nav>
+</div>
+</div>
+
+<div id="content">
+<div id="title_bar">
+<span id="main_title">
+
+<h1>Sportpsychologie</h1>
+</span>
+<div id="left_column" class="col">
+<div class="quote">„Gewonnen und verloren wird zwischen den Ohren.“<span class="quote_by">Boris Becker</span></div><p>Dieses Zitat zeigt am besten wie wichtig die mentale Vorbereitung im Sport ist. Sowohl im Spitzen- als auch im Breitensport kann mentale Vorbereitung zu einer Leistungssteigerung führen.</p><p>Kurz möchte ich Ihnen etwaige Themenfelder in einer sportpsychologischen Begleitung vorstellen.</p><h2>Themenfelder</h2><h3>Zielsetzung und Motivation</h3><div class="quote">„Ich glaube, wenn du keine Ziele hast, dann brauchst du keinen Sport zu betreiben. Wenn du dir keine Ziele setzt, dann kannst du nicht motiviert sein.“<span class="quote_by">Thomas Linke</span></div><p>Langfristig wird die SportlerIn erfolgreich sein, die in der Lage ist mit Schwankungen ihrer Motivation umzugehen, sich selbst zu führen und zu motivieren. Dabei hilft das richtige setzen von Zielen.</p><h3>Teambildung</h3><p>Nur wenn die einzelnen SportlerInnen eines Teams zusammenhalten und sich vertrauen, kann jede sein Bestes geben und selbstbewusst die Grenzen ihrer Leistungsfähigkeit ausloten. Teamgeist kann nicht von oben verordnet werden, er muss sich entwickeln. Dabei helfen gemeinsames Training, Matches und außersportliche Aktivitäten. Gezielte Übungen können helfen Vertrauen und Zusammenhalt zu steigern und durch Reflexion der Übungen kann Klarheit über die Rolle der Einzelnen im Team gewonnen werden.</p><h3>Entspannung und Aktivierung</h3><div class="quote">„Da mache ich die Augen zu und konzentriere mich. Ich atme bewusst in den Bauch und entspanne mich mit der Jacobsen-Übung. Ich will nicht lange herumsitzen und warten, sondern anziehen und raus.“<span class="quote_by">René Aufhauser</span></div><p>Ob eine SportlerIn ihre Trainingsleistung im Match abrufen kann, hängt vor allem davon ab, wie angespannt sie ist. Ist sie zu angespannt oder nervös, wird sie ihre Bestleistung nur schwer erbringen. Genauso wenig wird sie dies tun, wenn sie müde und zu wenig aktiviert ist. Durch gezielte Übungen, kann die Körperwahrnehmung geschult werden, um schnell zu erkennen, ob Aktivierungs- oder Entspannungsübungen durchgeführt werden sollten. Eine Vielzahl an Entspannungs- und Aktivierungsübungen wird gemeinsam geübt und an die einzelne SportlerIn angepasst.</p><h3>Konzentration</h3><div class="quote">„Am Spieltag bin ich sicherlich ein anderer Mensch. Zwei bis drei Stunden vor dem Spiel will ich meine Ruhe haben. Da brauche ich Zeit für mich alleine und vertrage keine Störungen. Deshalb mag ich es gerne, wenn wir vor den Spielen kaserniert sind.“<span class="quote_by">Thomas Winklhofer</span></div><p>Unter Konzentration versteht man die Fähigkeit, die richtigen Dinge zur richtigen Zeit wahrzunehmen und Störquellen wie Zuschauer oder die eigenen Zweifel ausblenden zu können. Um die Konzentration steuern zu können muss gezielt daran gearbeitet werden. Gemeinsam werden Strategien erarbeitet, um auch unter hoher Anspannung bei einem Wettkampf die Konzentration auf die Dinge zu lenken, die für eine optimale Leistungserbringung wichtig sind.</p><h3>Selbstbewusstsein</h3><div class="quote">„Wenn du gegen große Manschaften spielst, dann musst du anerkennen, dass da viele großartige Fußballer spielen, die besser sind als du. Aber alles, was ich kann, zeige ich denen! Du darfst nicht neben diesen Stars herlaufen und sie bewundern. Du musst an dich und deine Möglichkeiten denken und glauben. Ich habe bei solchen Spielen immer gedacht, okay, du bist besser als ich, aber vielleicht nicht heute!“<span class="quote_by">Herbert Prohaska</span></div><p>Eine Grundvoraussetzung für Erfolg ist eine gute Vorbereitung. Um sein Potential im entscheidenden Moment abrufen zu können, muss man auf das vertrauen was man kann und selbstbewusst loslegen. Es gibt sogenannte Trainingsweltmeister, die es nicht schaffen, ihr Potential im Match zu zeigen. Dies liegt oft daran, dass sie in entscheidenden Situationen nicht auf ihre Stärken vertrauen, und plötzlich anders agieren wie im Training. Gemeinsam suchen wir nach Stärken, und wie diese am besten zum Einsatz kommen. Durch gezielte Übungen kann das Selbstbewusstsein verändert werden.</p><h3>Vorstellungstraining</h3><div class="quote">„Ich ging nach Hause und habe es versucht. Aber so einfach war das nicht, sich hinzulegen und einen 12-Minuten-Film zu entwickeln. Es gelang mir schließlich doch, mir wieder vorzustellen, wie ich besondere Leistung bringe. Am meisten hat mich beeindruckt, dass ich in den nächsten Pflichtspielen vier Tore geschossen, wirklich gute Leistungen gebracht habe und meinen Biss wieder gefunden habe! Ich habe gesehen, dass optimale Vorbereitung im Kopf beginnt.“<span class="quote_by">Adi Hütter</span></div><p>Eine Befragung zeigt, dass 90 Prozent der Olympiateilnehmer Vorstellungstraining einsetzen, um Bewegungen zu lernen, sich zu motivieren und im Wettkampf voll da zu sein.</p><p>Durch Vorstellungstraining lassen sich auch Angst und Nervosität reduzieren, was im Spiel den entscheidenden Vorteil bringen kann. Laut Untersuchungen ist sogar der Muskelabbau bei einer Verletzung geringer, wenn man Vorstellungstraining während der Trainingspause betreibt.</p></div>
+<div id="right_column" class="col">
+</div>
+<div>
+<footer>
+(C)opyright 2016-2020, Marion Mayr<br />
+<a href="https://marion-mayr.at//page/impressum">Datenschutz & Impressum</a>
+
+
+ | <a href="https://marion-mayr.at//page/sitemap">Sitemap</a>
+
+
+
+</footer>
+</div>
+</div>
+
+</body>
+</html>
+

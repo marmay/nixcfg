@@ -1,0 +1,123 @@
+dn: dc=home
+objectClass: dcObject
+objectClass: organization
+dc: home
+o: Die Mayr-Familie
+description: Wir sind die Mayr-Familie
+
+dn: ou=People,dc=home
+objectClass: organizationalUnit
+ou: People
+
+dn: ou=Groups,dc=home
+objectClass: organizationalUnit
+ou: Groups
+
+dn: cn=users,ou=Groups,dc=home
+objectClass: posixGroup
+cn: users
+gidNumber: 5000
+
+dn: cn=admins,ou=Groups,dc=home
+objectClass: posixGroup
+cn: admins
+gidNumber: 5001
+
+dn: cn=parents,ou=Groups,dc=home
+objectClass: posixGroup
+cn: parents
+gidNumber: 5002
+
+dn: cn=guests,ou=Groups,dc=home
+objectClass: posixGroup
+cn: guests
+gidNumber: 5100
+
+dn: cn=children,ou=Groups,dc=home
+objectClass: posixGroup
+cn: children
+gidNumber: 5003
+
+dn: uid=markus,ou=People,dc=home
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+uid: markus
+sn: Mayr
+givenName: Markus
+cn: Markus Mayr
+displayName: Markus Mayr
+uidNumber: 10000
+gidNumber: 5000
+userPassword: {SHA}M2KdctZv2nMkP6/rvbFxTrtFX5o=
+gecos: Markus Mayr
+homeDirectory: /home/markus
+memberOf: cn=users,ou=Groups,dc=home
+memberOf: cn=admins,ou=Groups,dc=home
+memberOf: cn=parents,ou=Groups,dc=home
+
+dn: uid=marion,ou=People,dc=home
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+uid: marion
+sn: Mayr
+givenName: Marion
+cn: Marion Mayr
+displayName: Marion Mayr
+uidNumber: 10001
+gidNumber: 5000
+userPassword: {SSHA}tvY5NpYBxbZ9wuJ7HSzJBh8kcjQAdmhz
+gecos: Marion Mayr
+homeDirectory: /home/marion
+memberOf: cn=users,ou=Groups,dc=home
+memberOf: cn=parents,ou=Groups,dc=home
+
+dn: uid=raphaela,ou=People,dc=home
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+uid: raphaela
+sn: Mayr
+givenName: Raphaela
+cn: Raphaela Mayr
+displayName: Raphaela Mayr
+uidNumber: 10002
+gidNumber: 5000
+userPassword: {SSHA}Kmt7AuCDGopGyy17fY8ZOTWFyKbTuPzR
+gecos: Raphaela Mayr
+homeDirectory: /home/raphaela
+memberOf: cn=users,ou=Groups,dc=home
+memberOf: cn=children,ou=Groups,dc=home
+
+dn: uid=gabriel,ou=People,dc=home
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+uid: gabriel
+sn: Mayr
+givenName: Gabriel
+cn: Gabriel Mayr
+displayName: Gabriel Mayr
+uidNumber: 10003
+gidNumber: 5000
+userPassword: {SSHA}YX9IrFchUJ9VW+ZexHgc0l+p137qYqDa
+gecos: Gabriel Mayr
+homeDirectory: /home/gabriel
+memberOf: cn=children,ou=Groups,dc=home
+
+dn: uid=charlotte,ou=People,dc=home
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+uid: charlotte
+sn: Mayr
+givenName: Charlotte
+cn: Charlotte Mayr
+displayName: Charlotte Mayr
+uidNumber: 10004
+gidNumber: 5000
+userPassword: {SSHA}tvY5NpYBxbZ9wuJ7HSzJBh8kcjQAdmhz
+gecos: Charlotte Mayr
+homeDirectory: /home/charlotte
+memberOf: cn=children,ou=Groups,dc=home

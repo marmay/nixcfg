@@ -1,0 +1,278 @@
+body {
+  padding: 0px;
+  overflow-y: scroll;
+}
+
+#header {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  margin: 0px;
+  padding: 0px;
+  min-width: 1280px;
+  height: 120px;
+}
+
+#header header {
+  width: 1260px;
+}
+
+header address {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 205px;
+  font-size: 13px;
+}
+
+header .name {
+  font-size: 40px;
+  font-variant: small-caps;
+}
+
+header .ausbildung {
+  font-size: 16px;
+  font-variant: small-caps;
+}
+
+header address .detail {
+  line-height: 18px;
+}
+
+header address .double {
+  line-height: 2.5em;
+}
+
+header address .detail .icon {
+  position: relative;
+  display: inline-block;
+  height: 18px;
+  width: 18px;
+  vertical-align: top;
+}
+
+header address .detail .mail {
+  background-image: url('../gfx/mail.png');
+}
+
+header address .detail .phone {
+  background-image: url('../gfx/phone.png');
+}
+
+header address .detail .address {
+  background-image: url('../gfx/home.png');
+}
+
+header address .detail .content {
+  display: inline-block;
+  line-height: 1em;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
+header nav {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
+
+header #motto {
+  position: absolute;
+  left: 330px;
+  bottom: -10px;
+  padding: 10px;
+  height: 120px;
+  width: 630px;
+  background-image: url('../gfx/footsteps.png');
+  background-repeat: no-repeat;
+  background-position: center bottom;
+}
+
+header #motto span {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  bottom: 5px;
+  font-size: 18px;
+}
+
+header #portrait {
+  position: absolute;
+  left: 980px;
+  bottom: -10px;
+  padding: 10px;
+  height: 100px;
+  width: 65px;
+  background-image: url('../gfx/ich.png');
+  background-repeat: no-repeat;
+  background-position: center bottom;
+}
+
+#menu {
+  position: absolute;
+  left: 0px;
+  top: 120px;
+  height: 41px;
+  width: 100%;
+  background-color: #004400;
+  text-align: center;
+}
+
+#menu a {
+  position: relative;
+  display: inline-block;
+  height: 23px;
+  top: 4px;
+  width: 170px;
+  color: #004400;
+  background-color: #88cc88;
+  border: 4px solid;
+  border-color: #88cc88;
+  border-radius: 8px;
+  padding-top: 2px;
+  text-decoration: none;
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+#menu a:hover {
+  border-color: #ffaaaa;
+  background-color: #ffaaaa;
+  color: #550000;
+}
+
+#header #address {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 200px;
+}
+
+#content {
+  position: absolute;
+  box-sizing: border-box;
+  left: 0px;
+  right: 0px;
+  top: 170px;
+  width: 1280px;
+  margin: auto;
+  font-size: 14pt;
+}
+
+#content h1 {
+  text-align: center;
+  color: #004400;
+  font-size: 28pt;
+}
+
+#content footer {
+  font-size: 10pt;
+  text-align: center;
+}
+
+#footsteps {
+  position: absolute;
+  left: 50px;
+  top: -20px;
+  width: 800px;
+  height: 140px;
+  margin: 0;
+  padding: 0;
+  background-image: url('../gfx/footsteps.png');
+}
+
+#right_column {
+  box-sizing: border-box;
+  padding-left: 20px;
+  margin: 0px;
+  float: right;
+  border-style: solid;
+  border-width: 0px;
+  border-left-width: 1px;
+  border-color: #004400;
+  width: 30%;
+}
+
+#left_column {
+  float: left;
+  box-sizing: border-box;
+  padding-right: 20px;
+  margin: 0px;
+  width: 70%;
+  border-style: solid;
+  border-width: 0px;
+  border-right-width: 1px;
+  border-color: #004400;
+}
+
+a {
+  color: #004400;
+}
+
+a.link_box {
+  display: inline-block;
+  text-decoration: none;
+  padding: 20px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #004400;
+  background-color: #88cc88;
+  margin: 10px;
+  width: 250px;
+}
+
+.full_figure {
+  position: relative;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #004400;
+  width: 640px;
+  margin: auto;
+  text-align: center;
+}
+
+.full_figure img {
+  margin: 20px;
+}
+
+.full_figure .caption {
+  box-sizing: border-box;
+  left: 0px;
+  width: 100%;
+  background-color: #88cc88;
+  padding: 8pt;
+  clear: both;
+}
+
+.quote {
+  font-size: 22pt;
+  font-weight: bold;
+  color: #88cc88;
+  margin-left: 100px;
+  margin-right: 100px;
+  padding: 20px;
+  border-left: 5px solid #88cc88;
+}
+
+.breadcrumbtrace {
+  font-size: 12pt;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: -10px;
+}
+
+#main_title {
+  display: inline-block;
+  width: 1080px;
+}
+
+#social_buttons {
+  display: inline-block;
+  width: 166px;
+  margin-top: 15px;
+  margin-right: 10px;
+  text-align: center;
+  float: right;
+}
+
