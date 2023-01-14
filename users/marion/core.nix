@@ -11,7 +11,7 @@ let user = "marion"; in
     users.users.${user} = {
       uid = 1001;
       isNormalUser = true;
-      passwordFile = "/run/agenix/1/marionPassword";
+      passwordFile = config.age.secrets."${user}Password".path;
       extraGroups = [
         "users"
         "cdrom"
