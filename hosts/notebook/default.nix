@@ -8,7 +8,6 @@
     ../../bits/system/intel.nix
     ../../bits/system/nas_client.nix
     ../../bits/system/opengl.nix
-    ../../bits/system/pc.nix
     ../../bits/system/printing.nix
     ../../bits/system/sound.nix
     ../../bits/system/ssh.nix
@@ -27,6 +26,13 @@
     system.stateVersion = "22.11";
 
     time.timeZone = "Europe/Vienna";
+
+    boot.loader.grub = {
+      enable = true;
+      version = 2;
+      device = "/dev/sda";
+      useOSProber = true;
+    };
 
     networking = {
       hostName = "notebook";
