@@ -8,6 +8,7 @@
   ];
 
   config = {
+    nixpkgs.config.allowUnfree = true;
     programs.steam.enable = true;
     hardware = {
       pulseaudio.support32Bit = true;
