@@ -16,23 +16,21 @@ in
     age.secrets = {
       jellyfinVpnCaCert = {
         file = ../../../secrets/markus/vpn/server/buki/cert;
-        path = "/run/agenix/jellyfin/ca";
       };
       jellyfinVpnClientCert = {
         file = ../../../secrets/markus/vpn/client/jellyfin/cert;
-        path = "/run/agenix/jellyfin/cert";
       };
       jellyfinVpnClientKey = {
         file = ../../../secrets/markus/vpn/client/jellyfin/key;
-        path = "/run/agenix/jellyfin/key";
       };
       jellyfinVpnTaKey = {
         file = ../../../secrets/markus/vpn/server/buki/ta.key;
-        path = "/run/agenix/jellyfin/ta";
       };
     };
 
-    containers.jellyfin = commonContainerConfig.containerNetwork // {
+    containers.jellyfin =
+    let cfg = config;
+    in commonContainerConfig.containerNetwork // {
       autoStart = true;
       enableTun = true;
 
@@ -96,10 +94,10 @@ in
         openvpnCfg = {
           enable = true;
           host = "marion-mayr.at";
-          serverCert = "/run/agenix/jellyfin/ca";
-          clientCert = "/run/agenix/jellyfin/cert";
-          clientKey = "/run/agenix/jellyfin/key";
-          taKey = "/run/agenix/jellyfin/ta";
+          serverCert = cfg.age.secrets.jellyfinVpnCaCert.path;
+          clientCert = cfg.age.secrets.jellyfinVpnClientCert.path;
+          clientKey = cfg.age.secrets.jellyfinVpnClientKey.path;
+          taKey = cfg.age.secrets.jellyfinVpnTaKey.path;
         };
 
         users.users.jellyfin.extraGroups = [ "video" "render" ];

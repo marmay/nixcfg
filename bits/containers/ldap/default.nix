@@ -47,10 +47,10 @@ in
         openvpnCfg = {
           enable = true;
           host = "marion-mayr.at";
-          serverCert = "/run/agenix/1/ldapVpnCaCert";
-          clientCert = "/run/agenix/1/ldapVpnClientCert";
-          clientKey = "/run/agenix/1/ldapVpnClientKey";
-          taKey = "/run/agenix/1/ldapVpnTaKey";
+          serverCert = ageSecrets.ldapVpnCaCert.path;
+          clientCert = ageSecrets.ldapVpnClientCert.path;
+          clientKey = ageSecrets.ldapVpnClientKey.path;
+          taKey = ageSecrets.ldapVpnTaKey.path;
         };
 
         services.openldap = {
