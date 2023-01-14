@@ -11,6 +11,7 @@ let user = "marion"; in
         firefox.enable = true;
       };
       home.packages = with pkgs; [
+        calibre
         libreoffice
       ];
     };
