@@ -31,6 +31,7 @@
     networking = {
       hostName = "notebook";
       wireless.enable = true;
+      networkmanager.enable = false;
     };
 
     systemd.services.NetworkManager-wait-online.enable = false;
