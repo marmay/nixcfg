@@ -19,6 +19,7 @@
         defaultShared = false;
         drivers = with pkgs; [
         ];
+        extraConf = builtins.readFile ./printers.conf;
       };
     };
   };
