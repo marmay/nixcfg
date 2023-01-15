@@ -47,6 +47,8 @@
     networking.interfaces.br0.useDHCP = true;
     networking.networkmanager.enable = false;
 
+    age.secretsDir = "/run/agenix.d/current";
+
     nixpkgs.overlays = import ../../bits/overlays/all.nix;
 
     # List packages installed in system profile. To search, run:

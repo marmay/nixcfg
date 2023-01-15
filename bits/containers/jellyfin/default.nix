@@ -15,7 +15,7 @@ in
 
     age.secrets = {
       jellyfinVpnCaCert = {
-        file = ../../../secrets/markus/vpn/server/buki/cert;
+        file = ../../../secrets/markus/vpn/server/buki/ca.crt;
       };
       jellyfinVpnClientCert = {
         file = ../../../secrets/markus/vpn/client/jellyfin/cert;
@@ -52,8 +52,8 @@ in
           hostPath = "/dev/shm";
           isReadOnly = false;
         };
-        "/run/agenix" = {
-          hostPath = "/run/agenix";
+        "/run/agenix.d" = {
+          hostPath = "/run/agenix.d";
           isReadOnly = true;
         };
       } // (lib.lists.foldr lib.attrsets.recursiveUpdate {} (commonContainerConfig.path.mkServicePathBinds servicePaths));

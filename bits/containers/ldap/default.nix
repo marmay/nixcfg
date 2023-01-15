@@ -5,7 +5,7 @@ in
   config = {
     age.secrets = {
       ldapVpnCaCert = {
-        file = ../../../secrets/markus/vpn/server/buki/cert;
+        file = ../../../secrets/markus/vpn/server/buki/ca.crt;
       };
       ldapVpnClientCert = {
         file = ../../../secrets/markus/vpn/client/ldap/cert;
@@ -26,10 +26,6 @@ in
       enableTun = true;
 
       bindMounts = {
-        "/run/agenix" = {
-          hostPath = "/run/agenix";
-          isReadOnly = true;
-        };
         "/run/agenix.d" = {
           hostPath = "/run/agenix.d";
           isReadOnly = true;
