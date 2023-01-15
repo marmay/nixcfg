@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../../bits/system/autoupdate.nix
     ../../bits/system/core.nix
     ../../bits/system/data.nix
     ../../bits/system/nas_client.nix

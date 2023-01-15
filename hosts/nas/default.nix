@@ -10,6 +10,7 @@
       ./hardware.nix
       ./ldap.nix
       ./nfs.nix
+      ../../bits/system/autoupdate.nix
       ../../bits/system/core.nix
       ../../bits/system/data.nix
       ../../bits/system/intel.nix
