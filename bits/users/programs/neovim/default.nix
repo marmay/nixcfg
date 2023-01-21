@@ -5,8 +5,6 @@ let
     haskell-vim
     ghcid
     vim-hindent
-    orgmode
-    nvim-treesitter
     fugitive
     barbar-nvim
     toggleterm-nvim
@@ -16,8 +14,8 @@ let
   baseConfig = builtins.readFile ./config.vim;
   lspConfig = builtins.readFile ./lsp.vim;
   themeConfig = builtins.readFile ./rigel.vim;
-  orgmodeConfig = builtins.readFile ./orgmode.vim;
-  vimConfig = baseConfig + lspConfig + themeConfig + orgmodeConfig;
+  # orgmodeConfig = builtins.readFile ./orgmode.vim;
+  vimConfig = baseConfig + lspConfig + themeConfig; # + orgmodeConfig;
   lspSettings = builtins.toJSON (import ./lsp_settings.nix);
 in
 {
