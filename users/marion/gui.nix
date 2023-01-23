@@ -8,7 +8,15 @@ let user = "marion"; in
   config = {
     home-manager.users.${user} = {
       programs = {
-        firefox.enable = true;
+        firefox = {
+          enable = true;
+          profiles.default.settings = {
+            "media.gmp-widevinecdm.enabled" = "true";
+            "intl.accept_languages" = "de_AT,de,en_US,en";
+            "intl.locale.requested" = "de,en-US";
+            "services.sync.username" = "marion.st.mayr@gmail.com";
+          };
+        };
       };
       home.packages = with pkgs; [
         calibre
