@@ -17,4 +17,5 @@ in
   "mail/hashed_pwd.raphaela".publicKeys = [ keys.markus keys.buki ];
   "users/markus".publicKeys = [ keys.markus keys.buki keys.nas keys.keller keys.notebook ];
   "users/marion".publicKeys = [ keys.markus keys.buki keys.nas keys.keller keys.notebook ];
+  "users/raphaela".publicKeys = [ keys.markus keys.buki keys.nas keys.keller keys.notebook ];
 }

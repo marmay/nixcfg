@@ -24,9 +24,8 @@
       ../../users/markus/admin.nix
       ../../users/markus/gui.nix
       ../../users/markus/local.nix
-      ../../users/marion/core.nix
-      ../../users/marion/gui.nix
-      ../../users/marion/local.nix
+      ../../users/marion/full.nix
+      ../../users/raphaela/full.nix
       ./hardware.nix
     ] ++ import ./containers.nix;
 
