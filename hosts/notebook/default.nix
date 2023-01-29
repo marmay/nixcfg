@@ -17,6 +17,7 @@
     ../../users/markus/core.nix
     ../../users/markus/admin.nix
     ../../users/markus/local.nix
+    ../../users/markus/smallgui.nix
     ../../users/marion/core.nix
     ../../users/marion/gui.nix
     ../../users/marion/local.nix

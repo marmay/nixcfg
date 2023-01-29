@@ -6,20 +6,8 @@ let user = "markus"; in
     in
   [
     (withArgs ../../bits/users/xsession/xmonad {})
+  ] ++ [
+    ./smallgui.nix
   ];
-
-  config = {
-    home-manager.users.${user} = {
-      programs = {
-        firefox.enable = true;
-      };
-      home.packages = with pkgs; [
-      ];
-    };
-    users.users.${user}.extraGroups = [
-      "video"
-      "render"
-    ];
-  };
 }
 
