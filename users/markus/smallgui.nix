@@ -8,6 +8,7 @@ let user = "markus"; in
       };
       home.packages = with pkgs; [
         qmapshack
+        gnome.eog
       ];
     };
     users.users.${user}.extraGroups = [
