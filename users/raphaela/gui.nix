@@ -18,6 +18,7 @@ let user = "marion"; in
         };
       };
       home.packages = with pkgs; [
+        foxitreader
       ];
     };
 
