@@ -5,8 +5,9 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
   inputs.home-manager.url = "github:nix-community/home-manager/release-22.11";
+  inputs.flake-utils.url = "github:numtide/flake-utils";
 
-  outputs = { self, nixpkgs, home-manager, agenix, ... }:
+  outputs = { self, nixpkgs, home-manager, agenix, flake-utils, ... }:
   let
     mkUserPc = path: nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -33,5 +34,8 @@
       nas = mkUserPc ./hosts/nas;
       notebook = mkUserPc ./hosts/notebook;
     };
-  };
+
+  } // flake-utils.lib.eachDefaultSystem (system: {
+    legacyPackages = import nixpkgs ({ inherit system; });
+  });
 }
