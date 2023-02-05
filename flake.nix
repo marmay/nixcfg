@@ -17,7 +17,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
           }
-          agenix.nixosModule
+          agenix.nixosModules.default
           path
         ];
       };
@@ -27,7 +27,7 @@
         system = "x86_64-linux";
         modules = [
           ./hosts/buki
-          agenix.nixosModule
+          agenix.nixosModules.default
         ];
       };
       keller = mkUserPc ./hosts/keller;
