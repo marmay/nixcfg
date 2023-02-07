@@ -5,6 +5,7 @@
     ../../bits/system/autoupdate.nix
     ../../bits/system/core.nix
     ../../bits/system/data.nix
+    ../../bits/system/gnome.nix
     ../../bits/system/nas_client.nix
     ../../bits/system/nvidia.nix
     ../../bits/system/opengl.nix
