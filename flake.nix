@@ -4,8 +4,13 @@
     url = "github:ryantm/agenix";
     inputs.nixpkgs.follows = "nixpkgs";
   };
-  inputs.home-manager.url = "github:nix-community/home-manager/release-22.11";
-  inputs.flake-utils.url = "github:numtide/flake-utils";
+  inputs.home-manager = {
+    url = "github:nix-community/home-manager/release-22.11";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+  inputs.flake-utils = {
+    url = "github:numtide/flake-utils";
+  };
 
   outputs = { self, nixpkgs, home-manager, agenix, flake-utils, ... }:
   let
