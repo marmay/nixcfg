@@ -13,7 +13,7 @@ let
   ];
   baseConfig = builtins.readFile ./config.vim;
   lspConfig = builtins.readFile ./lsp.vim;
-  themeConfig = builtins.readFile ./rigel.vim;
+  themeConfig = builtins.readFile ./disco.vim;
   # orgmodeConfig = builtins.readFile ./orgmode.vim;
   vimConfig = baseConfig + lspConfig + themeConfig; # + orgmodeConfig;
   lspSettings = builtins.toJSON (import ./lsp_settings.nix);
