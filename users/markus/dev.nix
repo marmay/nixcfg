@@ -8,6 +8,7 @@ let user = "markus"; in
     (withArgs ../../bits/users/programs/neovim {})
   ];
 
+  config.nix.settings.trusted-users = [ user ];
   config.home-manager.users.${user} = {
     programs = {
       fish.enable = true;
