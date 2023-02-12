@@ -22,6 +22,11 @@ in
       ];
       xdg.configFile."xmobar/.xmobarrc".text = xmobarConfig;
       xsession.enable = true;
+      xsession.initExtra = ''
+        if test "$(basename $1)" != "xterm"; then
+          eval exec "$@";
+        fi
+      '';
       xsession.windowManager.xmonad = {
         enable = true;
         extraPackages = haskellPackages: [ haskellPackages.dbus ];
