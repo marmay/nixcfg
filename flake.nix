@@ -40,7 +40,15 @@
       notebook = mkUserPc ./hosts/notebook;
     };
 
-  } // flake-utils.lib.eachDefaultSystem (system: {
-    legacyPackages = import nixpkgs ({ inherit system; });
+  } // flake-utils.lib.eachDefaultSystem (system: let pkgs = import nixpkgs ({ inherit system; }); in {
+    legacyPackages = pkgs;
+    devShells.ihp = pkgs.mkShell {
+      buildInputs = with pkgs; [
+        cachix
+        direnv
+        gnumake
+        tmux
+      ];
+    };
   });
 }
