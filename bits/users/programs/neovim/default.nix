@@ -9,13 +9,12 @@ let
     barbar-nvim
     toggleterm-nvim
     nvim-web-devicons
+    nvim-base16
     LanguageClient-neovim
   ];
   baseConfig = builtins.readFile ./config.vim;
   lspConfig = builtins.readFile ./lsp.vim;
-  themeConfig = builtins.readFile ./disco.vim;
-  # orgmodeConfig = builtins.readFile ./orgmode.vim;
-  vimConfig = baseConfig + lspConfig + themeConfig; # + orgmodeConfig;
+  vimConfig = baseConfig + lspConfig;
   lspSettings = builtins.toJSON (import ./lsp_settings.nix);
 in
 {
