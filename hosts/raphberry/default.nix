@@ -9,6 +9,7 @@
     ../../bits/system/nas_client.nix
     ../../bits/system/opengl.nix
     ../../bits/system/printing.nix
+    ../../bits/system/rpi.nix
     ../../bits/system/sound.nix
     ../../bits/system/ssh.nix
     ../../bits/system/xserver.nix
@@ -30,10 +31,7 @@
     boot = {
       loader = {
         grub.enable = false;
-        raspberryPi = {
-          enable = true;
-          version = 4;
-        };
+        generic-extlinux-compatible.enable = true;
       };
 
       kernelParams = [
@@ -52,6 +50,24 @@
 
       tmpOnTmpfs = true;
     };
+
+    fileSystems = {
+      "/" = {
+        label = "NIXOS_ROOT";
+        fsType = "ext4";
+      };
+
+      "/boot" = {
+        label = "NIXOS_BOOT";
+        fsType = "vfat";
+      };
+    };
+
+    swapDevices = [
+      {
+        label = "NIXOS_SWAP";
+      }
+    ];
   };
 }
 

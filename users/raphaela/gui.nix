@@ -1,5 +1,5 @@
 args@{config, lib, pkgs, ... }:
-let user = "marion"; in
+let user = "raphaela"; in
 {
   imports = [
     ../../bits/system/gnome.nix
