@@ -14,8 +14,8 @@
 
   outputs = { self, nixpkgs, home-manager, agenix, flake-utils, ... }:
   let
-    mkUserPc = path: nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+    mkUserPc = { path, system ? "x86_64-linux" }: nixpkgs.lib.nixosSystem {
+        system = system;
         modules = [
           home-manager.nixosModules.default
           {
@@ -35,9 +35,13 @@
           agenix.nixosModules.default
         ];
       };
-      keller = mkUserPc ./hosts/keller;
-      nas = mkUserPc ./hosts/nas;
-      notebook = mkUserPc ./hosts/notebook;
+      keller = mkUserPc { path = ./hosts/keller; };
+      nas = mkUserPc { path = ./hosts/nas; };
+      notebook = mkUserPc { path = ./hosts/notebook; };
+      raphberry = mkUserPc {
+        path = ./hosts/raphberry;
+        system = "aarch64-linux";
+      };
     };
 
   } // flake-utils.lib.eachDefaultSystem (system: let pkgs = import nixpkgs ({ inherit system; }); in {
