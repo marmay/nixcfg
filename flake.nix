@@ -24,8 +24,18 @@
           }
           agenix.nixosModules.default
           path
+          nixpkgs.nixos.modules.installer.sd-card.sd-image-raspberrypi
         ];
       };
+    mynixpkgs = system: import nixpkgs ({
+      inherit system;
+      config = {
+        allowUnfree = true;
+        permittedInsecurePackages = [
+          "qtwebkit-5.212.0-alpha4"
+        ];
+      };
+    });
   in {
     nixosConfigurations = {
       buki = nixpkgs.lib.nixosSystem {
@@ -44,8 +54,9 @@
       };
     };
 
-  } // flake-utils.lib.eachDefaultSystem (system: let pkgs = import nixpkgs ({ inherit system; }); in {
+  } // flake-utils.lib.eachDefaultSystem (system: let pkgs = mynixpkgs system; in {
     legacyPackages = pkgs;
+
     devShells.ihp = pkgs.mkShell {
       buildInputs = with pkgs; [
         cachix
