@@ -14,7 +14,7 @@
 
   outputs = { self, nixpkgs, home-manager, agenix, flake-utils, ... }:
   let
-    mkUserPc = { path, system ? "x86_64-linux" }: nixpkgs.lib.nixosSystem {
+    mkUserPc = { path, system ? "x86_64-linux", extra-modules ? [] }: nixpkgs.lib.nixosSystem {
         system = system;
         modules = [
           home-manager.nixosModules.default
@@ -24,16 +24,12 @@
           }
           agenix.nixosModules.default
           path
-          nixpkgs.nixos.modules.installer.sd-card.sd-image-raspberrypi
-        ];
+        ] ++ extra-modules;
       };
     mynixpkgs = system: import nixpkgs ({
       inherit system;
       config = {
         allowUnfree = true;
-        permittedInsecurePackages = [
-          "qtwebkit-5.212.0-alpha4"
-        ];
       };
     });
   in {
@@ -51,6 +47,9 @@
       raphberry = mkUserPc {
         path = ./hosts/raphberry;
         system = "aarch64-linux";
+        extra-modules = [
+          (nixpkgs + "/nixos/modules/installer/sd-card/sd-image-aarch64-new-kernel.nix")
+        ];
       };
     };
 

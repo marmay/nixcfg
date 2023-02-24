@@ -37,6 +37,8 @@
       interfaces.br0.useDHCP = true;
     };
 
+    boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
     systemd.services.NetworkManager-wait-online.enable = false;
   };
 }

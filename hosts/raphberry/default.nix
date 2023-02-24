@@ -27,47 +27,6 @@
       hostName = "raphberry";
       networkmanager.enable = true;
     };
-
-    boot = {
-      loader = {
-        grub.enable = false;
-        generic-extlinux-compatible.enable = true;
-      };
-
-      kernelParams = [
-        "8250.nr_uarts=1"
-        "console=tty1"
-        "cma=256M"
-      ];
-
-      initrd.availableKernelModules = [
-        "usbhid"
-        "usb_storage"
-        "vc4"
-        "bcm2835_dma"
-        "i2c_bcm2835"
-      ];
-
-      tmpOnTmpfs = true;
-    };
-
-    fileSystems = {
-      "/" = {
-        label = "NIXOS_ROOT";
-        fsType = "ext4";
-      };
-
-      "/boot" = {
-        label = "NIXOS_BOOT";
-        fsType = "vfat";
-      };
-    };
-
-    swapDevices = [
-      {
-        label = "NIXOS_SWAP";
-      }
-    ];
   };
 }
 

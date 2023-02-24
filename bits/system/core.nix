@@ -24,7 +24,6 @@
         ];
       };
       extraOptions = ''
-        extra-platforms = i686-linux
         experimental-features = nix-command flakes
       '';
     };
