@@ -15,7 +15,7 @@ in
   "mail/hashed_pwd.marion".publicKeys = [ keys.markus keys.buki ];
   "mail/hashed_pwd.markus".publicKeys = [ keys.markus keys.buki ];
   "mail/hashed_pwd.raphaela".publicKeys = [ keys.markus keys.buki ];
-  "users/markus".publicKeys = [ keys.markus keys.buki keys.nas keys.keller keys.notebook ];
+  "users/markus".publicKeys = [ keys.markus keys.buki keys.nas keys.keller keys.notebook keys.raphberry ];
   "users/marion".publicKeys = [ keys.markus keys.buki keys.nas keys.keller keys.notebook ];
-  "users/raphaela".publicKeys = [ keys.markus keys.buki keys.nas keys.keller keys.notebook ];
+  "users/raphaela".publicKeys = [ keys.markus keys.buki keys.nas keys.keller keys.notebook keys.raphberry ];
 }
