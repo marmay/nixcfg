@@ -18,6 +18,8 @@ let user = "raphaela"; in
         };
       };
       home.packages = with pkgs; [
+        libreoffice
+        gimp
       ];
     };
 
