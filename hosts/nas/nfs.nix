@@ -22,6 +22,7 @@
         /export/recordings    10.0.0.10(rw,no_subtree_check)
         /export/media         10.0.0.150(rw,no_subtree_check)
         /export/recordings    10.0.0.150(rw,no_subtree_check)
+        /export/media         10.0.0.163(rw,no_subtree_check)
       '';
     };
 
