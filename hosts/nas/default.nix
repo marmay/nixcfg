@@ -78,6 +78,21 @@
     systemd.targets.suspend.enable = false;
     systemd.targets.hibernate.enable = false;
     systemd.targets.hybrid-sleep.enable = false;
+
+    # One of the backup strategies is to take snapshots of the data volume
+    # under /mnt/old_root:
+    services.snapper.configs."/mnt/old_root" = {
+      subvolume = "/mnt/old_root";
+      fstype = "btrfs";
+      extraConfig = ''
+        TIMELINE_CREATE=yes
+        TIMELINE_CLEANUP=yes
+        TIMELINE_LIMIT_HOURLY=24
+        TIMELINE_LIMIT_DAILY=30
+        TIMELINE_LIMIT_MONTHLY=12
+        TIMELINE_LIMIT_YEARLY=0
+      '';
+    };
   };
 }
 
