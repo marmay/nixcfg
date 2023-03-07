@@ -23,7 +23,8 @@ in
       xdg.configFile."xmobar/.xmobarrc".text = xmobarConfig;
       xsession.enable = true;
       xsession.initExtra = ''
-        if test "$(basename $1)" != "xterm"; then
+        if test "$(echo $(basename $1) | sed -e 's/[^-]*-\(.*\)/\1/')" != "xsession"; then
+          echo "$(basename $1)" > /tmp/xsession.log;
           eval exec "$@";
         fi
       '';
