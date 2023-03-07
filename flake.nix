@@ -63,6 +63,9 @@
         gnumake
         tmux
       ];
+      shellHook = ''
+        eval "$(direnv hook bash)"
+      '';
     };
   });
 }
