@@ -2,7 +2,7 @@
 {
   config.system.autoUpgrade = {
     enable = true;
-    flake = "github:marmay/nixcfg";
+    flake = "ssh+git://git@github.com/marmay/nixcfg";
     allowReboot = true;
     dates = "daily";
     rebootWindow = {

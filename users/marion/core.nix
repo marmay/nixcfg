@@ -18,11 +18,26 @@ let user = "marion"; in
       ];
     };
 
-    home-manager.users.${user}.home = {
-      username = "${user}";
-      homeDirectory = "/home/${user}";
-      stateVersion = "21.11";
-      packages = with pkgs; [];
+    home-manager.users.${user} = {
+      home = {
+        username = "${user}";
+        homeDirectory = "/home/${user}";
+        stateVersion = "21.11";
+        packages = with pkgs; [];
+      };
+
+      accounts.email.accounts."marion.st.mayr@gmail.com" = {
+        primary = true;
+        realName = "Marion Mayr";
+        address = "marion.st.mayr@gmail.com";
+        flavor = "gmail";
+      };
+
+      accounts.email.accounts."marion@marion-mayr.at" =
+        (import ../../bits/users/mail/mkBuki.nix ({
+          realName = "Marion Mayr";
+          address = "marion@marion-mayr.at";
+        }));
     };
   };
 }

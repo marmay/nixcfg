@@ -26,32 +26,11 @@ let user = "raphaela"; in
         packages = with pkgs; [];
       };
 
-      accounts.email.accounts."raphaela@marion-mayr.at" = {
-        primary = true;
-        address = "raphaela@marion-mayr.at";
-        realName = "Raphaela Sophie Mayr";
-        userName = "raphaela@marion-mayr.at";
-        imap = {
-          host = "mail.bu-ki.at";
-          port = 143;
-          tls = {
-            enable = true;
-            useStartTls = true;
-          };
-        };
-        smtp = {
-          host = "mail.bu-ki.at";
-          port = 587;
-          tls = {
-            enable = true;
-            useStartTls = true;
-          };
-        };
-        thunderbird = {
-          enable = true;
-          profiles = [ "default" ];
-        };
-      };
+      accounts.email.accounts."raphaela@marion-mayr.at" =
+        (import ../../bits/users/mail/mkBuki.nix ({
+          realName = "Raphaela Sophie Mayr";
+          address = "raphaela@marion-mayr.at"
+        })) // { primary = true; };
     };
   };
 }

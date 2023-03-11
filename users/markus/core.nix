@@ -18,11 +18,26 @@ let user = "markus"; in
       ];
     };
 
-    home-manager.users.${user}.home = {
-      username = "${user}";
-      homeDirectory = "/home/${user}";
-      stateVersion = "21.11";
-      packages = with pkgs; [];
+    home-manager.users.${user} = {
+      home = {
+        username = "${user}";
+        homeDirectory = "/home/${user}";
+        stateVersion = "21.11";
+        packages = with pkgs; [];
+      };
+
+      accounts.email.accounts."markus.mayr@outlook.com" = {
+        primary = true;
+        realName = "Markus Mayr";
+        address = "markus.mayr@outlook.com";
+        flavor = "outlook.office365.com";
+      } // (import ../../bits/users/mail/mailClients.nix);
+
+      accounts.email.accounts."markus@bu-ki.at" =
+        (import ../../bits/users/mail/mkBuki.nix ({
+          realName = "Markus Mayr";
+          address = "markus@bu-ki.at";
+        }));
     };
   };
 }
