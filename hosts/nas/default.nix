@@ -14,6 +14,7 @@
       ../../bits/system/core.nix
       ../../bits/system/data.nix
       ../../bits/system/intel.nix
+      ../../bits/system/nas_client.nix
       ../../bits/system/opengl.nix
       ../../bits/system/printing.nix
       ../../bits/system/sound.nix
