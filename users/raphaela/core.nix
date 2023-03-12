@@ -27,10 +27,10 @@ let user = "raphaela"; in
       };
 
       accounts.email.accounts."raphaela@marion-mayr.at" =
-        (import ../../bits/users/mail/mkBuki.nix ({
+        (import ../../bits/users/mail/mkBuki.nix {
           realName = "Raphaela Sophie Mayr";
-          address = "raphaela@marion-mayr.at"
-        })) // { primary = true; };
+          address = "raphaela@marion-mayr.at";
+        }) // { primary = true; };
     };
   };
 }

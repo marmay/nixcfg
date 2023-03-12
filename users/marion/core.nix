@@ -30,7 +30,7 @@ let user = "marion"; in
         primary = true;
         realName = "Marion Mayr";
         address = "marion.st.mayr@gmail.com";
-        flavor = "gmail";
+        flavor = "gmail.com";
       } // (import ../../bits/users/mail/mailClients.nix { maxAge = 360; });
 
       accounts.email.accounts."marion@marion-mayr.at" =
