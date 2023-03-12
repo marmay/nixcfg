@@ -18,4 +18,4 @@
       useStartTls = true;
     };
   };
-} // (import ./mailClients.nix)
+} // (import ./mailClients.nix {})

@@ -31,7 +31,7 @@ let user = "marion"; in
         realName = "Marion Mayr";
         address = "marion.st.mayr@gmail.com";
         flavor = "gmail";
-      };
+      } // (import ../../bits/users/mail/mailClients.nix { maxAge = 360; });
 
       accounts.email.accounts."marion@marion-mayr.at" =
         (import ../../bits/users/mail/mkBuki.nix ({

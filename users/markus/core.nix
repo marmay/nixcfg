@@ -31,7 +31,7 @@ let user = "markus"; in
         realName = "Markus Mayr";
         address = "markus.mayr@outlook.com";
         flavor = "outlook.office365.com";
-      } // (import ../../bits/users/mail/mailClients.nix);
+      } // (import ../../bits/users/mail/mailClients.nix { maxAge = 30; });
 
       accounts.email.accounts."markus@bu-ki.at" =
         (import ../../bits/users/mail/mkBuki.nix ({
