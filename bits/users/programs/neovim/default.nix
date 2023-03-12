@@ -2,6 +2,7 @@
 
 let
   myPlugins = with pkgs.vimPlugins; [
+    copilot-vim
     haskell-vim
     ghcid
     vim-hindent
