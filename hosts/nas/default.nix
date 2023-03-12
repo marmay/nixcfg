@@ -24,6 +24,7 @@
       ../../users/markus/admin.nix
       ../../users/markus/gui.nix
       ../../users/markus/local.nix
+      ../../users/markus/wingames.nix
       ../../users/marion/full.nix
       ../../users/raphaela/full.nix
       ./hardware.nix
