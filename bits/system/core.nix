@@ -32,6 +32,17 @@
         dates = "weekly";
         options = "--delete-older-than 14d";
       };
+      registry.m = {
+        from = {
+          type = "indirect";
+          id = "m";
+        };
+        to = {
+          ref = "master";
+          type = "git";
+          url = "ssh://git@github.com/marmay/nixcfg";
+        };
+      };
     };
 
     users.mutableUsers = false;
