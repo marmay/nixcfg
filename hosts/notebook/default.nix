@@ -18,6 +18,7 @@
     ../../users/markus/admin.nix
     ../../users/markus/local.nix
     ../../users/markus/smallgui.nix
+    ../../users/markus/wingames.nix
     ../../users/marion/full.nix
     ../../users/raphaela/full.nix
     ./hardware.nix

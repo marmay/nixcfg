@@ -1,15 +1,20 @@
-{ config, lib, pkgs, user, ... }:
+{ config, lib, pkgs, ... }:
 {
-  config.home-manager.users."${user}" = {
-    home.packages = [
-      pkgs.wine
-    ];
+  options = {
+    games.settlers3 = lib.mkOption {
+      type = lib.types.bool;
+      description = "Whether to create a starter for the game settlers 3.";
+      default = false;
+    };
+  };
 
+  config = lib.mkIf config.games.settlers3 {
+    home.packages = [ pkgs.wine ];
     xdg.desktopEntries = {
       "Die Siedler 3" = {
         name = "Die Siedler 3";
         exec = "${pkgs.writeShellScript "wine-starter-settlers-3" ''
-          export WINEPREFIX="/media/nas/Users/${user}/Spiele/Windows/Siedler3"
+          export WINEPREFIX="/media/nas/Users/${config.home.username}/Spiele/Windows/Siedler3"
           wine "C:\\Settlers 3 Ultimate\\S3.exe"
         ''}";
         terminal = false;

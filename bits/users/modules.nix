@@ -1,0 +1,3 @@
+[
+  ./games/windows.nix
+]
