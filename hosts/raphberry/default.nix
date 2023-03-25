@@ -11,6 +11,7 @@
     ../../bits/system/printing.nix
     ../../bits/system/rpi.nix
     ../../bits/system/sound.nix
+    ../../bits/system/spotifyd.nix
     ../../bits/system/ssh.nix
     ../../bits/system/xserver.nix
     ../../users/markus/core.nix
@@ -27,6 +28,8 @@
       hostName = "raphberry";
       networkmanager.enable = true;
     };
+
+    services.spotifyd.enable = true;
   };
 }
 
