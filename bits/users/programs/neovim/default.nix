@@ -20,6 +20,9 @@ let
 in
 {
   config.home-manager.users.${user} = { ... } : {
+    home.packages = with pkgs; [
+      nodejs-16_x
+    ];
     programs.neovim = {
       enable = true;
       extraConfig = vimConfig;

@@ -6,6 +6,7 @@ let user = "markus"; in
     in
   [
     (withArgs ../../bits/users/programs/neovim {})
+    ../../bits/system/haskell.nix
   ];
 
   config.nix.settings.trusted-users = [ user ];

@@ -1,4 +1,4 @@
-let g:LanguageClient_serverCommands = { 'haskell': ['haskell-language-server-wrapper', '--lsp', '--logfile', '/tmp/hls.log', '--debug'] }
+let g:LanguageClient_serverCommands = { 'haskell': ['haskell-language-server', '--lsp', '--logfile', '/tmp/hls.log', '--debug'] }
 let g:LanguageClient_rootMarkers = ['*.cabal', 'stack.yaml']
 let g:LanguageClient_settingsPath = "~/.config/nvim/settings.json"
 let g:LanguageClient_loggingFile = "/tmp/nvim-language-client.log"
