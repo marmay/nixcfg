@@ -15,7 +15,8 @@
         name = "Die Siedler 3";
         exec = "${pkgs.writeShellScript "wine-starter-settlers-3" ''
           export WINEPREFIX="/media/nas/Users/${config.home.username}/Spiele/Windows/Siedler3"
-          wine "C:\\Settlers 3 Ultimate\\S3.exe"
+          cd "$WINEPREFIX/drive_c/Settlers 3 Ultimate"
+          taskset -c 0 wine ./S3.exe
         ''}";
         terminal = false;
         categories = [ "Game" ];

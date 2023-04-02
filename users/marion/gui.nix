@@ -13,6 +13,8 @@ let user = "marion"; in
 
   config = {
     home-manager.users.${user} = {
+      games.settlers3 = true;
+
       programs = {
         firefox = {
           profiles.default.settings = {

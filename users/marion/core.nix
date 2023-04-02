@@ -19,6 +19,8 @@ let user = "marion"; in
     };
 
     home-manager.users.${user} = {
+      imports = (import ../../bits/users/modules.nix);
+
       home = {
         username = "${user}";
         homeDirectory = "/home/${user}";
