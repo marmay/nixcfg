@@ -96,18 +96,6 @@
         TIMELINE_LIMIT_YEARLY=0
       '';
     };
-
-    fileSystems = builtins.listToAttrs (map (user: lib.nameValuePair "/mnt/old_root/srv/media/Users/${user}/Spiele/Windows"
-                                          {
-                                            device = "overlay";
-                                            fsType = "overlay";
-                                            options = [
-                                              "lowerdir=/mnt/old_root/srv/media/Spiele/Windows"
-                                              "upperdir=/mnt/old_root/srv/media/Users/markus/Spiele/.Windows/upper"
-                                              "workdir=/mnt/old_root/srv/media/Users/markus/Spiele/.Windows/work"
-                                            ];
-                                            depends = [ "/mnt/old_root" ];
-                                          }) [ "markus" "marion" ]);
   };
 }
 
