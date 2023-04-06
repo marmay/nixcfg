@@ -21,6 +21,7 @@
     ../../users/markus/gui.nix
     ../../users/markus/local.nix
     ../../users/markus/dev.nix
+    ../../users/markus/wingames.nix
     ./hardware.nix
     ./minecraft.nix
   ];
