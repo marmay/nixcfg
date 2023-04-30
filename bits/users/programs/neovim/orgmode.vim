@@ -7,7 +7,7 @@ require'nvim-treesitter.configs'.setup {
     enable = true,
     additional_vim_regex_highlighting = {'org'}, -- Required since TS highlighter doesn't support all syntax features (conceal)
   },
-  ensure_installed = {'org'}, -- Or run :TSUpdate org
+  ensure_installed = {}, -- Or run :TSUpdate org
 }
 
 require('orgmode').setup({

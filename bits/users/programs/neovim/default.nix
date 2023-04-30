@@ -7,15 +7,23 @@ let
     ghcid
     vim-hindent
     fugitive
+    lualine-nvim
     barbar-nvim
     toggleterm-nvim
     nvim-web-devicons
     nvim-base16
+    nvim-treesitter.withAllGrammars
+    nvim-tree-lua
+    orgmode
     LanguageClient-neovim
   ];
   baseConfig = builtins.readFile ./config.vim;
   lspConfig = builtins.readFile ./lsp.vim;
-  vimConfig = baseConfig + lspConfig;
+  orgModeConfig = builtins.readFile ./orgmode.vim;
+  vimConfig = baseConfig + orgModeConfig + lspConfig;
+  treeConfig = builtins.readFile ./tree.lua;
+  lualineConfig = builtins.readFile ./lualine.lua;
+  vimLuaConfig = treeConfig + lualineConfig;
   lspSettings = builtins.toJSON (import ./lsp_settings.nix);
 in
 {
@@ -26,6 +34,7 @@ in
     programs.neovim = {
       enable = true;
       extraConfig = vimConfig;
+      extraLuaConfig = vimLuaConfig;
       plugins = myPlugins;
       viAlias = true;
       vimAlias = true;
