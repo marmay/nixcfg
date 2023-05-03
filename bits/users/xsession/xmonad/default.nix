@@ -1,46 +1,52 @@
-args@{ config, lib, pkgs, user, ... }:
+{ config, lib, pkgs, nixosConfig, ... }:
+
+assert lib.assertMsg (nixosConfig.programs.dconf.enable) "dconf is required to enable xmonad";
+assert lib.assertMsg (nixosConfig.services.dbus.enable) "dbus is required to enable xmonad";
+assert lib.assertMsg (nixosConfig.services.upower.enable) "upower is required to enable xmonad";
 
 let
   xmobarConfig = builtins.readFile ./xmobar.config;
 in
 {
-  imports = let withArgs = p: (import p (args));
-    in [
-    (withArgs ../../programs/kitty)
-    (withArgs ../../programs/rofi)
-    (withArgs ../../services/picom)
-    (withArgs ../../services/dunst)
-    (withArgs ../../services/polybar)
-    (withArgs ../../services/udiskie)
-  ];
-
-  config = {
-    home-manager.users.${user} = { ... } : {
-      home.packages = [
-        pkgs.haskellPackages.xmobar
-        pkgs.dmenu
-      ];
-      xdg.configFile."xmobar/.xmobarrc".text = xmobarConfig;
-      xsession.enable = true;
-      xsession.initExtra = ''
-        if test "$(echo $(basename $1) | sed -e 's/[^-]*-\(.*\)/\1/')" != "xsession"; then
-          echo "$(basename $1)" > /tmp/xsession.log;
-          eval exec "$@";
-        fi
-      '';
-      xsession.windowManager.xmonad = {
-        enable = true;
-        extraPackages = haskellPackages: [ haskellPackages.dbus ];
-        enableContribAndExtras = true;
-        config = ./config.hs;
+  options = {
+    marmar.xsession.xmonad = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Enable xmonad";
       };
     };
+  };
 
-    programs.dconf.enable = lib.mkDefault true;
+  config = lib.mkIf config.marmar.xsession.xmonad.enable {
+    home.packages = [
+      pkgs.dmenu
+    ];
+
+    xdg.configFile."xmobar/.xmobarrc".text = xmobarConfig;
+    xsession.enable = true;
+    xsession.initExtra = ''
+      if test "$(echo $(basename $1) | sed -e 's/[^-]*-\(.*\)/\1/')" != "xsession"; then
+        echo "$(basename $1)" > /tmp/xsession.log;
+        eval exec "$@";
+      fi
+    '';
+
+    xsession.windowManager.xmonad = {
+      enable = true;
+      extraPackages = haskellPackages: [ haskellPackages.dbus ];
+      enableContribAndExtras = true;
+      config = ./config.hs;
+    };
+
+    programs.kitty.enable = lib.mkDefault true;
+    programs.rofi.enable = lib.mkDefault true;
 
     services = {
-      upower.enable = lib.mkDefault true;
-      dbus.enable = lib.mkDefault true;
+      dunst.enable = lib.mkDefault true;
+      picom.enable = lib.mkDefault true;
+      polybar.enable = lib.mkDefault true;
+      udiskie.enable = lib.mkDefault true;
     };
   };
 }

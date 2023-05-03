@@ -2,12 +2,7 @@ args@{config, lib, pkgs, ... }:
 let user = "marion"; in
 {
   imports =
-    let withArgs = path: extra: (import path (args // { user = user; } // extra));
-    in
   [
-    (withArgs ../../bits/users/programs/firefox.nix {})
-    (withArgs ../../bits/users/programs/thunderbird.nix {})
-  ] ++ [
     ../../bits/system/gnome.nix
   ];
 
@@ -17,10 +12,13 @@ let user = "marion"; in
 
       programs = {
         firefox = {
+          enable = true;
           profiles.default.settings = {
             "services.sync.username" = "marion.st.mayr@gmail.com";
           };
         };
+
+        thunderbird.enable = true;
       };
       home.packages = with pkgs; [
         calibre

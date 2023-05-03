@@ -1,4 +1,4 @@
-{ config, lib, pkgs, user, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   myPlugins = with pkgs.vimPlugins; [
@@ -27,7 +27,9 @@ let
   lspSettings = builtins.toJSON (import ./lsp_settings.nix);
 in
 {
-  config.home-manager.users.${user} = { ... } : {
+  options.marmar.neovim.enable = mkEnableOption "neovim marmar configuration";
+
+  config = lib.mkIf config.marmar.neovim.enable {
     home.packages = with pkgs; [
       nodejs-16_x
     ];

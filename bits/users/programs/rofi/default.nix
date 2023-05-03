@@ -1,11 +1,9 @@
-{ pkgs, config, user, ... }:
+{ config, lib, pkgs, ... }:
 
 {
-  config.home-manager.users.${user} = { ... } : {
-    programs.rofi = {
-      enable = true;
-      terminal = "${pkgs.kitty}/bin/kitty";
-      # theme = ./theme.rafi;
-    };
+  config.programs.rofi = lib.mkIf config.programs.kitty.enable {
+    terminal = "${pkgs.kitty}/bin/kitty";
+  } // {
+    theme = lib.mkDefault ./theme.rafi;
   };
 }

@@ -1,7 +1,6 @@
-{ config, pkgs, user, ... }:
+{ config, pkgs, ... }:
 {
-  config.home-manager.users.${user}.services.picom = {
-    enable = true;
+  config.services.picom = {
     activeOpacity = 1.0;
     inactiveOpacity = 0.8;
     backend = "glx";
@@ -11,6 +10,5 @@
     opacityRules = [ "100:name *= 'i3lock'" ];
     shadow = true;
     shadowOpacity = 0.75;
-    # settings = "xrender-sync-fence = true;";
   };
 }

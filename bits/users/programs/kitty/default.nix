@@ -1,24 +1,24 @@
-{ config, pkgs, user, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   kittyTheme = builtins.readFile ./theme.conf;
 in
 {
   config = {
-    fonts.fonts = with pkgs; [
+    programs.kitty = {
+      font = {
+        name = lib.mkDefault "Fira Code";
+        size = lib.mkDefault 9;
+      };
+      extraConfig = lib.mkDefault kittyTheme;
+    };
+
+  } // lib.mkIf config.programs.kitty.enable {
+    fonts.fontconfig.enable = true;
+
+    home.packages = with pkgs; [
       fira-code
       fira-code-symbols
     ];
-
-    home-manager.users."${user}" = { ... } : {
-      programs.kitty = {
-        enable = true;
-        font = {
-          name = "Fira Code";
-          size = 9;
-        };
-        extraConfig = kittyTheme;
-      };
-    };
   };
 }

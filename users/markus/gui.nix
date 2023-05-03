@@ -5,9 +5,9 @@ let user = "markus"; in
     let withArgs = path: extra: (import path (args // { user = user; } // extra));
     in
   [
-    (withArgs ../../bits/users/xsession/xmonad {})
-  ] ++ [
     ./smallgui.nix
   ];
+
+  home-manager.users.${user}.marmar.xsession.xmonad.enable = true;
 }
 

@@ -1,3 +1,10 @@
 [
   ./games/windows.nix
+  ./programs/firefox.nix
+  ./programs/kitty
+  ./programs/rofi
+  ./programs/thunderbird.nix
+  ./services/picom
+  ./services/polybar
+  ./xsession/xmonad
 ]

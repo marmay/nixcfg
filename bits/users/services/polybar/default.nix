@@ -1,4 +1,4 @@
-{ config, pkgs, user, ... }:
+{ config, pkgs, ... }:
 
 let
   mypolybar = pkgs.polybar.override {
@@ -12,8 +12,8 @@ let
   mods1  = builtins.readFile ./modules.ini;
   mods2  = builtins.readFile ./user_modules.ini;
 
-  monitorScript   = pkgs.callPackage ./scripts/monitor.nix {};
-  networkScript   = pkgs.callPackage ./scripts/network.nix {};
+  monitorScript = pkgs.callPackage ./scripts/monitor.nix {};
+  networkScript = pkgs.callPackage ./scripts/network.nix {};
 
   cal = ''
     [module/clickable-date]
@@ -31,8 +31,7 @@ let
   customMods = cal + xmonad;
 in
 {
-  config.home-manager.users.${user}.services.polybar = {
-    enable = true;
+  config.services.polybar = {
     package = mypolybar;
     config = ./config.ini;
     extraConfig = bars + colors + mods1 + mods2 + customMods;
