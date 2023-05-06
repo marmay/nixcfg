@@ -1,7 +1,9 @@
 # Enables sound and pulseaudio.
 { config, lib, pkgs, ... }:
 {
-  config = {
+  options.marmar.sound = lib.mkEnableOption "Sound support";
+
+  config = lib.mkIf config.marmar.sound {
     sound.enable = true;
     hardware.pulseaudio.enable = true;
     hardware.bluetooth.enable = true;

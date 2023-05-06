@@ -27,14 +27,11 @@ let
   lspSettings = builtins.toJSON (import ./lsp_settings.nix);
 in
 {
-  options.marmar.neovim.enable = mkEnableOption "neovim marmar configuration";
-
-  config = lib.mkIf config.marmar.neovim.enable {
+  config = lib.mkIf config.programs.neovim.enable {
     home.packages = with pkgs; [
       nodejs-16_x
     ];
     programs.neovim = {
-      enable = true;
       extraConfig = vimConfig;
       extraLuaConfig = vimLuaConfig;
       plugins = myPlugins;

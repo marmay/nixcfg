@@ -4,7 +4,7 @@ in
 {
   config = {
     services.openssh = {
-      enable = true;
+      enable = lib.mkDefault true;
       knownHosts = {
         "github.com/rsa" = {
           hostNames = [ "github.com" ];

@@ -2,34 +2,12 @@
 
 {
   imports = [
-    ../../bits/system/autoupdate.nix
-    ../../bits/system/core.nix
-    ../../bits/system/data.nix
-    ../../bits/system/gnome.nix
-    ../../bits/system/nas_client.nix
-    ../../bits/system/nvidia.nix
-    ../../bits/system/opengl.nix
-    ../../bits/system/pc.nix
-    ../../bits/system/printing.nix
-    ../../bits/system/scanning.nix
-    ../../bits/system/sound.nix
-    ../../bits/system/ssh.nix
-    ../../bits/system/steam.nix
-    ../../bits/system/xserver.nix
-    ../../users/markus/core.nix
-    ../../users/markus/admin.nix
-    ../../users/markus/gui.nix
-    ../../users/markus/local.nix
-    ../../users/markus/dev.nix
-    ../../users/markus/wingames.nix
     ./hardware.nix
     ./minecraft.nix
   ];
 
   config = {
     system.stateVersion = "22.05";
-
-    time.timeZone = "Europe/Vienna";
 
     networking = {
       hostName = "keller";
@@ -38,8 +16,20 @@
       interfaces.br0.useDHCP = true;
     };
 
-    boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+    marmar = {
+      haskell = true;
+      nas_client = true;
+      nvidiaGpuSupport = true;
+      printingSupport = true;
+      scanningSupport = true;
+      steam = true;
+    };
 
+    marmar.users.markus.enable = true;
+    home-manager.users.markus.profiles.dev = true;
+    home-manager.users.markus.profiles.xmonad = true;
+
+    boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
     systemd.services.NetworkManager-wait-online.enable = false;
   };
 }

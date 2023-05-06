@@ -1,6 +1,9 @@
 { config, lib, pkgs, ... }:
 {
-  config.hardware.opengl = {
+  options.marmar.intelGpuSupport = lib.mkEnableOption "Intel GPU support";
+
+  config.hardware.opengl = lib.mkIf config.marmar.intelGpuSupport {
+    enable = true;
     driSupport = true;
     extraPackages = with pkgs; [
       intel-media-driver

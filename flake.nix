@@ -23,6 +23,8 @@
             home-manager.useUserPackages = true;
           }
           agenix.nixosModules.default
+          ./bits/system
+          ./users
           path
         ] ++ extra-modules;
       };

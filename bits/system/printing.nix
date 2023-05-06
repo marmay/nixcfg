@@ -1,6 +1,8 @@
 { config, lib, self, pkgs, ... }:
 {
-  config = {
+  options.marmar.printingSupport = lib.mkEnableOption "Printing Support";
+
+  config = lib.mkIf config.marmar.printingSupport {
     services = {
       avahi = {
         enable = true;

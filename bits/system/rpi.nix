@@ -1,6 +1,8 @@
-{ config, inputs, ... }:
+{ config, lib, inputs, ... }:
 {
-  config = {
+  options.marmar.rpi = lib.mkEnableOption "Raspberry Pi support";
+
+  config = lib.mkIf config.marmar.rpi {
     # Makes `availableOn` fail for zfs, see <nixos/modules/profiles/base.nix>.
     # This is a workaround since we cannot remove the `"zfs"` string from `supportedFilesystems`.
     # The proper fix would be to make `supportedFilesystems` an attrset with true/false which we

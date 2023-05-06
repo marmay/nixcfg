@@ -1,13 +1,11 @@
-# This file will provide a useful steam environment.
 { config, lib, pkgs, ... }:
 {
-  imports = [
-    ./xserver.nix
-    ./opengl.nix
-    ./sound.nix
-  ];
+  options.marmar.steam = lib.mkEnableOption "Steam";
 
-  config = {
+  config = lib.mkIf config.marmar.steam {
+    marmar.sound = true;
+    marmar.xserver = true;
+
     nixpkgs.config.allowUnfree = true;
     programs.steam.enable = true;
     hardware = {

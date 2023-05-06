@@ -1,7 +1,9 @@
 # Enables sound and pulseaudio.
 { config, lib, pkgs, ... }:
 {
-  config = {
+  options.marmar.xserver = lib.mkEnableOption "X server";
+
+  config = lib.mkIf config.marmar.xserver {
     services.xserver = {
       enable = true;
       layout = "de";

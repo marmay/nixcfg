@@ -3,11 +3,11 @@
 { config, lib, pkgs, ... }:
 {
   config = {
-    i18n.defaultLocale = "de_AT.UTF-8";
+    i18n.defaultLocale = lib.mkDefault "de_AT.UTF-8";
 
     console = {
-      font = "Lat2-Terminus16";
-      keyMap = "de";
+      font = lib.mkDefault "Lat2-Terminus16";
+      keyMap = lib.mkDefault "de";
     };
 
     environment.systemPackages = with pkgs; [
@@ -18,8 +18,8 @@
 
     nix = {
       settings = {
-        auto-optimise-store = true;
-        sandbox = true;
+        auto-optimise-store = lib.mkDefault true;
+        sandbox = lib.mkDefault true;
         trusted-users = [
           "root"
         ];
@@ -28,9 +28,9 @@
         experimental-features = nix-command flakes
       '';
       gc = {
-        automatic = true;
-        dates = "weekly";
-        options = "--delete-older-than 14d";
+        automatic = lib.mkDefault true;
+        dates = lib.mkDefault "weekly";
+        options = lib.mkDefault "--delete-older-than 14d";
       };
       registry.m = {
         from = {
@@ -44,6 +44,8 @@
         };
       };
     };
+
+    time.timeZone = lib.mkDefault "Europe/Vienna";
 
     users.mutableUsers = false;
   };
