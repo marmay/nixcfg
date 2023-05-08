@@ -11,9 +11,6 @@
 
     networking = {
       hostName = "keller";
-      useDHCP = false;
-      bridges.br0.interfaces = [ "enp5s0" ];
-      interfaces.br0.useDHCP = true;
     };
 
     marmar = {
@@ -30,6 +27,5 @@
     home-manager.users.markus.profiles.xmonad = true;
 
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-    systemd.services.NetworkManager-wait-online.enable = false;
   };
 }
