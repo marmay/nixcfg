@@ -22,7 +22,14 @@
   config = {
     system.stateVersion = "22.11";
 
-    time.timeZone = "Europe/Vienna";
+    marmar = {
+      nas_client = true;
+      printingSupport = true;
+      rpi = true;
+    };
+
+    marmar.users.markus.enable = true;
+    marmar.users.raphaela.enable = true;
 
     networking = {
       hostName = "raphberry";

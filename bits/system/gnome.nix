@@ -8,6 +8,7 @@
 
   config = lib.mkIf config.marmar.gnome {
     marmar.xserver = true;
+    marmar.sound = true;
 
     services.xserver.displayManager.gdm.enable = true;
     services.xserver.desktopManager.gnome.enable = true;
