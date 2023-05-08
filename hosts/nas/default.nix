@@ -6,28 +6,9 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
-      ./hardware.nix
+    [ ./hardware.nix
       ./ldap.nix
       ./nfs.nix
-      ../../bits/system/autoupdate.nix
-      ../../bits/system/core.nix
-      ../../bits/system/data.nix
-      ../../bits/system/intel.nix
-      ../../bits/system/nas_client.nix
-      ../../bits/system/opengl.nix
-      ../../bits/system/printing.nix
-      ../../bits/system/sound.nix
-      ../../bits/system/ssh.nix
-      ../../bits/system/steam.nix
-      ../../bits/system/xserver.nix
-      ../../users/markus/core.nix
-      ../../users/markus/admin.nix
-      ../../users/markus/gui.nix
-      ../../users/markus/local.nix
-      ../../users/markus/wingames.nix
-      ../../users/marion/full.nix
-      ../../users/raphaela/full.nix
       ./hardware.nix
     ] ++ import ./containers.nix;
 
@@ -36,11 +17,16 @@
     boot.loader.efi.canTouchEfiVariables = true;
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
-    nixpkgs.config.allowUnfree = true;
-    sharedData.enable = true;
-    sharedData.path = "/srv/media";
+    marmar = {
+      nas_client = true;
+      intelGpuSupport = true;
+      printingSupport = true;
+      steam = true;
+    };
 
-    time.timeZone = "Europe/Vienna";
+    marmar.users.markus.enable = true;
+    marmar.users.marion.enable = true;
+    marmar.users.raphaela.enable = true;
 
     system.stateVersion = "22.11"; # Did you read the comment?
 
@@ -57,9 +43,6 @@
     # List packages installed in system profile. To search, run:
     # $ nix search wget
     environment.systemPackages = with pkgs; [
-      firefox
-      git
-      gnupg
       (pkgs.kodi.passthru.withPackages (kodiPkgs: with kodiPkgs; [
         jellyfin
         joystick
@@ -69,11 +52,6 @@
         pvr-hts
       ]))
       retroarchFull
-      kodi-retroarch-advanced-launchers
-      makemkv
-      sound-juicer
-      vim
-      vlc
     ];
 
     # The NAS never sleeps.

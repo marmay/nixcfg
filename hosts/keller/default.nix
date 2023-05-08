@@ -20,6 +20,7 @@
       printingSupport = true;
       scanningSupport = true;
       steam = true;
+      uefi = true;
     };
 
     marmar.users.markus.enable = true;
