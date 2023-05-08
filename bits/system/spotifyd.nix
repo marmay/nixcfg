@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 {
   config = {
-    age.secrets = {
+    age.secrets = lib.mkIf config.services.spotifyd.enable {
       "spotifyPassword" = {
         file = ../../secrets/markus/spotify;
         owner = "spotifyd";
