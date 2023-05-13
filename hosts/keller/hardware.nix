@@ -20,12 +20,6 @@
         "kvm-amd"
         "sg"
       ];
-      blacklistedKernelModules = [
-        "r8169"
-      ];
-      extraModulePackages = with config.boot.kernelPackages; [
-        r8168
-      ];
     };
 
     fileSystems = {

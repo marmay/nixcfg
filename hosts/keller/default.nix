@@ -11,6 +11,9 @@
 
     networking = {
       hostName = "keller";
+      interfaces.enp5s0 = {
+        wakeOnLan.enable = true;
+      };
     };
 
     marmar = {
