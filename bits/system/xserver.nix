@@ -11,6 +11,6 @@
       desktopManager.xterm.enable = true;
     };
 
-    services.openssh.forwardX11 = lib.mkDefault true;
+    services.openssh.settings.X11Forwarding = lib.mkDefault true;
   };
 }
