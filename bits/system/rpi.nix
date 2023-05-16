@@ -30,11 +30,20 @@
         generic-extlinux-compatible.enable = true;
       };
 
-      kernelPackages = pkgs.linuxPackages_rpi4;
+      kernelParams = [
+        "console=tty1"
+      ];
 
+      initrd.availableKernelModules = [
+        "usbhid"
+        "usb_storage"
+        "vc4"
+        "bcm2835_dma"
+        "i2c_bcm2835"
+      ];
+
+      kernelPackages = pkgs.linuxPackages_latest;
       tmp.useTmpfs = true;
     };
-
-    #hardware.raspberry-pi."4".fkms-3d.enable = true;
   };
 }
