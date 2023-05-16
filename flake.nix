@@ -11,9 +11,18 @@
   inputs.flake-utils = {
     url = "github:numtide/flake-utils";
   };
+  inputs.nixos-hardware = {
+    url = "github:NixOS/nixos-hardware/master";
+  };
 
-  outputs = { self, nixpkgs, home-manager, agenix, flake-utils, ... }:
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, agenix, flake-utils, ... }:
   let
+    mynixpkgs = system: import nixpkgs ({
+      inherit system;
+      config = {
+        allowUnfree = true;
+      };
+    });
     mkUserPc = { path, system ? "x86_64-linux", extra-modules ? [] }: nixpkgs.lib.nixosSystem {
         system = system;
         modules = [
@@ -28,16 +37,9 @@
           path
         ] ++ extra-modules;
       };
-    mynixpkgs = system: import nixpkgs ({
-      inherit system;
-      config = {
-        allowUnfree = true;
-      };
-    });
   in {
     nixosConfigurations = {
       buki = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
         modules = [
           ./hosts/buki
           agenix.nixosModules.default
@@ -50,7 +52,8 @@
         path = ./hosts/raphberry;
         system = "aarch64-linux";
         extra-modules = [
-          (nixpkgs + "/nixos/modules/installer/sd-card/sd-image-aarch64-new-kernel.nix")
+          (nixpkgs + "/nixos/modules/installer/sd-card/sd-image-aarch64.nix")
+          nixos-hardware.nixosModules.raspberry-pi-4
         ];
       };
     };

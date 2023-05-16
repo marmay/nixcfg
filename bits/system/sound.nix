@@ -6,6 +6,7 @@
   config = lib.mkIf config.marmar.sound {
     sound.enable = true;
     hardware.pulseaudio.enable = true;
+    hardware.pulseaudio.systemWide = true;
     hardware.bluetooth.enable = true;
   };
 }
