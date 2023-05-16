@@ -38,7 +38,7 @@
         "i2c_bcm2835"
       ];
 
-      tmpOnTmpfs = true;
+      tmp.useTmpfs = true;
     };
   };
 }
