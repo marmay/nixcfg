@@ -12,7 +12,7 @@
     ];
 
     accounts.email.accounts."raphaela@marion-mayr.at" =
-      (import ../../bits/users/mail/mkBuki.nix {
+      (import ../../bits/util/mail/mkBuki.nix {
         realName = "Raphaela Sophie Mayr";
         address = "raphaela@marion-mayr.at";
       }) // { primary = true; };
