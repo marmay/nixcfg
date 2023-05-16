@@ -1,4 +1,4 @@
-{ config, lib, inputs, ... }:
+{ config, lib, pkgs, ... }:
 {
   options.marmar.rpi = lib.mkEnableOption "Raspberry Pi support";
 
@@ -7,11 +7,17 @@
     # This is a workaround since we cannot remove the `"zfs"` string from `supportedFilesystems`.
     # The proper fix would be to make `supportedFilesystems` an attrset with true/false which we
     # could then `lib.mkForce false`
-    nixpkgs.overlays = [(final: super: {
-      zfs = super.zfs.overrideAttrs(_: {
-        meta.platforms = [];
-      });
-    })];
+    nixpkgs.overlays = [
+      (final: super: {
+        zfs = super.zfs.overrideAttrs(_: {
+          meta.platforms = [];
+        });
+      })
+      (final: super: {
+        makeModulesClosure = x:
+        super.makeModulesClosure (x // { allowMissing = true; });
+      })
+    ];
 
     # As we do not have passwords set up on the initial boot, we must be able to trigger
     # a system update. For that purpose, we log in as root without a password. Once the
@@ -24,21 +30,11 @@
         generic-extlinux-compatible.enable = true;
       };
 
-      kernelParams = [
-        "8250.nr_uarts=1"
-        "console=tty1"
-        "cma=256M"
-      ];
-
-      initrd.availableKernelModules = [
-        "usbhid"
-        "usb_storage"
-        "vc4"
-        "bcm2835_dma"
-        "i2c_bcm2835"
-      ];
+      kernelPackages = pkgs.linuxPackages_rpi4;
 
       tmp.useTmpfs = true;
     };
+
+    #hardware.raspberry-pi."4".fkms-3d.enable = true;
   };
 }

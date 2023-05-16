@@ -8,6 +8,14 @@
       };
     };
 
+    users.users.spotifyd = {
+       isSystemUser = true;
+       group = "spotifyd";
+       extraGroups = [ "audio" "pulse-access" ];
+    };
+
+    users.groups.spotifyd = {};
+
     services.spotifyd.settings.global = {
       username = "marmayr";
       password_cmd = "cat ${config.age.secrets.spotifyPassword.path}";
