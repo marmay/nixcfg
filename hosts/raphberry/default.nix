@@ -9,7 +9,7 @@
 
     marmar = {
       nas_client = true;
-      printingSupport = true;
+      # printingSupport = true;
       rpi = true;
     };
 
@@ -21,7 +21,7 @@
       networkmanager.enable = true;
     };
 
-    services.spotifyd.enable = true;
+    # services.spotifyd.enable = true;
   };
 }
 
