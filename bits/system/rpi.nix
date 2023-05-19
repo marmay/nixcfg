@@ -31,6 +31,7 @@
     };
 
   } // lib.mkIf config.marmar.vc4-kms {
+    hardware.raspberry-pi."4".apply-overlays-dtmerge.enable = true;
     hardware.deviceTree.overlays = [
       {
         name = "rpi4-cma-overlay";
