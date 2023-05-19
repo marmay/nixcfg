@@ -11,6 +11,7 @@
       nas_client = true;
       # printingSupport = true;
       rpi = true;
+      vc4-kms = true;
     };
 
     marmar.users.markus.enable = true;
