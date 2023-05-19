@@ -32,6 +32,7 @@
 
   } // lib.mkIf config.marmar.vc4-kms {
     hardware.raspberry-pi."4".apply-overlays-dtmerge.enable = true;
+    hardware.deviceTree.filter = lib.mkForce "bcm2711-rpi-400.dtb";
     hardware.deviceTree.overlays = [
       {
         name = "rpi4-cma-overlay";
@@ -45,7 +46,7 @@
             fragment@0 {
               target = <&cma>;
               __overlay__ {
-                size = <(512 * 1024 * 1024)>;
+                size = <(508 * 1024 * 1024)>;
               };
             };
           };
@@ -60,10 +61,6 @@
 
           /dts-v1/;
           /plugin/;
-
-          &frag0 {
-          	size = <((512-4)*1024*1024)>;
-          };
 
           / {
           	compatible = "brcm,bcm2711";
