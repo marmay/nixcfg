@@ -12,6 +12,7 @@
     ./pc.nix
     ./printing.nix
     ./rpi.nix
+    ./rpi-vc4.nix
     ./scanning.nix
     ./sound.nix
     ./spotifyd.nix
