@@ -10,9 +10,12 @@
     marmar = {
       nas_client = true;
       # printingSupport = true;
+      gnome = true;
       rpi = true;
-      vc4-kms = true;
+      # vc4-kms = true;
     };
+
+    # hardware.raspberry-pi."4".fkms-3d.enable = true;
 
     marmar.users.markus.enable = true;
     marmar.users.raphaela.enable = true;

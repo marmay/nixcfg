@@ -2,8 +2,8 @@
 {
   config = {
     programs = {
-      firefox.enable = true;
-      thunderbird.enable = true;
+      #firefox.enable = true;
+      #thunderbird.enable = true;
     };
 
     home.packages = with pkgs; [

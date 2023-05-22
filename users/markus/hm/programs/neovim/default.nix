@@ -29,7 +29,7 @@ in
 {
   config = lib.mkIf config.programs.neovim.enable {
     home.packages = with pkgs; [
-      nodejs-16_x
+      nodejs
     ];
     programs.neovim = {
       extraConfig = vimConfig;
