@@ -7,6 +7,7 @@
     };
 
     home.packages = with pkgs; [
+      libreoffice
       qmapshack
       gnome.eog
     ];
@@ -17,10 +18,10 @@
         realName = "Marion Mayr";
         address = "marion.st.mayr@gmail.com";
         flavor = "gmail.com";
-      } // (import ../../bits/users/mail/mailClients.nix { maxAge = 360; });
+      } // (import ../../bits/util/mail/mailClients.nix { maxAge = 360; });
 
       "marion@marion-mayr.at" =
-        (import ../../bits/users/mail/mkBuki.nix ({
+        (import ../../bits/util/mail/mkBuki.nix ({
           realName = "Marion Mayr";
           address = "marion@marion-mayr.at";
         }));
