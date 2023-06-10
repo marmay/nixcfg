@@ -9,6 +9,7 @@
       layout = "de";
       libinput.enable = true;
       desktopManager.xterm.enable = true;
+      updateDbusEnvironment = true;
     };
 
     services.openssh.settings.X11Forwarding = lib.mkDefault true;

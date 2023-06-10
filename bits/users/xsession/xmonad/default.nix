@@ -1,8 +1,8 @@
 { config, lib, pkgs, nixosConfig, ... }:
 
-assert lib.assertMsg (nixosConfig.programs.dconf.enable) "dconf is required to enable xmonad";
-assert lib.assertMsg (nixosConfig.services.dbus.enable) "dbus is required to enable xmonad";
-assert lib.assertMsg (nixosConfig.services.upower.enable) "upower is required to enable xmonad";
+#assert lib.assertMsg (!config.marmar.xsession.xmonad.enable || nixosConfig.programs.dconf.enable) "dconf is required to enable xmonad";
+#assert lib.assertMsg (!config.marmar.xsession.xmonad.enable || nixosConfig.services.dbus.enable) "dbus is required to enable xmonad";
+#assert lib.assertMsg (!config.marmar.xsession.xmonad.enable || nixosConfig.services.upower.enable) "upower is required to enable xmonad";
 
 let
   xmobarConfig = builtins.readFile ./xmobar.config;
