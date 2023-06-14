@@ -1,4 +1,4 @@
 { config, lib, pkgs, ... }:
 {
-  imports = [ ./dev ./xmonad ./gui ./work ];
+  imports = [ ./dev ./xmonad ./gui ./photo ./work ];
 }

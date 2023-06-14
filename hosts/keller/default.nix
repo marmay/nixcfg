@@ -30,6 +30,7 @@
     home-manager.users.markus.profiles.dev = true;
     home-manager.users.markus.profiles.xmonad = true;
     home-manager.users.markus.profiles.work = true;
+    home-manager.users.markus.profiles.photo = true;
 
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
