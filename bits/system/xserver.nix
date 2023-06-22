@@ -4,6 +4,8 @@
   options.marmar.xserver = lib.mkEnableOption "X server";
 
   config = lib.mkIf config.marmar.xserver {
+    xdg.portal.enable = lib.mkForce false;
+
     services.xserver = {
       enable = true;
       layout = "de";
