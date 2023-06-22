@@ -11,6 +11,7 @@
         epkgs.lsp-mode
         epkgs.lsp-haskell
         epkgs.lsp-treemacs
+        epkgs.magit
         epkgs.org
         epkgs.org-kanban
         epkgs.quelpa
@@ -54,15 +55,16 @@
           :init (setq lsp-keymap-prefix "C-c l")
           :hook (haskell-mode . lsp-deferred)
                 (haskell-literate-mode . lsp-deferred)
-          :commands (lsp lsp-deferred))
+          :commands (lsp lsp-deferred)
+        )
         (use-package lsp-ui
           :hook (lsp-mode . lsp-ui-mode)
           :commands lsp-ui-mode
           :config
             (setq lsp-ui-doc-enable t)
             (setq lsp-ui-doc-show-with-cursor t)
-	    (setq lsp-ui-sideline-enable t)
-	    (setq lsp-ui-sideline-show-hover t)
+        (setq lsp-ui-sideline-enable t)
+        (setq lsp-ui-sideline-show-hover t)
             (setq lsp-ui-sideline-show-diagnostics t))
         (use-package lsp-haskell
           :config
