@@ -64,6 +64,7 @@ myModMask       = mod4Mask
 myWorkspaces    = ["1","2","3","4","5","6","7","8","9:slack"]
 
 scratchpads = [
+  NS "audio-control" "nix run m#pavucontrol" (className =? "Pavucontrol") (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3)),
   NS "notes" "kitty --class='my-scratchpad-notes' -T notes nvim ~/Dokumente/Notizen/Main.org" (className =? "my-scratchpad-notes") (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
               ]
 -- Border colors for unfocused and focused windows, respectively.
@@ -151,6 +152,7 @@ myKeys conf@(XConfig {modMask = modm}) = M.fromList $
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
     , ((modm .|. shiftMask, xK_slash ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
 
+    , ((modm .|. controlMask .|. shiftMask, xK_a), namedScratchpadAction scratchpads "audio-control")
     , ((modm .|. controlMask .|. shiftMask, xK_n), namedScratchpadAction scratchpads "notes")
     ]
     ++
@@ -290,7 +292,7 @@ defaults = def {
 
       -- hooks, layouts
         layoutHook         = myLayout,
-        manageHook         = myManageHook,
+        manageHook         = namedScratchpadManageHook scratchpads <> myManageHook,
         handleEventHook    = myEventHook,
         startupHook        = myStartupHook
     }
