@@ -7,7 +7,11 @@
     marmar.xserver = true;
 
     nixpkgs.config.allowUnfree = true;
-    programs.steam.enable = true;
+    programs.steam = {
+      enable = true;
+      remotePlay.openFirewall = true;
+    };
+
     hardware = {
       pulseaudio.support32Bit = true;
       opengl = {
