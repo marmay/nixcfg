@@ -9,7 +9,6 @@
     [ ./hardware.nix
       ./ldap.nix
       ./nfs.nix
-      ./hardware.nix
     ] ++ import ./containers.nix;
 
   config = {

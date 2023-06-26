@@ -18,6 +18,10 @@
     };
     programs.steam.gamescopeSession.enable = true;
 
+    boot.extraModprobeConfig = ''
+      options bluetooth disable_ertm=1
+    '';
+
     hardware = {
       pulseaudio.support32Bit = true;
       opengl = {
