@@ -1,0 +1,21 @@
+Removes some options that hamper cross compilation to armv6l.
+
+--- old/deps/v8/BUILD.bazel
++++ new/deps/v8/BUILD.bazel
+@@ -339,8 +339,6 @@
+             "@v8//bazel/config:v8_target_x64": ["V8_TARGET_ARCH_X64"],
+             "@v8//bazel/config:v8_target_arm": [
+                 "V8_TARGET_ARCH_ARM",
+-                "CAN_USE_ARMV7_INSTRUCTIONS",
+-                "CAN_USE_VFP3_INSTRUCTIONS",
+             ],
+             "@v8//bazel/config:v8_target_arm64": ["V8_TARGET_ARCH_ARM64"],
+             "@v8//bazel/config:v8_target_s390x": [
+@@ -3241,7 +3239,6 @@
+         ":is_v8_annotate_torque_ir": ["-annotate-ir"],
+         "//conditions:default": [],
+     }) + select({
+-        "@v8//bazel/config:v8_target_is_32_bits": ["-m32"],
+         "//conditions:default": [],
+     }),
+     extras = [
