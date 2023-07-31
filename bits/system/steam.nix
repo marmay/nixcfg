@@ -6,11 +6,17 @@
     marmar.sound = true;
     marmar.xserver = true;
 
+    environment.systemPackages = with pkgs; [
+      gamemode
+      mangohud
+    ];
+
     nixpkgs.config.allowUnfree = true;
     programs.steam = {
       enable = true;
       remotePlay.openFirewall = true;
     };
+    programs.steam.gamescopeSession.enable = true;
 
     hardware = {
       pulseaudio.support32Bit = true;

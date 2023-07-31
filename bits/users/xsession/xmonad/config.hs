@@ -65,6 +65,8 @@ myWorkspaces    = ["1","2","3","4","5","6","7","8","9:slack"]
 
 scratchpads = [
   NS "audio-control" "nix run m#pavucontrol" (className =? "Pavucontrol") (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3)),
+  NS "htop" "kitty --class='my-scratchpad-htop' -T htop htop" (className =? "my-scratchpad-htop") (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3)),
+  NS "nvidia-smi" "kitty --class='my-scratchpad-nvidia-smi' -T nividia-smi watch -n 5 nvidia-smi" (className =? "my-scratchpad-nvidia-smi") (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3)),
   NS "notes" "kitty --class='my-scratchpad-notes' -T notes nvim ~/Dokumente/Notizen/Main.org" (className =? "my-scratchpad-notes") (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
               ]
 -- Border colors for unfocused and focused windows, respectively.
@@ -154,6 +156,8 @@ myKeys conf@(XConfig {modMask = modm}) = M.fromList $
 
     , ((modm .|. controlMask .|. shiftMask, xK_a), namedScratchpadAction scratchpads "audio-control")
     , ((modm .|. controlMask .|. shiftMask, xK_n), namedScratchpadAction scratchpads "notes")
+    , ((modm .|. controlMask .|. shiftMask, xK_h), namedScratchpadAction scratchpads "htop")
+    , ((modm .|. controlMask .|. shiftMask, xK_g), namedScratchpadAction scratchpads "nvidia-smi")
     ]
     ++
 
@@ -243,6 +247,7 @@ myManageHook = composeOne
     , className =? "my-scratchpad-notes" -?> doFloat
     , className =? "MPlayer"        -?> doFloat
     , className =? "Gimp"           -?> doFloat
+    , className =? "steam_app_356500"           -?> doFloat
     , resource  =? "desktop_window" -?> doIgnore
     , resource  =? "kdesktop"       -?> doIgnore
     ]

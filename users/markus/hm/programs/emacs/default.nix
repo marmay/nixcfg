@@ -5,6 +5,7 @@
       extraPackages = epkgs: [
         epkgs.bind-key
         epkgs.company
+	epkgs.fira-code-mode
         epkgs.haskell-mode
         epkgs.linum-relative
         epkgs.lsp-ui
@@ -70,6 +71,9 @@
           :config
             (setf lsp-haskell-formatting-provider "fourmolu")
             (setf lsp-haskell-server-path "haskell-language-server"))
+        (use-package fira-code-mode
+          :custom (fira-code-mode-disabled-ligatures '())  ; ligatures you don't want
+          :hook prog-mode)	    
         (use-package copilot
           :quelpa (copilot :fetcher github
                            :repo "zerolfx/copilot.el"

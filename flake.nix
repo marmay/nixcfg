@@ -56,6 +56,13 @@
           nixos-hardware.nixosModules.raspberry-pi-4
         ];
       };
+      camberry = nixpkgs.lib.nixosSystem {
+        system = "armv6l-linux";
+        modules = [
+          ./hosts/camberry
+          (nixpkgs + "/nixos/modules/installer/sd-card/sd-image-raspberrypi.nix")
+        ];
+      };
     };
 
   } // flake-utils.lib.eachDefaultSystem (system: let pkgs = mynixpkgs system; in {
