@@ -17,6 +17,7 @@
     ./spotifyd.nix
     ./ssh.nix
     ./steam.nix
+    ./sway.nix
     ./users.nix
     ./vpn_client.nix
     ./xserver.nix

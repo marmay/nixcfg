@@ -6,7 +6,7 @@
     home.packages = with pkgs; [
       remmina
       slack
-      teams
+      # teams
     ];
   };
 }

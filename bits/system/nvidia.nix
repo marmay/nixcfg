@@ -5,7 +5,7 @@
 
   config = lib.mkIf config.marmar.nvidiaGpuSupport {
     hardware.opengl.enable = true;
-    #hardware.nvidia.modesetting.enable = true;
+    hardware.nvidia.modesetting.enable = true;
     services.xserver.videoDrivers = [ "nvidia" ];
     hardware.nvidia = {
       nvidiaSettings = true;
