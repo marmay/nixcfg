@@ -7,6 +7,7 @@
         epkgs.company
 	epkgs.fira-code-mode
         epkgs.haskell-mode
+	epkgs.helm
         epkgs.linum-relative
         epkgs.lsp-ui
         epkgs.lsp-mode
@@ -21,6 +22,15 @@
         epkgs.use-package
       ];
       extraConfig = ''
+        (setq inhibit-startup-message 1)
+
+	(scroll-bar-mode -1)
+	(tool-bar-mode -1)
+	(tooltip-mode -1)
+	(set-fringe-mode 10)
+
+	(menu-bar-mode -1)
+
         (eval-when-compile
           (require 'use-package))
         (use-package bind-key
@@ -33,6 +43,12 @@
           (setq quelpa-update-melpa-p nil))
         (use-package quelpa-use-package
           :ensure t)
+	(use-package helm
+          :bind  ("M-x" . helm-M-x)
+                 ("M-y" . helm-show-kill-ring)
+                 ("C-x b" . helm-mini))
+	(use-package helm-files
+          :bind ("C-x C-f" . helm-find-files))
         (use-package company
           :after lsp-mode
           :hook (prog-mode . company-mode)
