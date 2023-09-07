@@ -6,6 +6,7 @@
         epkgs.bind-key
         epkgs.company
 	epkgs.fira-code-mode
+	epkgs.flycheck
         epkgs.haskell-mode
 	epkgs.helm
         epkgs.linum-relative
@@ -49,6 +50,16 @@
                  ("C-x b" . helm-mini))
 	(use-package helm-files
           :bind ("C-x C-f" . helm-find-files))
+	(use-package flycheck
+	  :ensure t
+	  :init (global-flycheck-mode)
+	  :config (add-to-list 'display-buffer-alist
+             `(,(rx bos "*Flycheck errors*" eos)
+              (display-buffer-reuse-window
+               display-buffer-in-side-window)
+              (side            . bottom)
+              (reusable-frames . visible)
+              (window-height   . 0.15))))
         (use-package company
           :after lsp-mode
           :hook (prog-mode . company-mode)
