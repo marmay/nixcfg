@@ -1,5 +1,7 @@
 {config, lib, pkgs, ... }:
 {
+  imports = [ ./profiles ];
+
   config = {
     programs = {
       firefox.enable = true;

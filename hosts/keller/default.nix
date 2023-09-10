@@ -34,6 +34,9 @@
     home-manager.users.markus.profiles.work = true;
     home-manager.users.markus.profiles.photo = true;
 
+    marmar.users.raphaela.enable = true;
+    home-manager.users.raphaela.profiles.school = true;
+
     virtualisation.waydroid.enable = true;
 
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
