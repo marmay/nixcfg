@@ -6,17 +6,9 @@
         epkgs.bind-key
         epkgs.company
 	epkgs.fira-code-mode
-	epkgs.flycheck
-        epkgs.haskell-mode
 	epkgs.helm
         epkgs.linum-relative
-        epkgs.lsp-ui
-        epkgs.lsp-mode
-        epkgs.lsp-haskell
-        epkgs.lsp-treemacs
-        epkgs.magit
         epkgs.org
-        epkgs.org-kanban
         epkgs.quelpa
         epkgs.quelpa-use-package
         epkgs.treemacs
@@ -50,16 +42,6 @@
                  ("C-x b" . helm-mini))
 	(use-package helm-files
           :bind ("C-x C-f" . helm-find-files))
-	(use-package flycheck
-	  :ensure t
-	  :init (global-flycheck-mode)
-	  :config (add-to-list 'display-buffer-alist
-             `(,(rx bos "*Flycheck errors*" eos)
-              (display-buffer-reuse-window
-               display-buffer-in-side-window)
-              (side            . bottom)
-              (reusable-frames . visible)
-              (window-height   . 0.15))))
         (use-package company
           :after lsp-mode
           :hook (prog-mode . company-mode)
@@ -75,43 +57,11 @@
           :ensure org-mode
           :config
           (progn
-            (setq org-agenda-files (list "~/Dokumente/RaphisNotizen/"))
+            (setq org-agenda-files (list "~/Dokumente/Notizen/"))
           ))
-        (use-package org-kanban
-          )
-        (use-package lsp-mode
-          :init (setq lsp-keymap-prefix "C-c l")
-          :hook (haskell-mode . lsp-deferred)
-                (haskell-literate-mode . lsp-deferred)
-          :commands (lsp lsp-deferred)
-        )
-        (use-package lsp-ui
-          :hook (lsp-mode . lsp-ui-mode)
-          :commands lsp-ui-mode
-          :config
-            (setq lsp-ui-doc-enable t)
-            (setq lsp-ui-doc-show-with-cursor t)
-        (setq lsp-ui-sideline-enable t)
-        (setq lsp-ui-sideline-show-hover t)
-            (setq lsp-ui-sideline-show-diagnostics t))
-        (use-package lsp-haskell
-          :config
-            (setf lsp-haskell-formatting-provider "fourmolu")
-            (setf lsp-haskell-server-path "haskell-language-server"))
         (use-package fira-code-mode
           :custom (fira-code-mode-disabled-ligatures '())  ; ligatures you don't want
           :hook prog-mode)	    
-        (use-package copilot
-          :quelpa (copilot :fetcher github
-                           :repo "zerolfx/copilot.el"
-                           :branch "main"
-                           :files ("dist" "*.el"))
-          :hook
-            (prog-mode . copilot-mode)
-            (org-mode . copilot-mode)
-          :config
-            (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
-            (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion))
         (use-package linum-relative
           :config
           (linum-relative-global-mode))
