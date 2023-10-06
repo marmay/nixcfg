@@ -5,6 +5,8 @@
       extraPackages = epkgs: [
         epkgs.bind-key
         epkgs.company
+	epkgs.epresent
+	epkgs.evil
 	epkgs.fira-code-mode
 	epkgs.flycheck
         epkgs.haskell-mode
@@ -20,6 +22,7 @@
         epkgs.quelpa
         epkgs.quelpa-use-package
         epkgs.treemacs
+        epkgs.treemacs-evil
         epkgs.use-package
       ];
       extraConfig = ''
@@ -79,6 +82,21 @@
           ))
         (use-package org-kanban
           )
+	(use-package epresent
+	  )
+	(use-package haskell-mode
+	  :ensure t
+	  :config
+              (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+              (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+              (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+              (setq haskell-process-args-cabal-new-repl
+                '("--ghc-options=-ferror-spans -fshow-loaded-modules"))
+              (setq haskell-process-type 'cabal-new-repl)
+              (setq haskell-stylish-on-save 't)
+              (setq haskell-tags-on-save 't)
+	      (define-key haskell-mode-map (kbd "C-c m") 'haskell-process-reload-devel-main)
+	)
         (use-package lsp-mode
           :init (setq lsp-keymap-prefix "C-c l")
           :hook (haskell-mode . lsp-deferred)
@@ -91,15 +109,17 @@
           :config
             (setq lsp-ui-doc-enable t)
             (setq lsp-ui-doc-show-with-cursor t)
-        (setq lsp-ui-sideline-enable t)
-        (setq lsp-ui-sideline-show-hover t)
+            (setq lsp-ui-sideline-enable t)
+            (setq lsp-ui-sideline-show-hover t)
             (setq lsp-ui-sideline-show-diagnostics t))
         (use-package lsp-haskell
           :config
             (setf lsp-haskell-formatting-provider "fourmolu")
             (setf lsp-haskell-server-path "haskell-language-server"))
         (use-package fira-code-mode
-          :custom (fira-code-mode-disabled-ligatures '())  ; ligatures you don't want
+          :custom (fira-code-mode-disabled-ligatures '("x"))  ; ligatures you don't want
+	  :config
+	    (set-face-attribute 'default nil :family "Fira Code" :weight 'medium :height 80)
           :hook prog-mode)	    
         (use-package copilot
           :quelpa (copilot :fetcher github
@@ -114,7 +134,9 @@
             (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion))
         (use-package linum-relative
           :config
-          (linum-relative-global-mode))
+            (linum-relative-global-mode))
+	(use-package treemacs-evil
+	  :ensure t)
         (use-package treemacs
           :ensure t
           :defer t
@@ -203,7 +225,20 @@
                 ("C-x t B"   . treemacs-bookmark)
                 ("C-x t C-t" . treemacs-find-file)
                 ("C-x t M-t" . treemacs-find-tag)))
+        (use-package evil
+          :ensure t ;; install the evil package if not installed
+          :init ;; tweak evil's configuration before loading it
+            (setq evil-search-module 'evil-search)
+            (setq evil-ex-complete-emacs-commands nil)
+            (setq evil-vsplit-window-right t)
+            (setq evil-split-window-below t)
+            (setq evil-shift-round nil)
+            (setq evil-want-C-u-scroll t)
+          :config ;; tweak evil after loading it
+            (evil-mode)
 
+          ;; example how to map a command in normal mode (called 'normal state' in evil)
+          (define-key evil-normal-state-map (kbd ", w") 'evil-window-vsplit))
       '';
     };
   };

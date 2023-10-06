@@ -7,6 +7,10 @@
     home.packages = with pkgs; [
       anki
       teams
+      libreoffice
+      scribus
+      gimp
+      inkscape
     ];
     programs.emacs.enable = true;
   };

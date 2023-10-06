@@ -25,6 +25,7 @@
       swaySupport = true;
       steam = true;
       uefi = true;
+      xrdp = true;
     };
 
     marmar.users.markus.enable = true;
@@ -40,5 +41,9 @@
     virtualisation.waydroid.enable = true;
 
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
+    environment.etc."sysctl.d/99-for-hogwarts-legacy.conf".text = ''
+      vm.max_map_count=1048576
+    '';
   };
 }
