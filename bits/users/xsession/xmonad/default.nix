@@ -21,6 +21,7 @@ in
   config = lib.mkIf config.marmar.xsession.xmonad.enable {
     home.packages = [
       pkgs.dmenu
+      pkgs.feh
     ];
 
     xdg.configFile."xmobar/.xmobarrc".text = xmobarConfig;
@@ -30,6 +31,7 @@ in
         echo "$(basename $1)" > /tmp/xsession.log;
         eval exec "$@";
       fi
+      feh --bg-scale ~/.background.jpg &
     '';
 
     xsession.windowManager.xmonad = {
@@ -44,7 +46,7 @@ in
 
     services = {
       dunst.enable = lib.mkDefault true;
-      picom.enable = lib.mkDefault true;
+      # picom.enable = lib.mkDefault true;
       polybar.enable = lib.mkDefault true;
       udiskie.enable = lib.mkDefault true;
     };

@@ -2,11 +2,13 @@
 {
   config = {
     programs.emacs = {
+      package = pkgs.emacs29;
       extraPackages = epkgs: [
         epkgs.bind-key
         epkgs.company
 	epkgs.epresent
 	epkgs.evil
+	epkgs.evil-org
 	epkgs.fira-code-mode
 	epkgs.flycheck
         epkgs.haskell-mode
@@ -18,7 +20,6 @@
         epkgs.lsp-treemacs
         epkgs.magit
         epkgs.org
-        epkgs.org-kanban
         epkgs.quelpa
         epkgs.quelpa-use-package
         epkgs.treemacs
@@ -77,11 +78,17 @@
           :mode (("org$" . org-mode))
           :ensure org-mode
           :config
-          (progn
-            (setq org-agenda-files (list "~/Dokumente/RaphisNotizen/"))
-          ))
-        (use-package org-kanban
-          )
+            (progn
+              (setq org-agenda-files (list "~/Dokumente/RaphisNotizen/")))
+	  )
+	(use-package evil-org
+	  :ensure t
+          :after org
+          :hook (org-mode . evil-org-mode)
+          :config
+            (require 'evil-org-agenda)
+            (evil-org-agenda-set-keys)
+	  )
 	(use-package epresent
 	  )
 	(use-package haskell-mode
