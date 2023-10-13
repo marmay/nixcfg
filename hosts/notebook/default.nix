@@ -29,5 +29,6 @@
     marmar.users.markus.enable = true;
     marmar.users.marion.enable = true;
     marmar.users.raphaela.enable = true;
+    home-manager.users.raphaela.profiles.school = true;
   };
 }
