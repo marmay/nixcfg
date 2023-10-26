@@ -8,6 +8,7 @@
       htop.enable = true;
       emacs.enable = true;
       neovim.enable = true;
+      wezterm.enable = true;
       git = {
         enable = true;
         userName = "Markus Mayr";
