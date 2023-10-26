@@ -4,7 +4,7 @@
   {
     nixpkgs.config.allowUnfree = true;
     services.minecraft-server = {
-      #enable = true;
+      enable = true;
       eula = true;
       openFirewall = true;
       declarative = true;
@@ -20,5 +20,6 @@
         online-mode = false;
       };
     };
+    systemd.services.minecraft-server.wantedBy = lib.mkForce [];
   };
 }
