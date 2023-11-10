@@ -20,6 +20,7 @@
     services.xrdp = lib.mkIf config.marmar.xrdp {
       enable = true;
       openFirewall = true;
+      defaultWindowManager = "xsession";
     };
   };
 }

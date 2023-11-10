@@ -29,6 +29,7 @@
     };
 
     marmar.users.markus.enable = true;
+    home-manager.users.markus.profiles.agda = true;
     home-manager.users.markus.profiles.dev = true;
     home-manager.users.markus.profiles.xmonad = true;
     home-manager.users.markus.profiles.sway = true;
