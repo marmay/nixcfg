@@ -109,6 +109,9 @@
           :hook (haskell-mode . lsp-deferred)
                 (haskell-literate-mode . lsp-deferred)
           :commands (lsp lsp-deferred)
+	  :config
+	      (setq read-process-output-max (* 1024 1024))
+	      (setq gc-cons-threshold 100000000)
         )
         (use-package lsp-ui
           :hook (lsp-mode . lsp-ui-mode)

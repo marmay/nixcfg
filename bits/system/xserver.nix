@@ -10,6 +10,7 @@
     services.xserver = {
       enable = true;
       layout = "de";
+      xkbVariant = "nodeadkeys";
       libinput.enable = true;
       desktopManager.xterm.enable = true;
       updateDbusEnvironment = true;

@@ -6,7 +6,7 @@
   config = lib.mkIf config.profiles.school {
     home.packages = with pkgs; [
       anki
-      teams
+      teams-for-linux
       libreoffice
       scribus
       gimp
