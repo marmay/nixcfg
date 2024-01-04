@@ -16,7 +16,11 @@
       };
     };
     home.sessionVariables = {
-      EDITOR = "nvim";
+      EDITOR = "emacs";
     };
+    home.packages = with pkgs; [
+      ghc
+      cabal-install
+    ];
   };
 }

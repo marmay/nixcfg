@@ -16,6 +16,8 @@
       };
     };
 
+    hardware.keyboard.qmk.enable = true;
+
     marmar = {
       haskell = true;
       nas_client = true;
