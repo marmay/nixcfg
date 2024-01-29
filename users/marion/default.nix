@@ -8,8 +8,6 @@
 
     home.packages = with pkgs; [
       libreoffice
-      qmapshack
-      obsidian
       gnome.eog
     ];
 
