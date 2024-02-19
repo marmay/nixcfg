@@ -17,6 +17,7 @@
     };
 
     hardware.keyboard.qmk.enable = true;
+    nix.gc.automatic = false;
 
     marmar = {
       haskell = true;

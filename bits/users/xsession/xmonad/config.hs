@@ -61,7 +61,7 @@ myModMask       = mod4Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["1","2","3","4","5","6","7","8","9:slack"]
+myWorkspaces    = ["1:web","2:mail","3","4","5","6","7","8","9:slack"]
 
 scratchpads = [
   NS "audio-control" "nix run m#pavucontrol" (className =? "Pavucontrol") (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3)),
@@ -163,11 +163,23 @@ myKeys conf@(XConfig {modMask = modm}) = M.fromList $
 
     --
     -- mod-[1..9], Switch to workspace N
+    [((modm, k), windows $ W.greedyView i)
+        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]]
+    ++
+    
     -- mod-shift-[1..9], Move client to workspace N
     --
-    [((m .|. modm, k), windows $ f i)
-        | (i, k) <- zip (workspaces conf) [xK_1 .. xK_9]
-        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
+    [((m .|. modm, k), windows $ W.shift i)
+        | (i, (m, k)) <- zip (workspaces conf) [ (shiftMask, xK_asciicircum)
+                                               , (shiftMask, xK_3)
+                                               , (mod5Mask, xK_n)
+                                               , (mod5Mask, xK_x)
+                                               , (mod5Mask, xK_v)
+                                               , (shiftMask, xK_4)
+                                               , (mod5Mask, xK_e)
+                                               , (mod5Mask, xK_v)
+                                               , (mod5Mask, xK_b)
+                                               ] ]
     ++
 
     --
