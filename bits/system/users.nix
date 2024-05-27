@@ -50,7 +50,7 @@ in
   config.users.users = lib.attrsets.mapAttrs (user: userConfig: {
       uid = userConfig.uid;
       isNormalUser = true;
-      passwordFile = config.age.secrets."userPassword_${user}".path;
+      hashedPasswordFile = config.age.secrets."userPassword_${user}".path;
       extraGroups =
         [ "users" ] ++
         userConfig.extraGroups ++
