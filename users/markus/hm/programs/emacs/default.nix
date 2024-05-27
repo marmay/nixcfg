@@ -6,13 +6,14 @@
       extraPackages = epkgs: [
         epkgs.bind-key
         epkgs.company
-	epkgs.epresent
-	epkgs.evil
-	epkgs.evil-org
-	epkgs.fira-code-mode
-	epkgs.flycheck
+        epkgs.epresent
+        epkgs.evil
+        epkgs.evil-org
+        epkgs.fira-code-mode
+        epkgs.flycheck
         epkgs.haskell-mode
-	epkgs.helm
+        epkgs.helm
+        epkgs.lean-mode
         epkgs.linum-relative
         epkgs.lsp-ui
         epkgs.lsp-mode
@@ -29,12 +30,12 @@
       extraConfig = ''
         (setq inhibit-startup-message 1)
 
-	(scroll-bar-mode -1)
-	(tool-bar-mode -1)
-	(tooltip-mode -1)
-	(set-fringe-mode 10)
+        (scroll-bar-mode -1)
+        (tool-bar-mode -1)
+        (tooltip-mode -1)
+        (set-fringe-mode 10)
 
-	(menu-bar-mode -1)
+        (menu-bar-mode -1)
 
         (eval-when-compile
           (require 'use-package))
@@ -48,16 +49,16 @@
           (setq quelpa-update-melpa-p nil))
         (use-package quelpa-use-package
           :ensure t)
-	(use-package helm
+        (use-package helm
           :bind  ("M-x" . helm-M-x)
                  ("M-y" . helm-show-kill-ring)
                  ("C-x b" . helm-mini))
-	(use-package helm-files
+        (use-package helm-files
           :bind ("C-x C-f" . helm-find-files))
-	(use-package flycheck
-	  :ensure t
-	  :init (global-flycheck-mode)
-	  :config (add-to-list 'display-buffer-alist
+        (use-package flycheck
+          :ensure t
+          :init (global-flycheck-mode)
+          :config (add-to-list 'display-buffer-alist
              `(,(rx bos "*Flycheck errors*" eos)
               (display-buffer-reuse-window
                display-buffer-in-side-window)
@@ -80,20 +81,20 @@
           :config
             (progn
               (setq org-agenda-files (list "~/Dokumente/RaphisNotizen/")))
-	  )
-	(use-package evil-org
-	  :ensure t
+          )
+        (use-package evil-org
+          :ensure t
           :after org
           :hook (org-mode . evil-org-mode)
           :config
             (require 'evil-org-agenda)
             (evil-org-agenda-set-keys)
-	  )
-	(use-package epresent
-	  )
-	(use-package haskell-mode
-	  :ensure t
-	  :config
+          )
+        (use-package epresent
+          )
+        (use-package haskell-mode
+          :ensure t
+          :config
               (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
               (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
               (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
@@ -102,16 +103,16 @@
               (setq haskell-process-type 'cabal-new-repl)
               (setq haskell-stylish-on-save 't)
               (setq haskell-tags-on-save 't)
-	      (define-key haskell-mode-map (kbd "C-c m") 'haskell-process-reload-devel-main)
-	)
+              (define-key haskell-mode-map (kbd "C-c m") 'haskell-process-reload-devel-main)
+        )
         (use-package lsp-mode
           :init (setq lsp-keymap-prefix "C-c l")
           :hook (haskell-mode . lsp-deferred)
                 (haskell-literate-mode . lsp-deferred)
           :commands (lsp lsp-deferred)
-	  :config
-	      (setq read-process-output-max (* 1024 1024))
-	      (setq gc-cons-threshold 100000000)
+          :config
+              (setq read-process-output-max (* 1024 1024))
+              (setq gc-cons-threshold 100000000)
         )
         (use-package lsp-ui
           :hook (lsp-mode . lsp-ui-mode)
@@ -128,9 +129,11 @@
             (setf lsp-haskell-server-path "haskell-language-server"))
         (use-package fira-code-mode
           :custom (fira-code-mode-disabled-ligatures '("x"))  ; ligatures you don't want
-	  :config
-	    (set-face-attribute 'default nil :family "Fira Code" :weight 'medium :height 80)
-          :hook prog-mode)	    
+          :config
+            (set-face-attribute 'default nil :family "Fira Code" :weight 'medium :height 80)
+          :hook prog-mode)
+        (use-package lean-mode
+          :ensure t)
         (use-package copilot
           :quelpa (copilot :fetcher github
                            :repo "zerolfx/copilot.el"
@@ -145,8 +148,8 @@
         (use-package linum-relative
           :config
             (linum-relative-global-mode))
-	(use-package treemacs-evil
-	  :ensure t)
+        (use-package treemacs-evil
+          :ensure t)
         (use-package treemacs
           :ensure t
           :defer t

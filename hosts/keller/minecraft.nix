@@ -12,7 +12,7 @@
         server-port = 40000;
         difficulty = 1;
         gamemode = 0;
-        max-players = 2;
+        max-players = 4;
         motd = "Mamaragach server!";
         white-list = false;
         enable-rcon = true;
