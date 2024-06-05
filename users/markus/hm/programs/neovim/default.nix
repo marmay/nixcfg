@@ -11,7 +11,7 @@ let
     barbar-nvim
     toggleterm-nvim
     nvim-web-devicons
-    nvim-base16
+    base16-nvim
     nvim-treesitter.withAllGrammars
     nvim-tree-lua
     orgmode

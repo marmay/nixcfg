@@ -9,11 +9,14 @@
 
     services.xserver = {
       enable = true;
-      layout = "de";
-      xkbVariant = "nodeadkeys";
-      libinput.enable = true;
+      xkb.layout = "de";
+      xkb.variant = "nodeadkeys";
       desktopManager.xterm.enable = true;
       updateDbusEnvironment = true;
+    };
+
+    services.libinput = {
+      enable = true;
     };
 
     services.openssh.settings.X11Forwarding = lib.mkDefault true;
