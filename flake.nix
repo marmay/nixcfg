@@ -63,6 +63,14 @@
           (nixpkgs + "/nixos/modules/installer/sd-card/sd-image-raspberrypi.nix")
         ];
       };
+      carpi = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        modules = [
+          ./hosts/carpi
+          (nixpkgs + "/nixos/modules/installer/sd-card/sd-image-aarch64.nix")
+          #nixos-hardware.nixosModules.raspberry-pi-4
+        ];
+      };
     };
 
   } // flake-utils.lib.eachDefaultSystem (system: let pkgs = mynixpkgs system; in {

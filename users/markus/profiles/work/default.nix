@@ -7,6 +7,12 @@
       remmina
       slack
       teams-for-linux
+      jetbrains.idea-ultimate
+      dbeaver-bin
+      mariadb
+      gradle
+      yarn
+      nginx
     ];
   };
 }

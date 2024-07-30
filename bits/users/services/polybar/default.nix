@@ -31,6 +31,11 @@ let
   customMods = cal + xmonad;
 in
 {
+  config.fonts.fontconfig.enableProfileFonts = true;
+  config.home.packages = with pkgs; [
+    nerdfonts
+  ];
+
   config.services.polybar = {
     package = mypolybar;
     config = ./config.ini;

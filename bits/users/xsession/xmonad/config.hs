@@ -11,6 +11,7 @@ import XMonad.Layout.NoBorders
 import XMonad.Layout.Spacing
 import XMonad.Layout.SimplestFloat
 import XMonad.Layout.Tabbed
+import XMonad.Layout.ResizableTile (ResizableTall(..), MirrorResize(..))
 import XMonad.Util.Run(spawnPipe, hPutStrLn)
 import XMonad.Util.NamedScratchpad
 import Data.List
@@ -130,6 +131,10 @@ myKeys conf@(XConfig {modMask = modm}) = M.fromList $
     -- Expand the master area
     , ((modm,               xK_l     ), sendMessage Expand)
 
+    -- Control the space of the focused window
+    , ((modm,               xK_a     ), sendMessage MirrorExpand)
+    , ((modm,               xK_y     ), sendMessage MirrorShrink)
+
     -- Push window back into tiling
     , ((modm,               xK_t     ), withFocused $ windows . W.sink)
 
@@ -139,6 +144,7 @@ myKeys conf@(XConfig {modMask = modm}) = M.fromList $
     -- Deincrement the number of windows in the master area
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
 
+    , ((modm,               xK_f     ), toggleFull)
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
     -- See also the statusBar function from Hooks.DynamicLog.
@@ -224,7 +230,7 @@ myMouseBindings (XConfig {modMask = modm}) = M.fromList $
 myLayout = tiled ||| Mirror tiled ||| Full ||| simplestFloat ||| simpleTabbed
   where
      -- default tiling algorithm partitions the screen into two panes
-     tiled   = Tall nmaster delta ratio
+     tiled   = ResizableTall nmaster delta ratio [mainSlave, subSlave]
 
      -- The default number of windows in the master pane
      nmaster = 1
@@ -234,6 +240,9 @@ myLayout = tiled ||| Mirror tiled ||| Full ||| simplestFloat ||| simpleTabbed
 
      -- Percent of screen to increment by when resizing panes
      delta   = 3/100
+
+     mainSlave = 2/3
+     subSlave = 1/3
 
 ------------------------------------------------------------------------
 -- Window rules:
@@ -427,3 +436,11 @@ polybarHook dbus =
 
 myPolybarLogHook dbus = myLogHook <+> dynamicLogWithPP (polybarHook dbus)
 myLogHook = fadeInactiveLogHook 0.9
+
+--Looks to see if focused window is floating and if it is the places it in the stack
+--else it makes it floating but as full screen
+toggleFull = withFocused (\windowId -> do
+    { floats <- gets (W.floating . windowset);
+        if windowId `M.member` floats
+        then withFocused $ windows . W.sink
+        else withFocused $ windows . (flip W.float $ W.RationalRect 0 0 1 1) })
