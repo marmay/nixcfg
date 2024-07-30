@@ -18,6 +18,7 @@
       intelGpuSupport = true;
       printingSupport = true;
       steam = true;
+      uefi = true;
     };
 
     marmar.users.markus.enable = true;
