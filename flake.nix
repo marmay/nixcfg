@@ -47,6 +47,7 @@
       };
       keller = mkUserPc { path = ./hosts/keller; };
       nas = mkUserPc { path = ./hosts/nas; };
+      mnb = mkUserPc { path = ./hosts/mnb; };
       notebook = mkUserPc { path = ./hosts/notebook; };
       raphberry = mkUserPc {
         path = ./hosts/raphberry;
