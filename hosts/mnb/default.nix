@@ -22,6 +22,10 @@
     };
 
     marmar.users.markus.enable = true;
+
+    home-manager.users.markus.profiles.dev = true;
+    home-manager.users.markus.profiles.xmonad = true;
+    home-manager.users.markus.profiles.sway = true;
     # marmar.users.marion.enable = true;
     # marmar.users.raphaela.enable = true;
     # home-manager.users.raphaela.profiles.school = true;
