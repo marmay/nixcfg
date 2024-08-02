@@ -19,6 +19,7 @@
     };
 
   boot.initrd.luks.devices."luks-ec992216-7488-449b-b1b3-37d6a8ef17d6".device = "/dev/disk/by-uuid/ec992216-7488-449b-b1b3-37d6a8ef17d6";
+  boot.initrd.luks.devices."luks-0959dacc-567e-4b04-8ecb-3363d33eac87".device = "/dev/disk/by-uuid/0959dacc-567e-4b04-8ecb-3363d33eac87";
 
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/89E5-D84F";
@@ -27,7 +28,7 @@
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/8204c0ff-ab8b-474e-b8cf-577b4aa158d7"; }
+    [ { device = "/dev/mapper/luks-0959dacc-567e-4b04-8ecb-3363d33eac87"; }
     ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

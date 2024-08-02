@@ -6,6 +6,8 @@
   ];
 
   config = {
+    boot.kernelPackages = pkgs.linuxPackages_latest;
+
     system.stateVersion = "24.05";
 
     networking = {
