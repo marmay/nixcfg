@@ -47,7 +47,14 @@
       };
       keller = mkUserPc { path = ./hosts/keller; };
       nas = mkUserPc { path = ./hosts/nas; };
-      mnb = mkUserPc { path = ./hosts/mnb; };
+      mnb = mkUserPc {
+        path = ./hosts/mnb;
+        extra-modules = [
+          nixos-hardware.nixosModules.lenovo-thinkpad-x13
+          nixos-hardware.nixosModules.lenovo-thinkpad-x13-yoga
+          nixos-hardware.nixosModules.lenovo-thinkpad-x13-yoga-3th-gen
+        ];
+      };
       notebook = mkUserPc { path = ./hosts/notebook; };
       raphberry = mkUserPc {
         path = ./hosts/raphberry;
