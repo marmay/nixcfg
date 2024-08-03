@@ -20,4 +20,11 @@
     admin = false;
     passwordFile = ../secrets/markus/users/raphaela;
   };
+
+  config.marmar.users.gabriel = {
+    uid = 1003;
+    trusted = false;
+    admin = false;
+    passwordFile = ../secrets/markus/users/gabriel;
+  };
 }

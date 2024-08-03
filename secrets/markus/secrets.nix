@@ -18,5 +18,6 @@ in
   "users/markus".publicKeys = [ keys.markus keys.buki keys.nas keys.keller keys.notebook keys.raphberry keys.mnb ];
   "users/marion".publicKeys = [ keys.markus keys.buki keys.nas keys.keller keys.notebook keys.mnb ];
   "users/raphaela".publicKeys = [ keys.markus keys.buki keys.nas keys.keller keys.notebook keys.raphberry keys.mnb ];
+  "users/gabriel".publicKeys = [ keys.markus keys.buki keys.nas keys.keller keys.notebook keys.raphberry keys.mnb ];
   "spotify".publicKeys = [ keys.markus keys.nas keys.keller keys.notebook keys.raphberry keys.mnb ];
 }

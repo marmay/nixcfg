@@ -31,5 +31,6 @@
     # marmar.users.marion.enable = true;
     # marmar.users.raphaela.enable = true;
     # home-manager.users.raphaela.profiles.school = true;
+    marmar.users.gabriel.enable = true;
   };
 }
