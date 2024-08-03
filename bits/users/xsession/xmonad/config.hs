@@ -172,7 +172,7 @@ myKeys conf@(XConfig {modMask = modm}) = M.fromList $
     [((modm, k), windows $ W.greedyView i)
         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]]
     ++
-    
+
     -- mod-shift-[1..9], Move client to workspace N
     --
     [((m .|. modm, k), windows $ W.shift i)
@@ -418,20 +418,25 @@ dbusOutput dbus str =
 
 polybarHook :: D.Client -> PP
 polybarHook dbus =
-  let wrapper c s | s /= "NSP" = wrap ("%{F" <> c <> "} ") " %{F-}" s
-                  | otherwise  = mempty
+  let nonNSP :: String -> Maybe String
+      nonNSP "NSP" = Nothing
+      nonNSP s     = Just s
+      toStr Nothing  = ""
+      toStr (Just s) = s
+      withForeground c = wrap ("%{F" <> c <> "}") "%{F-}"
+      withUnderline c = wrap ("%{u" <> c <> "}%{+u}") "%{-u}%{u-}"
       blue   = "#2E9AFE"
       gray   = "#7F7F7F"
       orange = "#ea4300"
       purple = "#9058c7"
-      red    = "#722222"
+      darkGray = "#3F3F3F"
   in  def { ppOutput          = dbusOutput dbus
-          , ppCurrent         = wrapper blue
-          , ppVisible         = wrapper gray
-          , ppUrgent          = wrapper orange
-          , ppHidden          = wrapper gray
-          , ppHiddenNoWindows = wrapper red
-          , ppTitle           = wrapper purple . shorten 90
+          , ppCurrent         = toStr . fmap (withUnderline blue . withForeground blue) . nonNSP
+          , ppVisible         = toStr . fmap (withUnderline darkGray . withForeground gray) . nonNSP
+          , ppUrgent          = toStr . fmap (withUnderline darkGray . withForeground orange) . nonNSP
+          , ppHidden          = toStr . fmap (withUnderline darkGray . withForeground gray) . nonNSP
+          , ppHiddenNoWindows = toStr . fmap (withUnderline darkGray  . withForeground darkGray) . nonNSP
+          , ppTitle           = toStr . fmap (withForeground purple) . nonNSP . shorten 90
           }
 
 myPolybarLogHook dbus = myLogHook <+> dynamicLogWithPP (polybarHook dbus)
