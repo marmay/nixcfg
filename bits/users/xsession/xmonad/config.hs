@@ -383,7 +383,6 @@ main = mkDbusClient >>= main'
 
 main' :: D.Client -> IO ()
 main' dbus = do
-  xmproc <- spawnPipe "xmobar"
   xmonad $ ewmh $ docks $ defaults
         { modMask = mod4Mask
         , terminal = "kitty"

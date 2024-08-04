@@ -1,12 +1,5 @@
 { config, lib, pkgs, nixosConfig, ... }:
 
-#assert lib.assertMsg (!config.marmar.xsession.xmonad.enable || nixosConfig.programs.dconf.enable) "dconf is required to enable xmonad";
-#assert lib.assertMsg (!config.marmar.xsession.xmonad.enable || nixosConfig.services.dbus.enable) "dbus is required to enable xmonad";
-#assert lib.assertMsg (!config.marmar.xsession.xmonad.enable || nixosConfig.services.upower.enable) "upower is required to enable xmonad";
-
-let
-  xmobarConfig = builtins.readFile ./xmobar.config;
-in
 {
   options = {
     marmar.xsession.xmonad = {
@@ -14,6 +7,12 @@ in
         type = lib.types.bool;
         default = false;
         description = "Enable xmonad";
+      };
+      onlyStartServicesForXsession = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = ''dunst, polybar and udiskie are only run automatically for
+                        the Xsession, not in other sessions.'';
       };
     };
   };
@@ -24,7 +23,6 @@ in
       pkgs.feh
     ];
 
-    xdg.configFile."xmobar/.xmobarrc".text = xmobarConfig;
     xsession.enable = true;
     xsession.initExtra = ''
       if test "$(echo $(basename $1) | sed -e 's/[^-]*-\(.*\)/\1/')" != "xsession"; then
@@ -49,6 +47,16 @@ in
       polybar.enable = lib.mkDefault true;
       udiskie.enable = lib.mkDefault true;
       betterlockscreen.enable = lib.mkDefault true;
+    };
+
+    systemd.user.services = lib.mkIf config.marmar.xsession.xmonad.onlyStartServicesForXsession {
+      dunst.Unit.PartOf = lib.mkForce [ "hm-graphical-session.target" ];
+      polybar.Unit.PartOf = lib.mkForce [ "hm-graphical-session.target" ];
+      udisikie.Unit.PartOf = lib.mkForce [ "hm-graphical-session.target" ];
+      xss-lock.Unit.PartOf = lib.mkForce [ "hm-graphical-session.target" ];
+      xss-lock.Install.WantedBy = lib.mkForce [ "hm-graphical-session.target" ];
+      xautolock.Unit.PartOf = lib.mkForce [ "hm-graphical-session.target" ];
+      xautolock.Install.WantedBy = lib.mkForce [ "hm-graphical-session.target" ];
     };
   };
 }
