@@ -33,6 +33,7 @@ import qualified Data.Map        as M
 --
 myTerminal      = "kitty"
 menuApplication = "rofi -modi drun,window,ssh -show drun -show-icons"
+lockScreen      = "betterlockscreen -l"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -91,6 +92,9 @@ myKeys conf@(XConfig {modMask = modm}) = M.fromList $
 
     -- launch rofi
     , ((mod1Mask .|. shiftMask, xK_p     ), spawn menuApplication)
+
+    -- launch lock screen
+    , ((mod1Mask .|. shiftMask, xK_l ), spawn lockScreen)
 
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)

@@ -46,9 +46,9 @@ in
 
     services = {
       dunst.enable = lib.mkDefault true;
-      # picom.enable = lib.mkDefault true;
       polybar.enable = lib.mkDefault true;
       udiskie.enable = lib.mkDefault true;
+      betterlockscreen.enable = lib.mkDefault true;
     };
   };
 }
