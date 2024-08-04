@@ -15,6 +15,9 @@
       networkmanager.enable = true;
     };
 
+    programs.light.enable = true;
+    programs.light.brightnessKeys.enable = true;
+
     marmar = {
       nas_client = true;
       intelGpuSupport = true;
