@@ -27,6 +27,7 @@
     ];
 
     marmar = {
+      haskell = true;
       nas_client = true;
       intelGpuSupport = true;
       printingSupport = true;
@@ -38,7 +39,7 @@
 
     home-manager.users.markus.profiles.dev = true;
     home-manager.users.markus.profiles.xmonad = true;
-    home-manager.users.markus.profiles.sway = true;
+    home-manager.users.markus.profiles.photo = true;
     # marmar.users.marion.enable = true;
     # marmar.users.raphaela.enable = true;
     # home-manager.users.raphaela.profiles.school = true;
