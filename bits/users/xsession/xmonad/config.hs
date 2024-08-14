@@ -33,7 +33,7 @@ import qualified Data.Map        as M
 --
 myTerminal      = "kitty"
 menuApplication = "rofi -modi drun,window,ssh -show drun -show-icons"
-lockScreen      = "betterlockscreen -l"
+lockScreen      = "xsecurelock"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool

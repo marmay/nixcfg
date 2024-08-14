@@ -46,7 +46,8 @@
       dunst.enable = lib.mkDefault true;
       polybar.enable = lib.mkDefault true;
       udiskie.enable = lib.mkDefault true;
-      betterlockscreen.enable = lib.mkDefault true;
+      screen-locker.enable = lib.mkDefault true;
+      screen-locker.lockCmd = "${pkgs.xsecurelock}/bin/xsecurelock";
     };
 
     systemd.user.services = lib.mkIf config.marmar.xsession.xmonad.onlyStartServicesForXsession {
@@ -57,6 +58,7 @@
       xss-lock.Install.WantedBy = lib.mkForce [ "hm-graphical-session.target" ];
       xautolock.Unit.PartOf = lib.mkForce [ "hm-graphical-session.target" ];
       xautolock.Install.WantedBy = lib.mkForce [ "hm-graphical-session.target" ];
+      xautolock.Service.ExecStart = lib.mkForce "${pkgs.xautolock}/bin/xautolock -time 10 -locker ${pkgs.xsecurelock}/bin/xsecurelock -detectsleep";
     };
   };
 }
