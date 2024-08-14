@@ -15,9 +15,6 @@
         userEmail = "markus.mayr@outlook.com";
       };
     };
-    home.sessionVariables = {
-      EDITOR = "emacs";
-    };
     home.packages = with pkgs; [
       ghc
       cabal-install

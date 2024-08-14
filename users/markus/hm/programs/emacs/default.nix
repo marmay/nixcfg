@@ -1,6 +1,12 @@
 { config, lib, pkgs, ... }:
 {
   config = {
+    services.emacs = {
+      enable = true;
+      client.enable = true;
+      defaultEditor = true;
+    };
+
     programs.emacs = {
       package = pkgs.emacs29;
       extraPackages = epkgs: [
