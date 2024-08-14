@@ -18,6 +18,10 @@
     programs.light.enable = true;
     programs.light.brightnessKeys.enable = true;
 
+    services.fprintd.enable = true;
+    services.fprintd.tod.enable = true;
+    services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
+
     marmar = {
       nas_client = true;
       intelGpuSupport = true;
