@@ -22,6 +22,10 @@
     services.fprintd.tod.enable = true;
     services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
 
+    hardware.opengl.extraPackages = with pkgs; [
+      onevpl-intel-gpu
+    ];
+
     marmar = {
       nas_client = true;
       intelGpuSupport = true;
