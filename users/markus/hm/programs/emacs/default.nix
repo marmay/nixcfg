@@ -20,7 +20,6 @@
         epkgs.haskell-mode
         epkgs.helm
         epkgs.lean-mode
-        epkgs.linum-relative
         epkgs.lsp-ui
         epkgs.lsp-mode
         epkgs.lsp-haskell
@@ -85,6 +84,7 @@
           :mode (("org$" . org-mode))
           :ensure org-mode
           :config
+            (add-hook 'org-mode-hook 'display-line-numbers-mode)
             (progn
               (setq org-agenda-files (list "~/Dokumente/RaphisNotizen/")))
           )
@@ -104,6 +104,7 @@
               (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
               (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
               (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+              (add-hook 'haskell-mode-hook 'display-line-numbers-mode)
               (setq haskell-process-args-cabal-new-repl
                 '("--ghc-options=-ferror-spans -fshow-loaded-modules"))
               (setq haskell-process-type 'cabal-new-repl)
@@ -151,9 +152,6 @@
           :config
             (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
             (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion))
-        (use-package linum-relative
-          :config
-            (linum-relative-global-mode))
         (use-package treemacs-evil
           :ensure t)
         (use-package treemacs
@@ -258,6 +256,8 @@
 
           ;; example how to map a command in normal mode (called 'normal state' in evil)
           (define-key evil-normal-state-map (kbd ", w") 'evil-window-vsplit))
+
+        (setq display-line-numbers-type 'relative)
       '';
     };
   };
