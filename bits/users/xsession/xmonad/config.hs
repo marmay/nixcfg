@@ -14,6 +14,9 @@ import XMonad.Layout.Tabbed
 import XMonad.Layout.ResizableTile (ResizableTall(..), MirrorResize(..))
 import XMonad.Util.Run(spawnPipe, hPutStrLn)
 import XMonad.Util.NamedScratchpad
+import XMonad.Prompt
+import XMonad.Prompt.Pass
+import XMonad.Prompt.FuzzyMatch
 import Data.List
 import Data.Monoid
 import Data.Ratio
@@ -168,6 +171,11 @@ myKeys conf@(XConfig {modMask = modm}) = M.fromList $
     , ((modm .|. controlMask .|. shiftMask, xK_n), namedScratchpadAction scratchpads "notes")
     , ((modm .|. controlMask .|. shiftMask, xK_h), namedScratchpadAction scratchpads "htop")
     , ((modm .|. controlMask .|. shiftMask, xK_g), namedScratchpadAction scratchpads "nvidia-smi")
+
+    , ((modm                              , xK_s), passPrompt myXPConfig)
+    , ((modm .|. controlMask              , xK_s), passEditPrompt myXPConfig)
+    , ((modm                 .|. shiftMask, xK_s), passGeneratePrompt myXPConfig)
+    , ((modm .|. controlMask .|. shiftMask, xK_s), passRemovePrompt myXPConfig)
     ]
     ++
 
@@ -200,6 +208,11 @@ myKeys conf@(XConfig {modMask = modm}) = M.fromList $
         | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
+myXPConfig :: XPConfig
+myXPConfig = def {
+  searchPredicate = fuzzyMatch,
+  sorter = fuzzySort
+}
 
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events

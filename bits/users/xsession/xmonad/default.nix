@@ -21,6 +21,7 @@
     home.packages = [
       pkgs.dmenu
       pkgs.feh
+      pkgs.pass
     ];
 
     xsession.enable = true;
