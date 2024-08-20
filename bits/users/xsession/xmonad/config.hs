@@ -21,7 +21,9 @@ import Data.List
 import Data.Monoid
 import Data.Ratio
 import Control.Monad (liftM2)
+import Control.Monad.Catch (catchAll)
 import System.Exit
+import System.Process (system)
 
 import qualified DBus as D
 import qualified DBus.Client as D
@@ -82,7 +84,7 @@ myFocusedBorderColor = "#ff0000"
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
-myKeys conf@(XConfig {modMask = modm}) = M.fromList $
+myKeys hasSplitKbKeyboard conf@(XConfig {modMask = modm}) = M.fromList $
 
     -- launch a terminal
     [ ((modm .|. shiftMask, xK_Return), spawn $ terminal conf)
@@ -188,16 +190,7 @@ myKeys conf@(XConfig {modMask = modm}) = M.fromList $
     -- mod-shift-[1..9], Move client to workspace N
     --
     [((m .|. modm, k), windows $ W.shift i)
-        | (i, (m, k)) <- zip (workspaces conf) [ (shiftMask, xK_asciicircum)
-                                               , (shiftMask, xK_3)
-                                               , (mod5Mask, xK_n)
-                                               , (mod5Mask, xK_x)
-                                               , (mod5Mask, xK_v)
-                                               , (shiftMask, xK_4)
-                                               , (mod5Mask, xK_e)
-                                               , (mod5Mask, xK_v)
-                                               , (mod5Mask, xK_b)
-                                               ] ]
+        | (i, (m, k)) <- zip (workspaces conf) (workspaceSwitchKeys hasSplitKbKeyboard)]
     ++
 
     --
@@ -213,6 +206,19 @@ myXPConfig = def {
   searchPredicate = fuzzyMatch,
   sorter = fuzzySort
 }
+
+workspaceSwitchKeys hasSplitKbKeyboard
+  | hasSplitKbKeyboard = [ (shiftMask, xK_asciicircum)
+                         , (shiftMask, xK_3)
+                         , (mod5Mask, xK_n)
+                         , (mod5Mask, xK_x)
+                         , (mod5Mask, xK_v)
+                         , (shiftMask, xK_4)
+                         , (mod5Mask, xK_e)
+                         , (mod5Mask, xK_v)
+                         , (mod5Mask, xK_b)
+                         ] 
+  | otherwise =          [ (shiftMask, k) | k <- [xK_1 .. xK_9] ]
 
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
@@ -318,7 +324,7 @@ myStartupHook = setWMName "LG3D"
 --
 -- No need to modify this.
 --
-defaults = def {
+defaults hasSplitKbKeyboard = def {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
@@ -330,7 +336,7 @@ defaults = def {
         focusedBorderColor = myFocusedBorderColor,
 
       -- key bindings
-        keys               = myKeys,
+        keys               = myKeys hasSplitKbKeyboard,
         mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
@@ -394,14 +400,23 @@ help = unlines ["The default modifier key is 'alt'. Default keybindings:",
 main :: IO ()
 main = mkDbusClient >>= main'
 
+detectSplitKbKeyboard :: IO Bool
+detectSplitKbKeyboard =
+  (do
+    testRc <- system "xinput list 'splitkb.com Aurora Sofle v2 rev1' 2>/dev/null"
+    return $ testRc == ExitSuccess
+  ) `catchAll` (\_ -> return False)
+        
 main' :: D.Client -> IO ()
 main' dbus = do
-  xmonad $ ewmh $ docks $ defaults
+  hasSplitkb <- detectSplitKbKeyboard
+  let d = defaults hasSplitkb
+  xmonad $ ewmh $ docks $ d
         { modMask = mod4Mask
         , terminal = "kitty"
-        , manageHook = manageDocks <+> manageHook defaults
+        , manageHook = manageDocks <+> manageHook d
         , layoutHook = smartBorders $ avoidStruts $ spacing 10 $ myLayout
-        , handleEventHook = handleEventHook defaults <+> fullscreenEventHook
+        , handleEventHook = handleEventHook d <+> fullscreenEventHook
         , logHook = myPolybarLogHook dbus
         }
 
