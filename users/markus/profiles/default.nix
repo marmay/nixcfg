@@ -1,4 +1,4 @@
 { config, lib, pkgs, ... }:
 {
-  imports = [ ./agda ./dev ./xmonad ./gui ./photo ./sway ./work ];
+  imports = [ ./agda ./dev ./xmonad ./gui ./photo ./school ./sway ./work ];
 }

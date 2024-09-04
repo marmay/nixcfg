@@ -40,6 +40,7 @@
     home-manager.users.markus.profiles.dev = true;
     home-manager.users.markus.profiles.xmonad = true;
     home-manager.users.markus.profiles.photo = true;
+    home-manager.users.markus.profiles.school = true;
     # marmar.users.marion.enable = true;
     # marmar.users.raphaela.enable = true;
     # home-manager.users.raphaela.profiles.school = true;
