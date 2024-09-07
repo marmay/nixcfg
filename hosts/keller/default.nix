@@ -17,6 +17,7 @@
       firewall.allowedTCPPorts = [ 80 443 ];
       extraHosts = ''
         10.0.0.10 webuntis.local
+        10.0.0.10 content.webuntis.local
       '';
     };
 
