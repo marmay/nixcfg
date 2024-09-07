@@ -1,9 +1,5 @@
 { config, lib, pkgs, ... }:
 
-let
-    port = 3128;
-    client_ip = "10.0.0.20";
-in
 {
   imports = [
     ./hardware.nix
@@ -18,7 +14,7 @@ in
       interfaces.enp5s0 = {
         wakeOnLan.enable = true;
       };
-      firewall.allowedTCPPorts = [ 80 443 port (port + 1)];
+      firewall.allowedTCPPorts = [ 80 443 ];
       extraHosts = ''
         10.0.0.10 webuntis.local
       '';
@@ -68,28 +64,6 @@ in
       openSha256 = lib.fakeSha256;
       settingsSha256 = "sha256-PMh5efbSEq7iqEMBr2+VGQYkBG73TGUh6FuDHZhmwHk=";
       persistencedSha256 = lib.fakeSha256;
-    };
-
-    nixpkgs.config.permittedInsecurePackages = [
-      "squid-6.8"
-    ];
-
-    services.squid = {
-      enable = true;
-      proxyAddress = "10.0.0.10";
-      proxyPort = port;
-      extraConfig = ''
-        acl client_device src ${client_ip}
-        http_access allow client_device
-
-        http_port ${toString (port + 1)} intercept ssl-bump generate-host-certificates=on dynamic_cert_mem_cache_size=4MB
-        acl step1 at_step SslBump1
-        ssl_bump peek step1
-        ssl_bump bump all
-
-        sslcrtd_program ${pkgs.squid}/libexec/security_file_certgen -s /var/cache/squid/ssl_db -M 4MB
-        sslcrtd_children 8 startup=1 idle=1
-      '';
     };
   };
 }
