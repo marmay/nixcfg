@@ -402,10 +402,14 @@ main = mkDbusClient >>= main'
 
 detectSplitKbKeyboard :: IO Bool
 detectSplitKbKeyboard =
-  (do
+  do
     testRc <- system "xinput list 'splitkb.com Aurora Sofle v2 rev1' 2>/dev/null"
-    return $ testRc == ExitSuccess
-  ) `catchAll` (\_ -> return False)
+    let rc = testRc == ExitSuccess
+    putStrLn $ "Detection of splitkb.com keyboard: " ++ show rc
+    return rc
+  `catchAll` \e -> do
+    putStrLn $ "Error while detecting splitkb.com keyboard: " ++ show e
+    return False
         
 main' :: D.Client -> IO ()
 main' dbus = do
