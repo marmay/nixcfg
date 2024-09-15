@@ -1,0 +1,32 @@
+latex-mode
+
+(stundenplanung
+  "\\documentclass{stundenplanung}" n> n>
+  "\\klasse{" (p "Klasse") "}" n>
+  "\\fach{" (p "Fach") "}" n>
+  "\\date{" (p "Datum") "}" n>
+  "\\dauer{" (p "Dauer") " Minuten}" n>
+  "\\thema{" (p "Thema") "}" n>
+  "\\grobziel{" n>
+  "  \\begin{uebersichtliste}" n>
+  "    \\item " (p "Grobziel 1") n>
+  "  \\end{uebersichtliste}" n>
+  "}" n>
+  "\\hausuebung{" n>
+  "  \\begin{uebersichtliste}" n>
+  "    \\item Noch nicht festgelegt." n>
+  "  \\end{uebersichtliste}" n>
+  "}" n> n>
+  "\\begin{document}" n>
+  "\\maketitle" n> n> r> n>
+  "\\end{document}" n>)
+
+(phase "\\begin{phase}{" (p "Phase") "}{" (p "Dauer") "}" n> r> n> "\\end{phase}")
+  
+(lehrstoff
+  "\\lehrstoff" n>
+  "{" (p "Lehrstoff") "}" n>
+  "{" (p "Dauer") "}" n>
+  "{" (p "Sozialform") "}" n>
+  "{" (p "Aktionsform") "}" n>
+  "{" n> r> n> "}")
