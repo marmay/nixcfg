@@ -296,7 +296,7 @@
       '';
     };
 
-    xdg.configFile.".emacs/templates".source = ./tempel-templates;
+    home.file.".emacs.d/templates".source = ./tempel-templates;
   };
 }
 

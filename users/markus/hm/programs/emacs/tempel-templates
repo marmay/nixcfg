@@ -9,19 +9,19 @@ latex-mode
   "\\thema{" (p "Thema") "}" n>
   "\\grobziel{" n>
   "  \\begin{uebersichtliste}" n>
-  "    \\item " (p "Grobziel 1") n>
-  "  \\end{uebersichtliste}" n>
-  "}" n>
+  "    \\item " (p "Grobziel 1") n
+  "  \\end{uebersichtliste}" n
+  "}" n
   "\\hausuebung{" n>
-  "  \\begin{uebersichtliste}" n>
-  "    \\item Noch nicht festgelegt." n>
-  "  \\end{uebersichtliste}" n>
-  "}" n> n>
+  "\\begin{uebersichtliste}" n>
+  "\\item Noch nicht festgelegt." n
+  "  \\end{uebersichtliste}" n
+  "}" n n
   "\\begin{document}" n>
-  "\\maketitle" n> n> r> n>
-  "\\end{document}" n>)
+  "\\maketitle" n n r> n
+  "\\end{document}" n)
 
-(phase "\\begin{phase}{" (p "Phase") "}{" (p "Dauer") "}" n> r> n> "\\end{phase}")
+(phase "\\begin{phase}{" (p "Phase") "}{" (p "Dauer") "}" n r> n "\\end{phase}")
   
 (lehrstoff
   "\\lehrstoff" n>
@@ -29,4 +29,23 @@ latex-mode
   "{" (p "Dauer") "}" n>
   "{" (p "Sozialform") "}" n>
   "{" (p "Aktionsform") "}" n>
-  "{" n> r> n> "}")
+  "{" n> r n "}")
+
+(lehrstoff-frontal
+  "\\lehrstoff" n>
+  "{" (p "Lehrstoff") "}" n>
+  "{" (p "Dauer") "}" n>
+  "{" (p "Klasse") "}" n>
+  "{" (p "darbietend") "}" n>
+  "{" n> "\\methode Frontalunterricht" n> "\\feinziel" r n "}")
+
+(lehrstoff-üben
+  "\\lehrstoff" n>
+  "{" (p "Lehrstoff") "}" n>
+  "{" (p "Dauer") "}" n>
+  "{" (p "Partner") "}" n>
+  "{" (p "aufgebend") "}" n>
+  "{" n>
+  "\\methode Üben in Partnerarbeit" n >
+  "\\arbeitsbuch{" (p "Aufgabe") "}" n >
+  "\\feinziel" r n "}")
