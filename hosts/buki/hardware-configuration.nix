@@ -14,18 +14,18 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/6cc403a0-0e27-4d8a-9d89-f80130b03ec3";
+    { device = "/dev/disk/by-uuid/3eb5a186-4328-46c9-a377-97b1b0f7d82e";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/CF1D-5DC0";
+    { device = "/dev/disk/by-uuid/BF9C-BE9C";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/32c3adc7-2a2f-420e-92f-34312458b70a"; }
+    [ { device = "/dev/disk/by-uuid/cbc59b45-ffe4-48ee-892d-4c818ab2d142"; }
     ];
 
   networking.useDHCP = lib.mkDefault true;
