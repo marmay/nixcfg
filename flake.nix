@@ -14,8 +14,12 @@
   inputs.nixos-hardware = {
     url = "github:NixOS/nixos-hardware/master";
   };
+  inputs.simple-nixos-mailserver = {
+    url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-24.05";
+    inputs.nixpkgs-24_05.follows = "nixpkgs";
+  };
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, agenix, flake-utils, ... }:
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, agenix, simple-nixos-mailserver, flake-utils, ... }:
   let
     mynixpkgs = system: import nixpkgs ({
       inherit system;
@@ -43,6 +47,7 @@
         modules = [
           ./hosts/buki
           agenix.nixosModules.default
+          simple-nixos-mailserver.nixosModule
         ];
       };
       keller = mkUserPc { path = ./hosts/keller; };
