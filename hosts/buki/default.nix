@@ -61,78 +61,78 @@
     # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
     system.stateVersion = "24.05"; # Did you read the comment?
 
-    security = {
-      acme.certs."bu-ki.at".email = "markus@bu-ki.at";
-      acme.certs."cloud.marion-mayr.at".email = "office@marion-mayr.at";
-      acme.acceptTerms = true;
-    };
+    # security = {
+    #   acme.certs."bu-ki.at".email = "markus@bu-ki.at";
+    #   acme.certs."cloud.marion-mayr.at".email = "office@marion-mayr.at";
+    #   acme.acceptTerms = true;
+    # };
 
-    age.secrets = {
-      mailHashedPwdGabriel.file = ../../../secrets/markus/mail/hashed_pwd.gabriel;
-      mailHashedPwdMarion.file = ../../../secrets/markus/mail/hashed_pwd.marion;
-      mailHashedPwdMarkus.file = ../../../secrets/markus/mail/hashed_pwd.markus;
-      mailHashedPwdRaphaela.file = ../../../secrets/markus/mail/hashed_pwd.raphaela;
-    };
+    # age.secrets = {
+    #   mailHashedPwdGabriel.file = ../../../secrets/markus/mail/hashed_pwd.gabriel;
+    #   mailHashedPwdMarion.file = ../../../secrets/markus/mail/hashed_pwd.marion;
+    #   mailHashedPwdMarkus.file = ../../../secrets/markus/mail/hashed_pwd.markus;
+    #   mailHashedPwdRaphaela.file = ../../../secrets/markus/mail/hashed_pwd.raphaela;
+    # };
 
-    mailserver = {
-      enable = true;
-      fqdn = "mail.bu-ki.at";
-      domains = [ "bu-ki.at" "marion-mayr.at" ];
-      loginAccounts = {
-        "markus@bu-ki.at" = {
-          hashedPasswordFile = config.age.secrets.mailHashedPwdMarkus.path;
-          aliases = [
-            "abuse@bu-ki.at"
-            "postmaster@bu-ki.at"
-          ];
-        };
-        "marion@marion-mayr.at" = {
-          hashedPasswordFile = config.age.secrets.mailHashedPwdMarion.path;
-          aliases = [
-            "office@marion-mayr.at"
-            "kontakt@marion-mayr.at"
-          ];
-        };
-        "raphaela@marion-mayr.at" = {
-          hashedPasswordFile = config.age.secrets.mailHashedPwdRaphaela.path;
-        };
-        "gabriel@marion-mayr.at" = {
-          hashedPasswordFile = config.age.secrets.mailHashedPwdGabriel.path;
-        };
-      };
-    };
+    # mailserver = {
+    #   enable = true;
+    #   fqdn = "mail.bu-ki.at";
+    #   domains = [ "bu-ki.at" "marion-mayr.at" ];
+    #   loginAccounts = {
+    #     "markus@bu-ki.at" = {
+    #       hashedPasswordFile = config.age.secrets.mailHashedPwdMarkus.path;
+    #       aliases = [
+    #         "abuse@bu-ki.at"
+    #         "postmaster@bu-ki.at"
+    #       ];
+    #     };
+    #     "marion@marion-mayr.at" = {
+    #       hashedPasswordFile = config.age.secrets.mailHashedPwdMarion.path;
+    #       aliases = [
+    #         "office@marion-mayr.at"
+    #         "kontakt@marion-mayr.at"
+    #       ];
+    #     };
+    #     "raphaela@marion-mayr.at" = {
+    #       hashedPasswordFile = config.age.secrets.mailHashedPwdRaphaela.path;
+    #     };
+    #     "gabriel@marion-mayr.at" = {
+    #       hashedPasswordFile = config.age.secrets.mailHashedPwdGabriel.path;
+    #     };
+    #   };
+    # };
 
-    services = {
-      nextcloud = {
-        enable = true;
-        package = pkgs.nextcloud30;
-        hostName = "cloud.marion-mayr.at";
-        https = true;
+    # services = {
+    #   nextcloud = {
+    #     enable = true;
+    #     package = pkgs.nextcloud30;
+    #     hostName = "cloud.marion-mayr.at";
+    #     https = true;
 
-        autoUpdateApps.enable = true;
-        autoUpdateApps.startAt = "05:00:00";
+    #     autoUpdateApps.enable = true;
+    #     autoUpdateApps.startAt = "05:00:00";
 
-        config = {
-          # Further forces Nextcloud to use HTTPS
-          overwriteProtocol = "https";
+    #     config = {
+    #       # Further forces Nextcloud to use HTTPS
+    #       overwriteProtocol = "https";
 
-          adminpassFile = "/var/nextcloud-admin-pass";
-          adminuser = "admin";
-        };
-      };
+    #       adminpassFile = "/var/nextcloud-admin-pass";
+    #       adminuser = "admin";
+    #     };
+    #   };
 
-      nginx = {
-        enable = true;
-        recommendedProxySettings = true;
-        recommendedTlsSettings = true;
-        recommendedGzipSettings = true;
+    #   nginx = {
+    #     enable = true;
+    #     recommendedProxySettings = true;
+    #     recommendedTlsSettings = true;
+    #     recommendedGzipSettings = true;
 
-        virtualHosts."cloud.marion-mayr.at" = {
-          enableACME = true;
-          forceSSL = true;
-        };
-      };
-    };
+    #     virtualHosts."cloud.marion-mayr.at" = {
+    #       enableACME = true;
+    #       forceSSL = true;
+    #     };
+    #   };
+    # };
   };
 }
 
