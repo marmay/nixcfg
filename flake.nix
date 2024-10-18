@@ -43,9 +43,9 @@
       };
   in {
     nixosConfigurations = {
-      buki = nixpkgs.lib.nixosSystem {
+      bu-ki = nixpkgs.lib.nixosSystem {
         modules = [
-          ./hosts/buki
+          ./hosts/bu-ki
           agenix.nixosModules.default
           simple-nixos-mailserver.nixosModule
         ];
