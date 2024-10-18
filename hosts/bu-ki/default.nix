@@ -33,7 +33,7 @@
       extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     };
 
-    nix.trustedUsers = [ "root" "markus" ];
+    nix.settings.trusted-users = [ "root" "markus" ];
 
     # List packages installed in system profile. To search, run:
     environment.systemPackages = with pkgs; [
@@ -64,10 +64,10 @@
     };
 
     age.secrets = {
-      mailHashedPwdGabriel.file = ../../../secrets/markus/mail/hashed_pwd.gabriel;
-      mailHashedPwdMarion.file = ../../../secrets/markus/mail/hashed_pwd.marion;
-      mailHashedPwdMarkus.file = ../../../secrets/markus/mail/hashed_pwd.markus;
-      mailHashedPwdRaphaela.file = ../../../secrets/markus/mail/hashed_pwd.raphaela;
+      mailHashedPwdGabriel.file = ../../secrets/markus/mail/hashed_pwd.gabriel;
+      mailHashedPwdMarion.file = ../../secrets/markus/mail/hashed_pwd.marion;
+      mailHashedPwdMarkus.file = ../../secrets/markus/mail/hashed_pwd.markus;
+      mailHashedPwdRaphaela.file = ../../secrets/markus/mail/hashed_pwd.raphaela;
     };
 
     mailserver = {
@@ -108,10 +108,10 @@
         autoUpdateApps.enable = true;
         autoUpdateApps.startAt = "05:00:00";
 
+        settings.overwrite-protocol = "https";
+
         config = {
           # Further forces Nextcloud to use HTTPS
-          overwriteProtocol = "https";
-
           adminpassFile = "/var/nextcloud-admin-pass";
           adminuser = "admin";
         };
@@ -123,6 +123,10 @@
         recommendedTlsSettings = true;
         recommendedGzipSettings = true;
 
+        virtualHosts."bu-ki.at" = {
+          enableACME = true;
+          forceSSL = true;
+        };
         virtualHosts."cloud.marion-mayr.at" = {
           enableACME = true;
           forceSSL = true;
