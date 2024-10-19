@@ -126,6 +126,11 @@
         virtualHosts."bu-ki.at" = {
           enableACME = true;
           forceSSL = true;
+          locations."~ ^/~(.+?)(/.*)?$".extraConfig = ''
+            alias /srv/public_html/$1$2;
+            index  index.html index.htm;
+            autoindex on;
+          '';
         };
         virtualHosts."cloud.marion-mayr.at" = {
           enableACME = true;
