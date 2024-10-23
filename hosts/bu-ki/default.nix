@@ -40,14 +40,17 @@
       git
       htop
       vim
+      haskellPackages.hprox
+      screen
     ];
+
+    nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
     # Enable the OpenSSH daemon.
     services.openssh.enable = true;
 
     # Open ports in the firewall.
-    networking.firewall.allowedTCPPorts = [ 80 143 443 587 ];
-    networking.firewall.allowedUDPPorts = [ 1194 ];
+    networking.firewall.allowedTCPPorts = [ 80 143 443 587 8443 ];
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
