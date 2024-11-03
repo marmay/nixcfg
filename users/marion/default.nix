@@ -8,6 +8,7 @@
 
     home.packages = with pkgs; [
       libreoffice
+      xournalpp
       gnome.eog
     ];
 
