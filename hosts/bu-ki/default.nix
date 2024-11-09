@@ -8,7 +8,7 @@
 
   config = {
     boot.loader.systemd-boot.enable = true;
-    
+
     networking.hostName = "bu-ki"; # Define your hostname.
 
     # Set your time zone.
@@ -48,9 +48,10 @@
 
     # Enable the OpenSSH daemon.
     services.openssh.enable = true;
+    services.openssh.ports = [22 2222];
 
     # Open ports in the firewall.
-    networking.firewall.allowedTCPPorts = [ 80 143 443 587 8443 ];
+    networking.firewall.allowedTCPPorts = [ 22 80 143 443 587 2222 8443 ];
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
