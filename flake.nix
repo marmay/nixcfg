@@ -47,8 +47,9 @@
       aws = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          (nixpkgs + "/nixos/modules/virtualisation/amazon-image.nix")
           ./hosts/aws
+          (nixpkgs + "/nixos/modules/virtualisation/amazon-image.nix")
+          vscode-server.nixosModules.default
         ];
       };
       bu-ki = nixpkgs.lib.nixosSystem {
