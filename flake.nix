@@ -18,8 +18,9 @@
     url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-24.05";
     inputs.nixpkgs-24_05.follows = "nixpkgs";
   };
+  inputs.vscode-server.url = "github:nix-community/nixos-vscode-server";
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, agenix, simple-nixos-mailserver, flake-utils, ... }:
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, agenix, simple-nixos-mailserver, vscode-server, flake-utils, ... }:
   let
     mynixpkgs = system: import nixpkgs ({
       inherit system;
@@ -43,11 +44,19 @@
       };
   in {
     nixosConfigurations = {
+      aws = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          (nixpkgs + "/nixos/modules/virtualisation/amazon-image.nix")
+          ./hosts/aws
+        ];
+      };
       bu-ki = nixpkgs.lib.nixosSystem {
         modules = [
           ./hosts/bu-ki
           agenix.nixosModules.default
           simple-nixos-mailserver.nixosModule
+          vscode-server.nixosModules.default
         ];
       };
       keller = mkUserPc { path = ./hosts/keller; };
