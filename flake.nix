@@ -48,8 +48,14 @@
         system = "x86_64-linux";
         modules = [
           ./hosts/aws
+          home-manager.nixosModules.default
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+          }
           (nixpkgs + "/nixos/modules/virtualisation/amazon-image.nix")
           vscode-server.nixosModules.default
+          agenix.nixosModules.default
         ];
       };
       bu-ki = nixpkgs.lib.nixosSystem {

@@ -40,7 +40,7 @@
         to = {
           ref = "master";
           type = "git";
-          url = "ssh://git@github.com/marmay/nixcfg";
+          url = "https://github.com/marmay/nixcfg";
         };
       };
     };

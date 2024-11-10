@@ -1,5 +1,7 @@
 { config, pkgs, ... }:
-
+let
+  public_keys = import ../../secrets/aws_public.nix;
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -32,6 +34,9 @@
       isNormalUser = true;
       extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     };
+    users.users.root.openssh.authorizedKeys.keys = [
+      public_keys.host
+    ];
 
     nix.settings.trusted-users = [ "root" "markus" ];
 
@@ -48,7 +53,7 @@
 
     # Enable the OpenSSH daemon.
     services.openssh.enable = true;
-    services.openssh.ports = [22 2222];
+    services.openssh.settings.GatewayPorts = "clientspecified";
 
     # Open ports in the firewall.
     networking.firewall.allowedTCPPorts = [ 22 80 143 443 587 2222 8443 ];
