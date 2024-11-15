@@ -10,6 +10,7 @@
       libreoffice
       xournalpp
       gnome.eog
+      teams-for-linux
     ];
 
     accounts.email.accounts = {
