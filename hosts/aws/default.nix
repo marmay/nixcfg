@@ -5,7 +5,7 @@ let
   public_keys = import ../../secrets/aws_public.nix;
   studentAgeSecrets = lib.mkMerge (map (studentName: {
     "${studentName}_ssh_key" = {
-      file = ../../secrets/markus/aws/afe;#${studentName};
+      file = ../../secrets/markus/aws/${studentName};
       owner = "${studentName}";
     };
   }) students);
@@ -30,8 +30,19 @@ in
   config = {
     age.secrets = studentAgeSecrets;
     home-manager.users = homeManagerStudentUsers;
-
     users.users = studentUsers;
+    systemd.user.slices = {
+      "user.slice" = {
+        enable = true;
+        sliceConfig = {
+          MemoryMax = "2G";
+        };
+      };
+    };
+    boot.kernel.sysctl = {
+      "vm.oom_kill_allocating_task" = "1";
+      "kernel.memory_failure_early_kill" = "1";
+    };
 
     environment.systemPackages = with pkgs; [
       git
