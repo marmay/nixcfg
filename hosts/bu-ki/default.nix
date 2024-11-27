@@ -147,6 +147,15 @@ in
         };
       };
     };
+
+    systemd.services.hprox = {
+      description = "An HTTPS proxy";
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+	ExecStart = "${pkgs.haskellPackages.hprox}/bin/hprox -p 8443 --tls bu-ki.at:/var/lib/acme/bu-ki.at/cert.pem:/var/lib/acme/bu-ki.at/key.pem";
+	Type = "simple";
+      };
+    };
   };
 }
 
