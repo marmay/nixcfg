@@ -26,6 +26,7 @@
         epkgs.lsp-treemacs
         epkgs.magit
         epkgs.org
+	epkgs.pdf-tools
         epkgs.quelpa
         epkgs.quelpa-use-package
 	epkgs.tempel
@@ -55,6 +56,27 @@
           (setq quelpa-update-melpa-p nil))
         (use-package quelpa-use-package
           :ensure t)
+        (use-package pdf-tools
+          :ensure t
+          :magic ("%PDF" . pdf-view-mode)
+
+	  :config
+            (pdf-tools-install)
+            (setq pdf-view-display-size 'fit-page)
+            (add-hook 'pdf-view-mode-hook (lambda ()
+                                            (pdf-view-auto-slice-minor-mode)
+                                            (auto-revert-mode 1)))
+            ;; Ensure Evil window management keybindings work in pdf-view-mode
+            (with-eval-after-load 'evil
+              (evil-set-initial-state 'pdf-view-mode 'normal)
+              (evil-define-key 'normal pdf-view-mode-map
+                ;; Keybindings for window management
+                "C-w h" 'evil-window-left
+                "C-w l" 'evil-window-right
+                "C-w j" 'evil-window-down
+                "C-w k" 'evil-window-up
+                "C-w w" 'evil-window-next
+                "C-w o" 'delete-other-windows)))
         (use-package helm
           :bind  ("M-x" . helm-M-x)
                  ("M-y" . helm-show-kill-ring)

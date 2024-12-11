@@ -50,6 +50,7 @@
 	  standalone
 	  tabularray
 	  tasks
+	  tikzpeople
 	  totcount
 	  translations
 	  ulem

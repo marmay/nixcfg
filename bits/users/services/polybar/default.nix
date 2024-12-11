@@ -15,6 +15,7 @@ in
   config.fonts.fontconfig.enable = true;
   config.home.packages = with pkgs; [
     nerdfonts
+    lato
   ];
 
   config.services.polybar = {
