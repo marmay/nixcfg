@@ -5,7 +5,6 @@
   config = lib.mkIf config.profiles.agda {
     programs.emacs = {
       extraPackages = epkgs: [
-        epkgs.agda-input
         epkgs.agda2-mode
       ];
     };
