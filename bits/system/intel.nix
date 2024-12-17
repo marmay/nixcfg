@@ -2,9 +2,8 @@
 {
   options.marmar.intelGpuSupport = lib.mkEnableOption "Intel GPU support";
 
-  config.hardware.opengl = lib.mkIf config.marmar.intelGpuSupport {
+  config.hardware.graphics = lib.mkIf config.marmar.intelGpuSupport {
     enable = true;
-    driSupport = true;
     extraPackages = with pkgs; [
       intel-media-driver
       vaapiIntel

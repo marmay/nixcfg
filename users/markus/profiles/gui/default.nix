@@ -9,8 +9,7 @@
     };
 
     home.packages = with pkgs; [
-      qmapshack
-      gnome.eog
+      eog
     ];
   };
 }

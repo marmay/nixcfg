@@ -9,7 +9,7 @@
     home.packages = with pkgs; [
       libreoffice
       xournalpp
-      gnome.eog
+      eog
       teams-for-linux
     ];
 

@@ -1,11 +1,11 @@
 {
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
   inputs.agenix = {
     url = "github:ryantm/agenix";
     inputs.nixpkgs.follows = "nixpkgs";
   };
   inputs.home-manager = {
-    url = "github:nix-community/home-manager/release-24.05";
+    url = "github:nix-community/home-manager/release-24.11";
     inputs.nixpkgs.follows = "nixpkgs";
   };
   inputs.flake-utils = {
@@ -27,6 +27,16 @@
       config = {
         allowUnfree = true;
       };
+      overlays = [
+        (final: prev: {
+          xsecurelock = prev.xsecurelock.overrideAttrs (oldAttrs: {
+            configureFlags = [
+              "--with-pam-service-name=xscreensaver"
+              "--with-xscreensaver=${final.xscreensaver}/bin/xscreensaver"
+            ];
+          });
+        })
+      ];
     });
     mkUserPc = { path, system ? "x86_64-linux", extra-modules ? [] }: nixpkgs.lib.nixosSystem {
         system = system;
