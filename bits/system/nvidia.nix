@@ -4,7 +4,7 @@
   options.marmar.nvidiaGpuSupport = lib.mkEnableOption "Enable Nvidia GPU support";
 
   config = lib.mkIf config.marmar.nvidiaGpuSupport {
-    hardware.opengl.enable = true;
+    hardware.graphics.enable = true;
     hardware.nvidia.modesetting.enable = true;
     services.xserver.videoDrivers = [ "nvidia" ];
     hardware.nvidia = {
