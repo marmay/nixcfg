@@ -11,6 +11,7 @@ import XMonad.Layout.NoBorders
 import XMonad.Layout.Spacing
 import XMonad.Layout.SimplestFloat
 import XMonad.Layout.Tabbed
+import XMonad.Layout.ThreeColumns
 import XMonad.Layout.ResizableTile (ResizableTall(..), MirrorResize(..))
 import XMonad.Util.Run(spawnPipe, hPutStrLn)
 import XMonad.Util.NamedScratchpad
@@ -250,10 +251,11 @@ myMouseBindings (XConfig {modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = tiled ||| Mirror tiled ||| Full ||| simplestFloat ||| simpleTabbed
+myLayout = tiled ||| threeCol ||| Full ||| simpleTabbed
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = ResizableTall nmaster delta ratio [mainSlave, subSlave]
+     threeCol = ThreeColMid nmaster delta ratio
 
      -- The default number of windows in the master pane
      nmaster = 1
