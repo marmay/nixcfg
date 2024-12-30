@@ -68,6 +68,7 @@ in
 
     security = {
       acme.certs."bu-ki.at".email = "markus@bu-ki.at";
+      acme.certs."mail.bu-ki.at".email = "markus@bu-ki.at";
       acme.certs."cloud.marion-mayr.at".email = "office@marion-mayr.at";
       acme.acceptTerms = true;
     };
@@ -140,6 +141,10 @@ in
             index  index.html index.htm;
             autoindex on;
           '';
+        };
+        virtualHosts."mail.bu-ki.at" = {
+          enableACME = true;
+          forceSSL = true;
         };
         virtualHosts."cloud.marion-mayr.at" = {
           enableACME = true;
