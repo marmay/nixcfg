@@ -11,6 +11,9 @@
       onedrive
       gnumake
       geogebra6
+      davinci-resolve
+      inkscape
+      gimp
     ];
   };
 }
