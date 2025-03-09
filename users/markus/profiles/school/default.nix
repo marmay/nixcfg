@@ -14,6 +14,9 @@
       davinci-resolve
       inkscape
       gimp
+      teams-for-linux
+      libreoffice
+      xournalpp
     ];
   };
 }

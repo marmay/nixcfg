@@ -42,6 +42,7 @@
 	  ninecolors
 	  ocgx2
 	  opensans
+	  pdfcol
 	  pdfprivacy
 	  pgf
 	  pgfopts
@@ -50,6 +51,8 @@
 	  standalone
 	  tabularray
 	  tasks
+    tcolorbox
+	  tikzfill
 	  tikzpeople
 	  totcount
 	  translations

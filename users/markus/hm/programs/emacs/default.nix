@@ -33,6 +33,7 @@
         epkgs.treemacs
         epkgs.treemacs-evil
         epkgs.use-package
+	(epkgs.callPackage ./minuet-ai.el.nix {})
       ];
       extraConfig = ''
         (setq inhibit-startup-message 1)
@@ -164,17 +165,36 @@
           :hook prog-mode)
         (use-package lean-mode
           :ensure t)
-        (use-package copilot
-          :quelpa (copilot :fetcher github
-                           :repo "zerolfx/copilot.el"
-                           :branch "main"
-                           :files ("dist" "*.el"))
-          :hook
-            (prog-mode . copilot-mode)
-            (org-mode . copilot-mode)
+
+        (use-package minuet
+          :bind
+            (("M-y" . #'minuet-complete-with-minibuffer) ;; use minibuffer for completion
+             ("M-i" . #'minuet-show-suggestion) ;; use overlay for completion
+        
+             :map minuet-active-mode-map
+             ;; These keymaps activate only when a minuet suggestion is displayed in the current buffer
+             ("M-p" . #'minuet-previous-suggestion) ;; invoke completion or cycle to next completion
+             ("M-n" . #'minuet-next-suggestion) ;; invoke completion or cycle to previous completion
+             ("M-A" . #'minuet-accept-suggestion) ;; accept whole completion
+             ;; Accept the first line of completion, or N lines with a numeric-prefix:
+             ;; e.g. C-u 2 M-a will accepts 2 lines of completion.
+             ("M-a" . #'minuet-accept-suggestion-line)
+             ("M-e" . #'minuet-dismiss-suggestion))
+        
+          :init
+            ;; if you want to enable auto suggestion.
+            ;; Note that you can manually invoke completions without enable minuet-auto-suggestion-mode
+            (add-hook 'prog-mode-hook #'minuet-auto-suggestion-mode)
+        
           :config
-            (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
-            (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion))
+            (setq minuet-provider 'codestral)
+        
+            ;; Required when defining minuet-ative-mode-map in insert/normal states.
+            ;; Not required when defining minuet-active-mode-map without evil state.
+            (add-hook 'minuet-active-mode-hook #'evil-normalize-keymaps)
+        
+            (minuet-set-optional-options minuet-openai-fim-compatible-options :max_tokens 256))
+
         (use-package treemacs-evil
           :ensure t)
         (use-package treemacs

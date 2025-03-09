@@ -1,7 +1,7 @@
 {
   trivialBuild,
   fetchFromGitHub,
-  all-the-icons,
+  pkgs,
 }:
 trivialBuild rec {
   pname = "minuet-ai";
@@ -10,11 +10,10 @@ trivialBuild rec {
     owner = "milanglacier";
     repo = "minuet-ai.el";
     rev = "571aefc4ec1a99787860aad8649fda0ef311d8ce";
-    hash = "sha256-xxx";
+    hash = "sha256-sSaNC6Os9bZOV7eOKcgvaicQ2sj/ykCwathqnGYWxIo=";
   };
-  # elisp dependencies
-  propagatedUserEnvPkgs = [
-    all-the-icons
+  packageRequires = with pkgs.emacsPackages; [
+    dash
+    plz
   ];
-  buildInputs = propagatedUserEnvPkgs;
 }

@@ -19,8 +19,10 @@
     inputs.nixpkgs-24_05.follows = "nixpkgs";
   };
   inputs.vscode-server.url = "github:nix-community/nixos-vscode-server";
+  inputs.davinci-convert.url = "git+file:///home/markus/devel/hs/davinci-convert";
+  # inputs.davinci-convert.url = "github:marmay/davinci-convert";
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, agenix, simple-nixos-mailserver, vscode-server, flake-utils, ... }:
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, agenix, simple-nixos-mailserver, vscode-server, flake-utils, davinci-convert, ... }:
   let
     mynixpkgs = system: import nixpkgs ({
       inherit system;
@@ -50,6 +52,7 @@
           ./bits/system
           ./users
           path
+          davinci-convert.nixosModules.${system}.default
         ] ++ extra-modules;
       };
   in {
