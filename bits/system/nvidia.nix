@@ -9,7 +9,8 @@
     services.xserver.videoDrivers = [ "nvidia" ];
     hardware.nvidia = {
       nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.production;
+      open = true;
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
     };
   };
 }

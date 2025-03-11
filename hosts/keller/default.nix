@@ -56,6 +56,8 @@
 
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
+    nixpkgs.overlays = import ../../bits/overlays/all.nix;
+
     environment.etc."sysctl.d/99-for-hogwarts-legacy.conf".text = ''
       vm.max_map_count=1048576
     '';
