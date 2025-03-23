@@ -61,15 +61,15 @@
     };
 
     networking.firewall.allowedTCPPorts = [ 80 ];
-    services.davinci-convert = {
-      enable = true;
-      ffmpegPath = "${pkgs.ffmpeg}/bin/ffmpeg";
-      port = 3000;
-      basePath = "/convert";
-      fileBase = "/var/lib/davinci-convert";
-      nginx = {
-        enable = true;
-      };
-    };
+    # services.davinci-convert = {
+    #   enable = true;
+    #   ffmpegPath = "${pkgs.ffmpeg}/bin/ffmpeg";
+    #   port = 3000;
+    #   basePath = "/convert";
+    #   fileBase = "/var/lib/davinci-convert";
+    #   nginx = {
+    #     enable = true;
+    #   };
+    # };
   };
 }
