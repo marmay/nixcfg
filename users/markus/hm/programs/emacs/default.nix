@@ -8,7 +8,7 @@
     };
 
     programs.emacs = {
-      package = pkgs.emacs29;
+      package = pkgs.emacs;
       extraPackages = epkgs: [
         epkgs.bind-key
         epkgs.company
