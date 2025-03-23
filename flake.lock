@@ -157,15 +157,15 @@
       "locked": {
         "lastModified": 1739190512,
         "narHash": "sha256-EgARqQAp8FK2Yvtf53yaj4xVrzUvS4m8xeYpO0Pd8Eo=",
-        "ref": "refs/heads/main",
+        "owner": "marmay",
+        "repo": "davinci-convert",
         "rev": "8d5968f387c0fbc3befaf3f75452dfa603810ba2",
-        "revCount": 3,
-        "type": "git",
-        "url": "file:///home/markus/devel/hs/davinci-convert"
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/markus/devel/hs/davinci-convert"
+        "owner": "marmay",
+        "repo": "davinci-convert",
+        "type": "github"
       }
     },
     "flake-compat": {
