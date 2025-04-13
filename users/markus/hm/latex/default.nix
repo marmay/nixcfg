@@ -36,10 +36,12 @@
 	  listings
 	  makecell
 	  mathspec
+          mdframed
 	  media9
 	  moderncv
 	  multirow
-	  ninecolors
+	  needspace
+          ninecolors
 	  ocgx2
 	  opensans
 	  pdfcol
