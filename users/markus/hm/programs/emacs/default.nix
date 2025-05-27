@@ -19,7 +19,6 @@
         epkgs.flycheck
         epkgs.haskell-mode
         epkgs.helm
-        epkgs.lean-mode
         epkgs.lsp-ui
         epkgs.lsp-mode
         epkgs.lsp-haskell
@@ -163,9 +162,6 @@
           :config
             (set-face-attribute 'default nil :family "Fira Code" :weight 'medium :height 80)
           :hook prog-mode)
-        (use-package lean-mode
-          :ensure t)
-
         (use-package minuet
           :bind
             (("M-y" . #'minuet-complete-with-minibuffer) ;; use minibuffer for completion

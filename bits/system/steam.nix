@@ -23,8 +23,9 @@
       options bluetooth disable_ertm=1
     '';
 
+    services.pulseaudio.support32Bit = true;
+
     hardware = {
-      pulseaudio.support32Bit = true;
       graphics = {
         enable32Bit = true;
         extraPackages = with pkgs; [

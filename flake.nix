@@ -1,11 +1,11 @@
 {
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
   inputs.agenix = {
     url = "github:ryantm/agenix";
     inputs.nixpkgs.follows = "nixpkgs";
   };
   inputs.home-manager = {
-    url = "github:nix-community/home-manager/release-24.11";
+    url = "github:nix-community/home-manager/release-25.05";
     inputs.nixpkgs.follows = "nixpkgs";
   };
   inputs.flake-utils = {
@@ -15,13 +15,11 @@
     url = "github:NixOS/nixos-hardware/master";
   };
   inputs.simple-nixos-mailserver = {
-    url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-24.05";
-    inputs.nixpkgs-24_05.follows = "nixpkgs";
+    url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-25.05";
+    inputs.nixpkgs-25_05.follows = "nixpkgs";
   };
-  inputs.vscode-server.url = "github:nix-community/nixos-vscode-server";
-  inputs.davinci-convert.url = "github:marmay/davinci-convert";
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, agenix, simple-nixos-mailserver, vscode-server, flake-utils, davinci-convert, ... }:
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, agenix, simple-nixos-mailserver, flake-utils, ... }:
   let
     mynixpkgs = system: import nixpkgs ({
       inherit system;
@@ -51,7 +49,6 @@
           ./bits/system
           ./users
           path
-          davinci-convert.nixosModules.${system}.default
         ] ++ extra-modules;
       };
   in {
@@ -66,7 +63,6 @@
             home-manager.useUserPackages = true;
           }
           (nixpkgs + "/nixos/modules/virtualisation/amazon-image.nix")
-          vscode-server.nixosModules.default
           agenix.nixosModules.default
         ];
       };
@@ -75,7 +71,6 @@
           ./hosts/bu-ki
           agenix.nixosModules.default
           simple-nixos-mailserver.nixosModule
-          vscode-server.nixosModules.default
         ];
       };
       keller = mkUserPc { path = ./hosts/keller; };

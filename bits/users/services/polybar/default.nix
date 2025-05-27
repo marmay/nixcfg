@@ -14,7 +14,7 @@ in
 {
   config.fonts.fontconfig.enable = true;
   config.home.packages = with pkgs; [
-    nerdfonts
+    nerd-fonts.iosevka-term
     lato
   ];
 
