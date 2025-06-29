@@ -3,6 +3,7 @@
   config = {
     home.packages = with pkgs; [
       symbola
+      nerd-fonts.fira-mono
     ];
     programs.texlive = {
       enable = true;

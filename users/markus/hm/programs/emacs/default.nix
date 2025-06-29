@@ -109,7 +109,7 @@
           :config
             (add-hook 'org-mode-hook 'display-line-numbers-mode)
             (progn
-              (setq org-agenda-files (list "~/Dokumente/RaphisNotizen/")))
+              (setq org-agenda-files (list "~/Offline/org/")))
           )
         (use-package evil-org
           :ensure t

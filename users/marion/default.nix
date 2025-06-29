@@ -4,13 +4,18 @@
     programs = {
       firefox.enable = true;
       thunderbird.enable = true;
+      gpg.enable = true;
     };
-
+    services.gpg-agent = {
+      enable = true;
+      pinentryPackage = pkgs.pinentry-gtk2;
+    };
     home.packages = with pkgs; [
       libreoffice
       xournalpp
       eog
       teams-for-linux
+      qtpass
     ];
 
     accounts.email.accounts = {
