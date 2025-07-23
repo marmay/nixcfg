@@ -5,12 +5,12 @@
 }:
 trivialBuild rec {
   pname = "minuet-ai";
-  version = "main-2025-02-09";
+  version = "0.5.4";
   src = fetchFromGitHub {
     owner = "milanglacier";
     repo = "minuet-ai.el";
-    rev = "571aefc4ec1a99787860aad8649fda0ef311d8ce";
-    hash = "sha256-sSaNC6Os9bZOV7eOKcgvaicQ2sj/ykCwathqnGYWxIo=";
+    rev = "8e4075713885f7ec7253936e3e74c7860ce7f77f";
+    hash = "sha256-R8h/tH4qWQnjb2AyZonKCz7OhmuFV4i1TbuydbUJA2U=";
   };
   packageRequires = with pkgs.emacsPackages; [
     dash
