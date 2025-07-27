@@ -7,6 +7,7 @@
     marmar.xserver = true;
 
     environment.systemPackages = with pkgs; [
+      dosbox
       gamemode
       mangohud
       lutris
