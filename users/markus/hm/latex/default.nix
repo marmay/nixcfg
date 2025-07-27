@@ -2,7 +2,7 @@
 {
   config = {
     home.packages = with pkgs; [
-      symbola
+      # symbola
       nerd-fonts.fira-mono
     ];
     programs.texlive = {
