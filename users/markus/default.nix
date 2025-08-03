@@ -11,6 +11,7 @@ in
     home.packages = [
       aspell
       pkgs.helvetica-neue-lt-std
+      pkgs.element-desktop
     ];
     programs.gpg.enable = true;
     services.gpg-agent = {
