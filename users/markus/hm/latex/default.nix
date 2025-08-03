@@ -2,10 +2,6 @@
 {
   config = {
     home.packages = with pkgs; [
-<<<<<<< HEAD
-      # symbola
-=======
->>>>>>> 0d2d3dc (Various updates)
       nerd-fonts.fira-mono
     ];
     programs.texlive = {
