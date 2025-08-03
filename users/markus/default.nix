@@ -10,6 +10,7 @@ in
     home.file.".background.jpg".source = ./background.jpg;
     home.packages = [
       aspell
+      pkgs.helvetica-neue-lt-std
     ];
     programs.gpg.enable = true;
     services.gpg-agent = {

@@ -82,7 +82,6 @@ in
         environment.systemPackages = with pkgs; [ libva-utils xterm ];
         hardware.opengl = {
           enable = true;
-          driSupport = true;
           extraPackages = with pkgs; [ intel-media-driver vaapiIntel ];
         };
         networking.interfaces.eth0.useDHCP = true;
