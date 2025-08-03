@@ -1,6 +1,6 @@
 {config, lib, pkgs, ... }:
 {
-  imports = [];
+  imports = [ ./profiles ];
 
   config = {
     programs = {
