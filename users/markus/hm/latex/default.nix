@@ -8,6 +8,7 @@
       enable = true;
       extraPackages = (tpkgs: {
         inherit (tpkgs)
+	  scheme-medium
 	  academicons
 	  animate
 	  arydshln
