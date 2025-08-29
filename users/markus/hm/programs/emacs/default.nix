@@ -109,7 +109,12 @@
           :config
             (add-hook 'org-mode-hook 'display-line-numbers-mode)
             (progn
-              (setq org-agenda-files (list "~/Offline/org/")))
+              (load-library "find-lisp")
+              (setq org-agenda-files
+                 (find-lisp-find-files "/home/markus/Offline/Dokumente/Schule" "\.org$"))
+              (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
+              (setq org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("GEPLANT" "GEHALTEN" "DONE")))
+	    )
           )
         (use-package evil-org
           :ensure t
