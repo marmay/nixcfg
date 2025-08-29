@@ -15,6 +15,7 @@
         epkgs.epresent
         epkgs.evil
         epkgs.evil-org
+        epkgs.evil-collection
         epkgs.fira-code-mode
         epkgs.flycheck
         epkgs.haskell-mode
@@ -197,7 +198,8 @@
             (minuet-set-optional-options minuet-openai-fim-compatible-options :max_tokens 256))
 
         (use-package treemacs-evil
-          :ensure t)
+          :ensure t
+	  :after evil-collection)
         (use-package treemacs
           :ensure t
           :defer t
@@ -295,12 +297,17 @@
             (setq evil-split-window-below t)
             (setq evil-shift-round nil)
             (setq evil-want-C-u-scroll t)
+            (setq evil-want-keybinding nil)
           :config ;; tweak evil after loading it
             (evil-mode)
 
           ;; example how to map a command in normal mode (called 'normal state' in evil)
           (define-key evil-normal-state-map (kbd ", w") 'evil-window-vsplit))
-
+	(use-package evil-collection
+          :ensure t
+          :after evil
+          :config
+            (evil-collection-init))
         (setq display-line-numbers-type 'relative)
 
         ;; Configure Tempel
