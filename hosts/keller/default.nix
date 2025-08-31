@@ -55,6 +55,8 @@
     marmar.users.gabriel.enable = true;
     home-manager.users.gabriel.profiles.school = true;
 
+    marmar.users.marion.enable = true;
+
     virtualisation.waydroid.enable = true;
 
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
