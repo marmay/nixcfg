@@ -15,6 +15,7 @@
       xournalpp
       eog
       teams-for-linux
+      tutanota-desktop
       qtpass
     ];
 
