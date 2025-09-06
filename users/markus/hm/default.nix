@@ -2,7 +2,6 @@
 { config, lib, pkgs, ... }:
 {
   imports = [
-    ./latex
     ./mail
     ./programs/neovim
     ./programs/emacs

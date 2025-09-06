@@ -3,6 +3,8 @@
   options.profiles.school = lib.mkEnableOption "School profile";
 
   config = lib.mkIf config.profiles.school {
+    profiles.latex = true;
+    
     home.packages = with pkgs; [
 
       # Schule

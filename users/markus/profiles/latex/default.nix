@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }:
 {
-  config = {
+  options.profiles.latex = lib.mkEnableOption "LaTeX environment";
+
+  config = lib.mkIf config.profiles.latex {
     home.packages = with pkgs; [
       nerd-fonts.fira-mono
     ];
