@@ -26,7 +26,6 @@
       steam = true;
     };
 
-    environment.systemPackages = with pkgs; [ retroarchFull ];
     marmar.users.markus.enable = true;
     marmar.users.marion.enable = true;
     marmar.users.raphaela.enable = true;
