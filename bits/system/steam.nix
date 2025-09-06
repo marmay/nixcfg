@@ -11,6 +11,7 @@
       gamemode
       mangohud
       lutris
+      prismlauncher
     ];
 
     nixpkgs.config.allowUnfree = true;
