@@ -45,12 +45,9 @@
       (pkgs.kodi.passthru.withPackages (kodiPkgs: with kodiPkgs; [
         jellyfin
         joystick
-        libretro
-        libretro-snes9x
         netflix
         pvr-hts
       ]))
-      retroarchFull
     ];
 
     # The NAS never sleeps.
