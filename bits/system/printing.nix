@@ -7,14 +7,13 @@
       avahi = {
         enable = true;
         nssmdns4 = true;
+        nssmdns6 = true;
         openFirewall = true;
       };
 
       printing = {
         enable = true;
-        browsing = true;
-	browsed.enable = true;
-	openFirewall = true;
+	browsed.enable = false;
         defaultShared = false;
 	drivers = with pkgs; [ gutenprint brlaser ];
       };

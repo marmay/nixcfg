@@ -16,6 +16,7 @@
 	  arydshln
 	  background
 	  biblatex
+	  capt-of
 	  cnltx
 	  cntformats
 	  collection-langgerman
@@ -56,7 +57,7 @@
 	  standalone
 	  tabularray
 	  tasks
-    tcolorbox
+          tcolorbox
 	  tikzfill
 	  tikzpeople
 	  totcount
