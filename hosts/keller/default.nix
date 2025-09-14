@@ -54,6 +54,7 @@
 
     marmar.users.gabriel.enable = true;
     home-manager.users.gabriel.profiles.school = true;
+    home-manager.users.gabriel.profiles.print3d = true;
 
     marmar.users.marion.enable = true;
 

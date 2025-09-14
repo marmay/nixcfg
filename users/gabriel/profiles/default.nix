@@ -1,5 +1,5 @@
 
 { config, lib, pkgs, ... }:
 {
-  imports = [ ./school ];
+  imports = [ ./print3d ./school ];
 }
