@@ -117,6 +117,9 @@
               (setq org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("GEPLANT" "GEHALTEN" "DONE")))
 	      (setq org-enforce-todo-dependencies t)
 	      (setq org-agenda-dim-blocked-tasks t)
+              (setq org-agenda-custom-commands
+                    `(;; match those tagged with :inbox:, are not scheduled, are not DONE.
+                      ("ii" "unscheduled tasks" tags "-SCHEDULED={.+}-DEADLINE={.+}/!+TODO|+STARTED|+WAITING")))
 	    )
           )
         (use-package evil-org

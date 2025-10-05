@@ -34,5 +34,21 @@ for device in 11 12 17; do
   xsetwacom set $device rotate $ROTATE_XSETWACOM;
 done
     '')
+
+    (writeShellScriptBin "projector" ''
+#!/bin/sh
+
+case "$1" in
+  lowres)
+    xrandr --output eDP-1 --mode 1280x720 --output HDMI-1 --mode 1280x720 --same-as eDP-1
+    ;;
+  highres)
+    xrandr --output eDP-1 --mode 1920x1200
+    ;;
+  *)
+    xrandr --output eDP-1 --mode 1920x1200
+    ;;
+esac
+    '')
   ];
 }

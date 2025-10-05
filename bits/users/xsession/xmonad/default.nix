@@ -21,7 +21,9 @@
     home.packages = [
       pkgs.dmenu
       pkgs.feh
+      pkgs.flameshot
       pkgs.pass
+      pkgs.onboard
     ];
 
     xsession.enable = true;

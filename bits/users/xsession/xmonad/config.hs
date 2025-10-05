@@ -167,6 +167,9 @@ myKeys hasSplitKbKeyboard conf@(XConfig {modMask = modm}) = M.fromList $
     -- Restart xmonad
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
 
+    -- Screenshot tool
+    , ((0                 , xK_Print ), spawn "flameshot gui")
+
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
     , ((modm .|. shiftMask, xK_slash ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
 
@@ -179,6 +182,20 @@ myKeys hasSplitKbKeyboard conf@(XConfig {modMask = modm}) = M.fromList $
     , ((modm .|. controlMask              , xK_s), passEditPrompt myXPConfig)
     , ((modm                 .|. shiftMask, xK_s), passGeneratePrompt myXPConfig)
     , ((modm .|. controlMask .|. shiftMask, xK_s), passRemovePrompt myXPConfig)
+
+    -- On-screen keyboard
+    , ((modm                              , xK_o), spawn "onboard")
+
+    -- Switch rotation
+    , ((modm .|. controlMask              , xK_1), spawn "rotate 0")
+    , ((modm .|. controlMask              , xK_2), spawn "rotate 90")
+    , ((modm .|. controlMask              , xK_3), spawn "rotate 180")
+    , ((modm .|. controlMask              , xK_4), spawn "rotate 270")
+
+    -- Switch resolution for low-res projectors
+    , ((modm .|. controlMask              , xK_8), spawn "projector lowres")
+    , ((modm .|. controlMask              , xK_9), spawn "projector highres")
+    , ((modm .|. controlMask              , xK_0), spawn "projector default")
     ]
     ++
 

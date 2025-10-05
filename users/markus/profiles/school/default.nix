@@ -6,18 +6,18 @@
     profiles.latex = true;
     
     home.packages = with pkgs; [
-
       # Schule
       anki
-      ocamlPackages.cpdf
-      onedrive
       gnumake
       geogebra6
-      davinci-resolve
-      inkscape
       gimp
-      teams-for-linux
+      inkscape
       libreoffice
+      ocamlPackages.cpdf
+      onedrive
+      pandoc
+      pdf2svg
+      teams-for-linux
       xournalpp
     ];
   };

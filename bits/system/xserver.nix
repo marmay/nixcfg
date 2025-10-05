@@ -7,6 +7,8 @@
   config = lib.mkIf config.marmar.xserver {
     xdg.portal.enable = lib.mkForce false;
 
+    programs.dconf.enable = true;
+
     services.xserver = {
       enable = true;
       xkb.layout = "de";
