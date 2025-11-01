@@ -46,11 +46,13 @@
 	  multirow
 	  needspace
           ninecolors
+	  numprint
 	  ocgx2
 	  opensans
 	  pdfcol
 	  pdfprivacy
 	  pgf
+	  pgfmath-xfp
 	  pgfopts
 	  pgfplots
 	  preprint
@@ -60,6 +62,8 @@
           tcolorbox
 	  tikzfill
 	  tikzpeople
+	  tkz-base
+	  tkz-euclide
 	  totcount
 	  translations
 	  ulem
