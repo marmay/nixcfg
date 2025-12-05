@@ -45,6 +45,7 @@
     marmar.users.marion.enable = true;
     marmar.users.raphaela.enable = true;
     marmar.users.gabriel.enable = true;
+    home-manager.users.gabriel.profiles.school = true;
 
     # services.create_ap = {
     #   enable = true;

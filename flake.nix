@@ -78,8 +78,6 @@
       mnb = mkUserPc {
         path = ./hosts/mnb;
         extra-modules = [
-          nixos-hardware.nixosModules.lenovo-thinkpad-x13
-          nixos-hardware.nixosModules.lenovo-thinkpad-x13-yoga
           nixos-hardware.nixosModules.lenovo-thinkpad-x13-yoga-3th-gen
         ];
       };

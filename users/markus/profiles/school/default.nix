@@ -9,7 +9,7 @@
       # Schule
       anki
       gnumake
-      geogebra6
+      # geogebra6
       gimp
       inkscape
       libreoffice

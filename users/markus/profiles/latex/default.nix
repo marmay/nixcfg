@@ -5,6 +5,7 @@
   config = lib.mkIf config.profiles.latex {
     home.packages = with pkgs; [
       nerd-fonts.fira-mono
+      noto-fonts-color-emoji
     ];
     programs.texlive = {
       enable = true;
@@ -57,6 +58,7 @@
 	  pgfplots
 	  preprint
 	  standalone
+	  tabto-ltx
 	  tabularray
 	  tasks
           tcolorbox
