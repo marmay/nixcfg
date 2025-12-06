@@ -11,8 +11,10 @@
       wezterm.enable = true;
       git = {
         enable = true;
-        userName = "Markus Mayr";
-        userEmail = "markus.mayr@outlook.com";
+	settings = {
+          user.name = "Markus Mayr";
+          user.email = "markus.mayr@outlook.com";
+	};
       };
     };
     home.packages = with pkgs; [

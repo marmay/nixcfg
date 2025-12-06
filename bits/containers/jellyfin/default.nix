@@ -82,7 +82,7 @@ in
         environment.systemPackages = with pkgs; [ libva-utils xterm ];
         hardware.opengl = {
           enable = true;
-          extraPackages = with pkgs; [ intel-media-driver vaapiIntel ];
+          extraPackages = with pkgs; [ intel-media-driver intel-vaapi-driver ];
         };
         networking.interfaces.eth0.useDHCP = true;
         services.jellyfin = {

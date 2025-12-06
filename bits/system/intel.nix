@@ -6,10 +6,10 @@
     enable = true;
     extraPackages = with pkgs; [
       intel-media-driver
-      vaapiIntel
+      intel-vaapi-driver
     ];
     extraPackages32 = with pkgs.pkgsi686Linux; [
-      vaapiIntel
+      intel-vaapi-driver
     ];
   };
 }
