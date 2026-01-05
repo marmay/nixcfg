@@ -15,6 +15,7 @@ in
   "mail/hashed_pwd.marion".publicKeys = [ keys.markus keys.bu-ki ];
   "mail/hashed_pwd.markus".publicKeys = [ keys.markus keys.bu-ki ];
   "mail/hashed_pwd.raphaela".publicKeys = [ keys.markus keys.bu-ki ];
+  "m365_competences.config".publicKeys = [ keys.markus keys.notebook keys.bu-ki ];
   "users/markus".publicKeys = [ keys.markus keys.bu-ki keys.nas keys.keller keys.notebook keys.raphberry keys.mnb ];
   "users/marion".publicKeys = [ keys.markus keys.bu-ki keys.nas keys.keller keys.notebook keys.mnb ];
   "users/raphaela".publicKeys = [ keys.markus keys.bu-ki keys.nas keys.keller keys.notebook keys.raphberry keys.mnb ];

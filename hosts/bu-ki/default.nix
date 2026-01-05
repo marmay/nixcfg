@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 let
   public_keys = import ../../secrets/aws_public.nix;
 in
@@ -44,9 +44,6 @@ in
     environment.systemPackages = with pkgs; [
       git
       htop
-      vim
-      haskellPackages.hprox
-      screen
     ];
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -68,6 +65,11 @@ in
 
     security = {
       acme.certs."bu-ki.at".email = "markus@bu-ki.at";
+      acme.certs."1a.bu-ki.at".email = "markus@bu-ki.at";
+      acme.certs."3a.bu-ki.at".email = "markus@bu-ki.at";
+      acme.certs."3c.bu-ki.at".email = "markus@bu-ki.at";
+      acme.certs."4d.bu-ki.at".email = "markus@bu-ki.at";
+      acme.certs."6b.bu-ki.at".email = "markus@bu-ki.at";
       acme.certs."mail.bu-ki.at".email = "markus@bu-ki.at";
       acme.certs."cloud.marion-mayr.at".email = "office@marion-mayr.at";
       acme.acceptTerms = true;
@@ -78,10 +80,66 @@ in
       mailHashedPwdMarion.file = ../../secrets/markus/mail/hashed_pwd.marion;
       mailHashedPwdMarkus.file = ../../secrets/markus/mail/hashed_pwd.markus;
       mailHashedPwdRaphaela.file = ../../secrets/markus/mail/hashed_pwd.raphaela;
+      m365secrets = {
+        file = ../../secrets/markus/m365_competences.config;
+        group = "competences";
+        mode = "440";
+      };
     };
 
-    mailserver = {
+    services.competences = {
       enable = true;
+
+      instances = {
+        class-1a = {
+          port = 43210;
+          subdomain = "1a";
+          database = "competences_prod_1a";
+          secretsFile = config.age.secrets.m365secrets_1a.path;
+          initDocument = "/tmp/init-1a.json";
+        };
+        class-3a = {
+          port = 43211;
+          subdomain = "3a";
+          database = "competences_prod_3a";
+          secretsFile = config.age.secrets.m365secrets_3a.path;
+          initDocument = "/tmp/init-3a.json";
+        };
+        class-3c = {
+          port = 43212;
+          subdomain = "3c";
+          database = "competences_prod_3c";
+          secretsFile = config.age.secrets.m365secrets_3c.path;
+          initDocument = "/tmp/init-3c.json";
+        };
+        class-4d = {
+          port = 43213;
+          subdomain = "4d";
+          database = "competences_prod_4d";
+          secretsFile = config.age.secrets.m365secrets_4d.path;
+          initDocument = "/tmp/init-4d.json";
+        };
+        class-6b = {
+          port = 43214;
+          subdomain = "6b";
+          database = "competences_prod_6b";
+          secretsFile = config.age.secrets.m365secrets_6b.path;
+          initDocument = "/tmp/init-6b.json";
+        };
+      };
+
+      nginx = {
+        enable = true;
+        domain = "bu-ki.at";
+        enableACME = true;
+        forceSSL = true;
+      };
+
+      postgresql.enable = true;
+    };
+    
+    mailserver = {
+      enable = false;
       fqdn = "mail.bu-ki.at";
       domains = [ "bu-ki.at" "marion-mayr.at" ];
       loginAccounts = {
@@ -109,24 +167,6 @@ in
     };
 
     services = {
-      nextcloud = {
-        enable = true;
-        package = pkgs.nextcloud30;
-        hostName = "cloud.marion-mayr.at";
-        https = true;
-
-        autoUpdateApps.enable = true;
-        autoUpdateApps.startAt = "05:00:00";
-
-        settings.overwrite-protocol = "https";
-
-        config = {
-          # Further forces Nextcloud to use HTTPS
-          adminpassFile = "/var/nextcloud-admin-pass";
-          adminuser = "admin";
-        };
-      };
-
       nginx = {
         enable = true;
         recommendedProxySettings = true;
@@ -150,15 +190,6 @@ in
           enableACME = true;
           forceSSL = true;
         };
-      };
-    };
-
-    systemd.services.hprox = {
-      description = "An HTTPS proxy";
-      wantedBy = [ "multi-user.target" ];
-      serviceConfig = {
-	ExecStart = "${pkgs.haskellPackages.hprox}/bin/hprox -p 8443 --tls bu-ki.at:/var/lib/acme/bu-ki.at/cert.pem:/var/lib/acme/bu-ki.at/key.pem";
-	Type = "simple";
       };
     };
   };

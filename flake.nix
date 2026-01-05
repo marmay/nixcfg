@@ -18,8 +18,11 @@
     url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-25.11";
     inputs.nixpkgs.follows = "nixpkgs";
   };
+  inputs.competences = {
+    url = "path:/home/markus/devel/hs/competences";
+  };
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, agenix, simple-nixos-mailserver, flake-utils, ... }:
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, agenix, simple-nixos-mailserver, competences, flake-utils, ... }@inputs:
   let
     mynixpkgs = system: import nixpkgs ({
       inherit system;
@@ -67,10 +70,17 @@
         ];
       };
       bu-ki = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+
+        specialArgs = {
+	  inherit inputs;
+	};
+
         modules = [
           ./hosts/bu-ki
           agenix.nixosModules.default
           simple-nixos-mailserver.nixosModule
+	  competences.nixosModules.competences
         ];
       };
       keller = mkUserPc { path = ./hosts/keller; };

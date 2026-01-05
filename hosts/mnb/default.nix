@@ -8,14 +8,30 @@
   config = {
     boot.kernelPackages = pkgs.linuxPackages_latest;
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+    boot.enableContainers = true;
+    # Enable NAT for containers to access internet
+    networking = {
+      nat = {
+        enable = true;
+        externalInterface = "wlp0s20f3";
+        internalInterfaces = [ "ve-+" ];  # Matches all container interfaces
+      };
+
+      # Enable IP forwarding (usually automatic with NAT, but explicit is clearer)
+      firewall.extraCommands = ''
+        iptables -A FORWARD -i ve-+ -j ACCEPT
+      '';
+    };
 
     system.stateVersion = "24.05";
 
     networking = {
       hostName = "mnb";
       networkmanager.enable = true;
+      extraHosts = ''
+        10.233.1.2 class-3a.local.test
+      '';
     };
-
     programs.light.enable = true;
     programs.light.brightnessKeys.enable = true;
 
@@ -23,6 +39,10 @@
     services.fprintd.tod.enable = true;
     services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
 
+    services.postgresql.enable = true;
+    services.postgresql.ensureUsers = [ { name = "markus"; ensureDBOwnership = true; } ];
+    services.postgresql.ensureDatabases = [ "markus" "competences_test" ];
+    
     hardware.graphics.extraPackages = with pkgs; [
       vpl-gpu-rt
     ];
