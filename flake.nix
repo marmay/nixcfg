@@ -19,7 +19,7 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
   inputs.competences = {
-    url = "path:/home/markus/devel/hs/competences";
+    url = "github:marmay/competences";
   };
 
   outputs = { self, nixpkgs, home-manager, nixos-hardware, agenix, simple-nixos-mailserver, competences, flake-utils, ... }@inputs:

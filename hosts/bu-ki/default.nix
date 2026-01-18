@@ -80,8 +80,28 @@ in
       mailHashedPwdMarion.file = ../../secrets/markus/mail/hashed_pwd.marion;
       mailHashedPwdMarkus.file = ../../secrets/markus/mail/hashed_pwd.markus;
       mailHashedPwdRaphaela.file = ../../secrets/markus/mail/hashed_pwd.raphaela;
-      m365secrets = {
-        file = ../../secrets/markus/m365_competences.config;
+      m365secrets_1a = {
+        file = ../../secrets/markus/m365_competences_1a.config;
+        group = "competences";
+        mode = "440";
+      };
+      m365secrets_3a = {
+        file = ../../secrets/markus/m365_competences_3a.config;
+        group = "competences";
+        mode = "440";
+      };
+      m365secrets_3c = {
+        file = ../../secrets/markus/m365_competences_3c.config;
+        group = "competences";
+        mode = "440";
+      };
+      m365secrets_4d = {
+        file = ../../secrets/markus/m365_competences_4d.config;
+        group = "competences";
+        mode = "440";
+      };
+      m365secrets_6b = {
+        file = ../../secrets/markus/m365_competences_6b.config;
         group = "competences";
         mode = "440";
       };
