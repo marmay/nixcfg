@@ -44,6 +44,7 @@ in
     environment.systemPackages = with pkgs; [
       git
       htop
+      inputs.competences.packages.x86_64-linux.competences-housecup
     ];
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -69,6 +70,7 @@ in
       acme.certs."3a.bu-ki.at".email = "markus@bu-ki.at";
       acme.certs."3c.bu-ki.at".email = "markus@bu-ki.at";
       acme.certs."4d.bu-ki.at".email = "markus@bu-ki.at";
+      acme.certs."5b.bu-ki.at".email = "markus@bu-ki.at";
       acme.certs."6b.bu-ki.at".email = "markus@bu-ki.at";
       acme.certs."mail.bu-ki.at".email = "markus@bu-ki.at";
       acme.certs."cloud.marion-mayr.at".email = "office@marion-mayr.at";
@@ -100,6 +102,11 @@ in
         group = "competences";
         mode = "440";
       };
+      m365secrets_5b = {
+        file = ../../secrets/markus/m365_competences_5b.config;
+        group = "competences";
+        mode = "440";
+      };
       m365secrets_6b = {
         file = ../../secrets/markus/m365_competences_6b.config;
         group = "competences";
@@ -116,35 +123,42 @@ in
           subdomain = "1a";
           database = "competences_prod_1a";
           secretsFile = config.age.secrets.m365secrets_1a.path;
-          initDocument = "/tmp/init-1a.json";
+          ensureTeacherO365 = "markus.mayr@bghorn.ac.at";
         };
         class-3a = {
           port = 43211;
           subdomain = "3a";
           database = "competences_prod_3a";
           secretsFile = config.age.secrets.m365secrets_3a.path;
-          initDocument = "/tmp/init-3a.json";
+          ensureTeacherO365 = "markus.mayr@bghorn.ac.at";
         };
         class-3c = {
           port = 43212;
           subdomain = "3c";
           database = "competences_prod_3c";
           secretsFile = config.age.secrets.m365secrets_3c.path;
-          initDocument = "/tmp/init-3c.json";
+          ensureTeacherO365 = "markus.mayr@bghorn.ac.at";
         };
         class-4d = {
           port = 43213;
           subdomain = "4d";
           database = "competences_prod_4d";
           secretsFile = config.age.secrets.m365secrets_4d.path;
-          initDocument = "/tmp/init-4d.json";
+          ensureTeacherO365 = "markus.mayr@bghorn.ac.at";
+        };
+        class-5b = {
+          port = 43214;
+          subdomain = "5b";
+          database = "competences_prod_5b";
+          secretsFile = config.age.secrets.m365secrets_6b.path;
+          ensureTeacherO365 = "markus.mayr@bghorn.ac.at";
         };
         class-6b = {
-          port = 43214;
+          port = 43215;
           subdomain = "6b";
           database = "competences_prod_6b";
           secretsFile = config.age.secrets.m365secrets_6b.path;
-          initDocument = "/tmp/init-6b.json";
+          ensureTeacherO365 = "markus.mayr@bghorn.ac.at";
         };
       };
 

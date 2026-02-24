@@ -19,6 +19,7 @@ in
   "m365_competences_3a.config".publicKeys = [ keys.markus keys.bu-ki ];
   "m365_competences_3c.config".publicKeys = [ keys.markus keys.bu-ki ];
   "m365_competences_4d.config".publicKeys = [ keys.markus keys.bu-ki ];
+  "m365_competences_5b.config".publicKeys = [ keys.markus keys.bu-ki ];
   "m365_competences_6b.config".publicKeys = [ keys.markus keys.bu-ki ];
   "users/markus".publicKeys = [ keys.markus keys.bu-ki keys.nas keys.keller keys.notebook keys.raphberry keys.mnb ];
   "users/marion".publicKeys = [ keys.markus keys.bu-ki keys.nas keys.keller keys.notebook keys.mnb ];
