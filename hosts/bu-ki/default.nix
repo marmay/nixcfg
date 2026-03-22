@@ -150,7 +150,7 @@ in
           port = 43214;
           subdomain = "5b";
           database = "competences_prod_5b";
-          secretsFile = config.age.secrets.m365secrets_6b.path;
+          secretsFile = config.age.secrets.m365secrets_5b.path;
           ensureTeacherO365 = "markus.mayr@bghorn.ac.at";
         };
         class-6b = {

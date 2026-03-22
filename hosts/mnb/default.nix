@@ -41,7 +41,7 @@
     services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
 
     services.postgresql.enable = true;
-    services.postgresql.ensureUsers = [ { name = "markus"; ensureDBOwnership = true; } ];
+    services.postgresql.ensureUsers = [ { name = "markus"; ensureDBOwnership = true; ensureClauses = { superuser = true; }; } ];
     services.postgresql.ensureDatabases = [ "markus" "competences_test" ];
     
     hardware.graphics.extraPackages = with pkgs; [
