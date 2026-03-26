@@ -19,28 +19,5 @@
       enable = true;
       remotePlay.openFirewall = true;
     };
-    programs.steam.gamescopeSession.enable = true;
-
-    boot.extraModprobeConfig = ''
-      options bluetooth disable_ertm=1
-    '';
-
-    services.pulseaudio.support32Bit = true;
-
-    hardware = {
-      graphics = {
-        enable32Bit = true;
-        extraPackages = with pkgs; [
-          libva
-	  libva-vdpau-driver
-          libvdpau-va-gl
-        ];
-        extraPackages32 = with pkgs.pkgsi686Linux; [
-          libva
-	  libva-vdpau-driver
-          libvdpau-va-gl
-        ];
-      };
-    };
   };
 }
