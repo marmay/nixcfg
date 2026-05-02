@@ -135,11 +135,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1774378529,
-        "narHash": "sha256-+VIkXJN1GxyCsLzAw+QVMt3/pHIamd8y8PEzRPmOr5E=",
+        "lastModified": 1777580331,
+        "narHash": "sha256-QkxjtSdwnmYychDbvY7qFBuZSMIYVCb2BOEioZl/640=",
         "owner": "marmay",
         "repo": "competences",
-        "rev": "a6841e767ff9273d9b3a5add9dd434941a6ba71f",
+        "rev": "9a88e0038791797e9918bea2afb2ae384a5bf304",
         "type": "github"
       },
       "original": {
@@ -151,11 +151,11 @@
     "competences-blobs": {
       "flake": false,
       "locked": {
-        "lastModified": 1774378385,
-        "narHash": "sha256-yFRwa7P236MnMjjDfHCkww4h9KmZk6dLdv1ZbPAvu+Q=",
+        "lastModified": 1777580174,
+        "narHash": "sha256-COxIu0GifAv+oC3xhtLdaeoQgzArjAdf2YSFrcV+RKY=",
         "owner": "marmay",
         "repo": "competences-blobs",
-        "rev": "39b382efadaf2817c8499029928efcdda170bf82",
+        "rev": "612953c4334cc2031ba65c220cadb483ccbf2831",
         "type": "github"
       },
       "original": {
