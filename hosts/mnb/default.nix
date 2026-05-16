@@ -44,6 +44,8 @@
     services.postgresql.ensureUsers = [ { name = "markus"; ensureDBOwnership = true; ensureClauses = { superuser = true; }; } ];
     services.postgresql.ensureDatabases = [ "markus" "competences_test" ];
 
+    services.syncthing.enable = true;
+    
     virtualisation.libvirtd = {
       enable = true;
       qemu = {
