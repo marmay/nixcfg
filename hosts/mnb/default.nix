@@ -43,7 +43,21 @@
     services.postgresql.enable = true;
     services.postgresql.ensureUsers = [ { name = "markus"; ensureDBOwnership = true; ensureClauses = { superuser = true; }; } ];
     services.postgresql.ensureDatabases = [ "markus" "competences_test" ];
-    
+
+    virtualisation.libvirtd = {
+      enable = true;
+      qemu = {
+        package = pkgs.qemu_kvm;
+        runAsRoot = true;
+        swtpm.enable = true;
+        vhostUserPackages = with pkgs; [ virtiofsd ];
+      };
+    };
+    virtualisation.spiceUSBRedirection.enable = true;
+
+    programs.virt-manager.enable = true;
+    users.users.markus.extraGroups = [ "libvirtd" "kvm" "render" "video" ];   
+
     hardware.graphics.extraPackages = with pkgs; [
       vpl-gpu-rt
     ];
