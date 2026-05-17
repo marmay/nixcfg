@@ -113,7 +113,7 @@
             (progn
               (load-library "find-lisp")
               (setq org-agenda-files
-                 (find-lisp-find-files "/home/markus/Offline/Dokumente" "\.org$"))
+                 (find-lisp-find-files "/home/markus/org" "\.org$"))
               (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
               (setq org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("GEPLANT" "GEHALTEN" "DONE")))
 	      (setq org-enforce-todo-dependencies t)
