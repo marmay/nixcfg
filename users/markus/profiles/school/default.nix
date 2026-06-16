@@ -8,8 +8,9 @@
     home.packages = with pkgs; [
       # Schule
       anki
+      davinci-resolve
       gnumake
-      # geogebra6
+      geogebra6
       gimp
       inkscape
       libreoffice

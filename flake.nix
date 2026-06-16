@@ -21,8 +21,11 @@
   inputs.competences = {
     url = "github:marmay/competences";
   };
+  inputs.davinci-convert = {
+    url = "github:marmay/davinci-convert";
+  };
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, agenix, simple-nixos-mailserver, competences, flake-utils, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, agenix, simple-nixos-mailserver, competences, flake-utils, davinci-convert, ... }@inputs:
   let
     mynixpkgs = system: import nixpkgs ({
       inherit system;
@@ -89,6 +92,7 @@
         path = ./hosts/mnb;
         extra-modules = [
           nixos-hardware.nixosModules.lenovo-thinkpad-x13-yoga-3th-gen
+	  davinci-convert.nixosModules.x86_64-linux.default
         ];
       };
       notebook = mkUserPc { path = ./hosts/notebook; };
