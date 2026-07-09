@@ -44,7 +44,6 @@ in
     environment.systemPackages = with pkgs; [
       git
       htop
-      inputs.competences.packages.x86_64-linux.competences-housecup
     ];
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -66,12 +65,6 @@ in
 
     security = {
       acme.certs."bu-ki.at".email = "markus@bu-ki.at";
-      acme.certs."1a.bu-ki.at".email = "markus@bu-ki.at";
-      acme.certs."3a.bu-ki.at".email = "markus@bu-ki.at";
-      acme.certs."3c.bu-ki.at".email = "markus@bu-ki.at";
-      acme.certs."4d.bu-ki.at".email = "markus@bu-ki.at";
-      acme.certs."5b.bu-ki.at".email = "markus@bu-ki.at";
-      acme.certs."6b.bu-ki.at".email = "markus@bu-ki.at";
       acme.certs."mail.bu-ki.at".email = "markus@bu-ki.at";
       acme.certs."cloud.marion-mayr.at".email = "office@marion-mayr.at";
       acme.acceptTerms = true;
@@ -82,96 +75,8 @@ in
       mailHashedPwdMarion.file = ../../secrets/markus/mail/hashed_pwd.marion;
       mailHashedPwdMarkus.file = ../../secrets/markus/mail/hashed_pwd.markus;
       mailHashedPwdRaphaela.file = ../../secrets/markus/mail/hashed_pwd.raphaela;
-      m365secrets_1a = {
-        file = ../../secrets/markus/m365_competences_1a.config;
-        group = "competences";
-        mode = "440";
-      };
-      m365secrets_3a = {
-        file = ../../secrets/markus/m365_competences_3a.config;
-        group = "competences";
-        mode = "440";
-      };
-      m365secrets_3c = {
-        file = ../../secrets/markus/m365_competences_3c.config;
-        group = "competences";
-        mode = "440";
-      };
-      m365secrets_4d = {
-        file = ../../secrets/markus/m365_competences_4d.config;
-        group = "competences";
-        mode = "440";
-      };
-      m365secrets_5b = {
-        file = ../../secrets/markus/m365_competences_5b.config;
-        group = "competences";
-        mode = "440";
-      };
-      m365secrets_6b = {
-        file = ../../secrets/markus/m365_competences_6b.config;
-        group = "competences";
-        mode = "440";
-      };
     };
 
-    services.competences = {
-      enable = true;
-
-      instances = {
-        class-1a = {
-          port = 43210;
-          subdomain = "1a";
-          database = "competences_prod_1a";
-          secretsFile = config.age.secrets.m365secrets_1a.path;
-          ensureTeacherO365 = "markus.mayr@bghorn.ac.at";
-        };
-        class-3a = {
-          port = 43211;
-          subdomain = "3a";
-          database = "competences_prod_3a";
-          secretsFile = config.age.secrets.m365secrets_3a.path;
-          ensureTeacherO365 = "markus.mayr@bghorn.ac.at";
-        };
-        class-3c = {
-          port = 43212;
-          subdomain = "3c";
-          database = "competences_prod_3c";
-          secretsFile = config.age.secrets.m365secrets_3c.path;
-          ensureTeacherO365 = "markus.mayr@bghorn.ac.at";
-        };
-        class-4d = {
-          port = 43213;
-          subdomain = "4d";
-          database = "competences_prod_4d";
-          secretsFile = config.age.secrets.m365secrets_4d.path;
-          ensureTeacherO365 = "markus.mayr@bghorn.ac.at";
-        };
-        class-5b = {
-          port = 43214;
-          subdomain = "5b";
-          database = "competences_prod_5b";
-          secretsFile = config.age.secrets.m365secrets_5b.path;
-          ensureTeacherO365 = "markus.mayr@bghorn.ac.at";
-        };
-        class-6b = {
-          port = 43215;
-          subdomain = "6b";
-          database = "competences_prod_6b";
-          secretsFile = config.age.secrets.m365secrets_6b.path;
-          ensureTeacherO365 = "markus.mayr@bghorn.ac.at";
-        };
-      };
-
-      nginx = {
-        enable = true;
-        domain = "bu-ki.at";
-        enableACME = true;
-        forceSSL = true;
-      };
-
-      postgresql.enable = true;
-    };
-    
     mailserver = {
       enable = false;
       fqdn = "mail.bu-ki.at";
