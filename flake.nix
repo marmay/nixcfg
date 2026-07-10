@@ -1,11 +1,11 @@
 {
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
   inputs.agenix = {
     url = "github:ryantm/agenix";
     inputs.nixpkgs.follows = "nixpkgs";
   };
   inputs.home-manager = {
-    url = "github:nix-community/home-manager/release-25.11";
+    url = "github:nix-community/home-manager/release-26.05";
     inputs.nixpkgs.follows = "nixpkgs";
   };
   inputs.flake-utils = {
@@ -14,10 +14,6 @@
   inputs.nixos-hardware = {
     url = "github:NixOS/nixos-hardware/master";
   };
-  inputs.simple-nixos-mailserver = {
-    url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-25.11";
-    inputs.nixpkgs.follows = "nixpkgs";
-  };
   inputs.competences = {
     url = "github:marmay/competences";
   };
@@ -25,7 +21,7 @@
     url = "github:marmay/davinci-convert";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, agenix, simple-nixos-mailserver, competences, flake-utils, davinci-convert, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, agenix, competences, flake-utils, davinci-convert, ... }@inputs:
   let
     mynixpkgs = system: import nixpkgs ({
       inherit system;
@@ -82,7 +78,6 @@
         modules = [
           ./hosts/bu-ki
           agenix.nixosModules.default
-          simple-nixos-mailserver.nixosModule
 	  competences.nixosModules.competences
         ];
       };

@@ -3,7 +3,6 @@
 {
   imports = [
     ./mail
-    ./programs/neovim
     ./programs/emacs
     ./scripts/rotate.nix
   ];

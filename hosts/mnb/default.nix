@@ -32,8 +32,7 @@
         10.233.1.2 class-3a.local.test
       '';
     };
-    programs.light.enable = true;
-    programs.light.brightnessKeys.enable = true;
+    hardware.acpilight.enable = true;
     programs.localsend.enable = true;
 
     services.fprintd.enable = true;

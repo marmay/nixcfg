@@ -70,40 +70,40 @@ in
       acme.acceptTerms = true;
     };
 
-    age.secrets = {
-      mailHashedPwdGabriel.file = ../../secrets/markus/mail/hashed_pwd.gabriel;
-      mailHashedPwdMarion.file = ../../secrets/markus/mail/hashed_pwd.marion;
-      mailHashedPwdMarkus.file = ../../secrets/markus/mail/hashed_pwd.markus;
-      mailHashedPwdRaphaela.file = ../../secrets/markus/mail/hashed_pwd.raphaela;
-    };
+    # age.secrets = {
+    #   mailHashedPwdGabriel.file = ../../secrets/markus/mail/hashed_pwd.gabriel;
+    #   mailHashedPwdMarion.file = ../../secrets/markus/mail/hashed_pwd.marion;
+    #   mailHashedPwdMarkus.file = ../../secrets/markus/mail/hashed_pwd.markus;
+    #   mailHashedPwdRaphaela.file = ../../secrets/markus/mail/hashed_pwd.raphaela;
+    # };
 
-    mailserver = {
-      enable = false;
-      fqdn = "mail.bu-ki.at";
-      domains = [ "bu-ki.at" "marion-mayr.at" ];
-      loginAccounts = {
-        "markus@bu-ki.at" = {
-          hashedPasswordFile = config.age.secrets.mailHashedPwdMarkus.path;
-          aliases = [
-            "abuse@bu-ki.at"
-            "postmaster@bu-ki.at"
-          ];
-        };
-        "marion@marion-mayr.at" = {
-          hashedPasswordFile = config.age.secrets.mailHashedPwdMarion.path;
-          aliases = [
-            "office@marion-mayr.at"
-            "kontakt@marion-mayr.at"
-          ];
-        };
-        "raphaela@marion-mayr.at" = {
-          hashedPasswordFile = config.age.secrets.mailHashedPwdRaphaela.path;
-        };
-        "gabriel@marion-mayr.at" = {
-          hashedPasswordFile = config.age.secrets.mailHashedPwdGabriel.path;
-        };
-      };
-    };
+    # mailserver = {
+    #   enable = false;
+    #   fqdn = "mail.bu-ki.at";
+    #   domains = [ "bu-ki.at" "marion-mayr.at" ];
+    #   loginAccounts = {
+    #     "markus@bu-ki.at" = {
+    #       hashedPasswordFile = config.age.secrets.mailHashedPwdMarkus.path;
+    #       aliases = [
+    #         "abuse@bu-ki.at"
+    #         "postmaster@bu-ki.at"
+    #       ];
+    #     };
+    #     "marion@marion-mayr.at" = {
+    #       hashedPasswordFile = config.age.secrets.mailHashedPwdMarion.path;
+    #       aliases = [
+    #         "office@marion-mayr.at"
+    #         "kontakt@marion-mayr.at"
+    #       ];
+    #     };
+    #     "raphaela@marion-mayr.at" = {
+    #       hashedPasswordFile = config.age.secrets.mailHashedPwdRaphaela.path;
+    #     };
+    #     "gabriel@marion-mayr.at" = {
+    #       hashedPasswordFile = config.age.secrets.mailHashedPwdGabriel.path;
+    #     };
+    #   };
+    # };
 
     services = {
       nginx = {

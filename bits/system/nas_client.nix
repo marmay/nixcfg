@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  mkLink = target: source: lib.nameValuePair target { device = source; options = [ "bind" "_netdev" "comment=x-gvfs-hide" ]; };
+  mkLink = target: source: lib.nameValuePair target { device = source; fsType = "auto"; options = [ "bind" "_netdev" "comment=x-gvfs-hide" ]; };
   mkUserLink = user: n: mkLink "/home/${user}/${n}" "${config.sharedData.path}/Users/${user}/${n}";
   mkSharedLink = user: n: mkLink "/home/${user}/Gemeinsam/${n}" "${config.sharedData.path}/${n}";
   mkLinks = user: [
