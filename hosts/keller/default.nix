@@ -45,7 +45,6 @@
     home-manager.users.markus.profiles.dev = true;
     home-manager.users.markus.profiles.xmonad = true;
     home-manager.users.markus.profiles.sway = true;
-    home-manager.users.markus.profiles.work = true;
     home-manager.users.markus.profiles.photo = true;
     home-manager.users.markus.profiles.school = true;
 
