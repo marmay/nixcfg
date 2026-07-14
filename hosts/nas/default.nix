@@ -15,6 +15,7 @@
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
     boot.kernelPackages = pkgs.linuxPackages_latest;
+    # boot.extraModulePackages = [ pkgs.linuxPackages_6_11.tbs ];
 
     marmar = {
       nas_client = true;
@@ -30,9 +31,10 @@
     system.stateVersion = "22.11"; # Did you read the comment?
 
     networking.hostName = "nas"; # Define your hostname.
-    networking.useDHCP = false;
-    networking.bridges.br0.interfaces = ["enp3s0"];
-    networking.interfaces.br0.useDHCP = true;
+    networking.useDHCP = true;
+    # networking.interfaces."enp0s21f0u4".useDHCP = true;
+    # networking.bridges.br0.interfaces = ["enp0s21f0u4"];
+    # networking.interfaces.br0.useDHCP = true;
     networking.networkmanager.enable = false;
 
     age.secretsDir = "/run/agenix.d/current";
@@ -42,12 +44,8 @@
     # List packages installed in system profile. To search, run:
     # $ nix search wget
     environment.systemPackages = with pkgs; [
-      (pkgs.kodi.passthru.withPackages (kodiPkgs: with kodiPkgs; [
-        jellyfin
-        joystick
-        netflix
-        pvr-hts
-      ]))
+      retroarchFull
+      vlc
     ];
 
     # The NAS never sleeps.
@@ -68,6 +66,8 @@
       TIMELINE_LIMIT_MONTHLY=12;
       TIMELINE_LIMIT_YEARLY=0;
     };
+
+    hardware.enableAllFirmware = true;
   };
 }
 
