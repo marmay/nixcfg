@@ -39,12 +39,11 @@
 
     age.secretsDir = "/run/agenix.d/current";
 
-    nixpkgs.overlays = import ../../bits/overlays/all.nix;
+    # nixpkgs.overlays = import ../../bits/overlays/all.nix;
 
     # List packages installed in system profile. To search, run:
     # $ nix search wget
     environment.systemPackages = with pkgs; [
-      retroarchFull
       vlc
     ];
 

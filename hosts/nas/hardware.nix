@@ -25,11 +25,13 @@
 
     fileSystems."/srv/media" =
       { device = "/mnt/old_root/srv/media";
+        fsType = "auto";
         options = [ "bind" ];
       };
 
     fileSystems."/srv/recordings" =
       { device = "/mnt/old_root/srv/recordings";
+        fsType = "auto";
         options = [ "bind" ];
       };
 

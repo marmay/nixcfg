@@ -3,11 +3,13 @@
   config = {
     fileSystems."/export/media" = {
       device = "/srv/media";
+      fsType = "auto";
       options = [ "bind" ];
     };
 
     fileSystems."/export/recordings" = {
       device = "/srv/recordings";
+      fsType = "auto";
       options = [ "bind" ];
     };
 
