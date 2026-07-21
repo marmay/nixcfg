@@ -20,30 +20,24 @@
   inputs.davinci-convert = {
     url = "github:marmay/davinci-convert";
   };
+  inputs.nix-minecraft = {
+    url = "github:Infinidoge/nix-minecraft";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, agenix, competences, flake-utils, davinci-convert, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, agenix, competences, flake-utils, davinci-convert, nix-minecraft, ... }@inputs:
   let
-    mynixpkgs = system: import nixpkgs ({
-      inherit system;
-      config = {
-        allowUnfree = true;
-      };
-      overlays = [
-        (final: prev: {
-          xsecurelock = prev.xsecurelock.overrideAttrs (oldAttrs: {
-            configureFlags = [
-              "--with-pam-service-name=xscreensaver"
-              "--with-xscreensaver=${final.xscreensaver}/bin/xscreensaver"
-            ];
-          });
-        })
-      ];
-    });
+    myOverlays = (import ./bits/overlays/all.nix);
     mkUserPc = { path, system ? "x86_64-linux", extra-modules ? [] }: nixpkgs.lib.nixosSystem {
         system = system;
+        specialArgs = {
+	  inherit inputs;
+	};
         modules = [
           home-manager.nixosModules.default
           {
+	    nixpkgs.config.allowUnfree = true;
+	    nixpkgs.overlays = [ self.overlays.default ];
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
           }
@@ -54,81 +48,45 @@
         ] ++ extra-modules;
       };
   in {
+    overlays = { default = nixpkgs.lib.composeManyExtensions myOverlays; };
     nixosConfigurations = {
-      aws = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/aws
-          home-manager.nixosModules.default
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-          }
-          (nixpkgs + "/nixos/modules/virtualisation/amazon-image.nix")
-          agenix.nixosModules.default
-        ];
-      };
       bu-ki = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-
-        specialArgs = {
-	  inherit inputs;
-	};
-
-        modules = [
-          ./hosts/bu-ki
-          agenix.nixosModules.default
+        extra-modules = [
 	  competences.nixosModules.competences
         ];
       };
-      keller = mkUserPc { path = ./hosts/keller; };
-      nas = mkUserPc { path = ./hosts/nas; };
+      keller = mkUserPc {
+        path = ./hosts/keller;
+	extra-modules = [
+	  nix-minecraft.nixosModules.minecraft-servers
+	];
+      };
+      nas = mkUserPc {
+        path = ./hosts/nas;
+      };
       mnb = mkUserPc {
         path = ./hosts/mnb;
         extra-modules = [
           nixos-hardware.nixosModules.lenovo-thinkpad-x13-yoga-3th-gen
-	  davinci-convert.nixosModules.x86_64-linux.default
         ];
       };
-      notebook = mkUserPc { path = ./hosts/notebook; };
-      raphberry = mkUserPc {
-        path = ./hosts/raphberry;
-        system = "aarch64-linux";
-        extra-modules = [
-          (nixpkgs + "/nixos/modules/installer/sd-card/sd-image-aarch64.nix")
-          nixos-hardware.nixosModules.raspberry-pi-4
-        ];
+      notebook = mkUserPc {
+        path = ./hosts/notebook;
       };
-      camberry = nixpkgs.lib.nixosSystem {
-        system = "armv6l-linux";
-        modules = [
-          ./hosts/camberry
-          (nixpkgs + "/nixos/modules/installer/sd-card/sd-image-raspberrypi.nix")
-        ];
-      };
-      carpi = nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
-        modules = [
-          ./hosts/carpi
-          (nixpkgs + "/nixos/modules/installer/sd-card/sd-image-aarch64.nix")
-          #nixos-hardware.nixosModules.raspberry-pi-4
-        ];
+      surface = mkUserPc {
+        path = ./hosts/surface;
+	system = "aarch64-linux";
+	extra-modules = [
+	  nixos-hardware.nixosModules.microsoft-surface-pro-intel
+	];
       };
     };
-
-  } // flake-utils.lib.eachDefaultSystem (system: let pkgs = mynixpkgs system; in {
-    legacyPackages = pkgs;
-
-    devShells.ihp = pkgs.mkShell {
-      buildInputs = with pkgs; [
-        cachix
-        direnv
-        gnumake
-        tmux
-      ];
-      shellHook = ''
-        eval "$(direnv hook bash)"
-      '';
+  } // flake-utils.lib.eachDefaultSystem (system: {
+    legacyPackages = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+      config.overlays = [ self.overlays.default ];
     };
   });
 }

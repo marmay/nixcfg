@@ -3,4 +3,5 @@
   (import ./kodi.nix)
   (import ./vlc.nix)
   (import ./xmonad.nix)
+  (import ./xsecurelock.nix)
 ]
