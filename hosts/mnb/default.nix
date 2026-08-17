@@ -56,8 +56,9 @@
     };
     virtualisation.spiceUSBRedirection.enable = true;
 
+    virtualisation.docker.enable = true;
     programs.virt-manager.enable = true;
-    users.users.markus.extraGroups = [ "libvirtd" "kvm" "render" "video" ];   
+    users.users.markus.extraGroups = [ "docker" "libvirtd" "kvm" "render" "video" ];   
 
     hardware.graphics.extraPackages = with pkgs; [
       vpl-gpu-rt
