@@ -60,8 +60,8 @@
           :ensure t)
         (use-package pdf-tools
           :ensure t
+	  :after evil-collection
           :magic ("%PDF" . pdf-view-mode)
-
 	  :config
             (pdf-tools-install)
             (setq pdf-view-display-size 'fit-page)
@@ -143,6 +143,7 @@
         (use-package evil-org
           :ensure t
           :after org
+	  :after evil-collection
           :hook (org-mode . evil-org-mode)
           :config
             (require 'evil-org-agenda)
@@ -206,6 +207,7 @@
              ("M-a" . #'minuet-accept-suggestion-line)
              ("M-e" . #'minuet-dismiss-suggestion))
         
+          :after evil-collection
           :init
             ;; if you want to enable auto suggestion.
             ;; Note that you can manually invoke completions without enable minuet-auto-suggestion-mode
