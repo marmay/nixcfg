@@ -55,6 +55,7 @@
 
     # One of the backup strategies is to take snapshots of the data volume
     # under /mnt/old_root:
+    services.syncthing.enable = true;
     services.snapper.configs."/mnt/old_root" = {
       SUBVOLUME = "/mnt/old_root";
       FSTYPE = "btrfs";
