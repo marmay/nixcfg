@@ -18,6 +18,7 @@ import XMonad.Util.NamedScratchpad
 import XMonad.Prompt
 import XMonad.Prompt.Pass
 import XMonad.Prompt.FuzzyMatch
+import XMonad.Actions.OnScreen
 import Data.List
 import Data.Monoid
 import Data.Ratio
@@ -69,7 +70,7 @@ myModMask       = mod4Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["1:web","2:mail","3","4","5","6","7","8","9:slack"]
+myWorkspaces    = ["1","2","3","4","5","6","7","8","9:org"]
 
 scratchpads = [
   NS "audio-control" "nix run m#pavucontrol" (className =? "Pavucontrol") (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3)),
@@ -201,8 +202,12 @@ myKeys hasSplitKbKeyboard conf@(XConfig {modMask = modm}) = M.fromList $
 
     --
     -- mod-[1..9], Switch to workspace N
-    [((modm, k), windows $ W.greedyView i)
-        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]]
+    [ ((m .|. modm, k), windows (f i))
+      | (i, k) <- zip (XMonad.workspaces conf) ([xK_1 .. xK_9] ++ [xK_0])
+      , (f, m) <- [ (viewOnScreen 0, 0)
+                  , (viewOnScreen 1, controlMask)
+                  , (W.greedyView, controlMask .|. shiftMask) ]
+    ]
     ++
 
     -- mod-shift-[1..9], Move client to workspace N
