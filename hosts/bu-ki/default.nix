@@ -65,45 +65,26 @@ in
 
     security = {
       acme.certs."bu-ki.at".email = "markus@bu-ki.at";
-      acme.certs."mail.bu-ki.at".email = "markus@bu-ki.at";
-      acme.certs."cloud.marion-mayr.at".email = "office@marion-mayr.at";
       acme.acceptTerms = true;
     };
 
-    # age.secrets = {
-    #   mailHashedPwdGabriel.file = ../../secrets/markus/mail/hashed_pwd.gabriel;
-    #   mailHashedPwdMarion.file = ../../secrets/markus/mail/hashed_pwd.marion;
-    #   mailHashedPwdMarkus.file = ../../secrets/markus/mail/hashed_pwd.markus;
-    #   mailHashedPwdRaphaela.file = ../../secrets/markus/mail/hashed_pwd.raphaela;
-    # };
-
-    # mailserver = {
-    #   enable = false;
-    #   fqdn = "mail.bu-ki.at";
-    #   domains = [ "bu-ki.at" "marion-mayr.at" ];
-    #   loginAccounts = {
-    #     "markus@bu-ki.at" = {
-    #       hashedPasswordFile = config.age.secrets.mailHashedPwdMarkus.path;
-    #       aliases = [
-    #         "abuse@bu-ki.at"
-    #         "postmaster@bu-ki.at"
-    #       ];
-    #     };
-    #     "marion@marion-mayr.at" = {
-    #       hashedPasswordFile = config.age.secrets.mailHashedPwdMarion.path;
-    #       aliases = [
-    #         "office@marion-mayr.at"
-    #         "kontakt@marion-mayr.at"
-    #       ];
-    #     };
-    #     "raphaela@marion-mayr.at" = {
-    #       hashedPasswordFile = config.age.secrets.mailHashedPwdRaphaela.path;
-    #     };
-    #     "gabriel@marion-mayr.at" = {
-    #       hashedPasswordFile = config.age.secrets.mailHashedPwdGabriel.path;
-    #     };
-    #   };
-    # };
+    age.secrets = {
+      marmay-auth-security-config = {
+        file = ../../secrets/markus/bu-ki/marmay-auth-security-config;
+        owner = "marmay-auth";
+        mode = "0400";
+      };
+      bghorn-cms-security-config = {
+        file = ../../secrets/markus/bu-ki/bghorn-cms-security-config;
+        owner = "bghorn";
+        mode = "0400";
+      };
+      bghorn-cms-publisher-ftp-password= {
+        file = ../../secrets/markus/bu-ki/bghorn-cms-publisher-ftp-password;
+        owner = "root";
+        mode = "0400";
+      };
+    };
 
     services = {
       nginx = {
@@ -121,14 +102,38 @@ in
             autoindex on;
           '';
         };
-        virtualHosts."mail.bu-ki.at" = {
-          enableACME = true;
-          forceSSL = true;
+      };
+
+      bghorn.backend = {
+        enable = true;
+        securityConfigFile = config.age.secrets.bghorn-cms-security-config.path;
+      };
+      bghorn.builder = {
+        enable = true;
+        preview = {
+          enable = true;
+          domain = "preview.cms.bu-ki.at";
         };
-        virtualHosts."cloud.marion-mayr.at" = {
-          enableACME = true;
-          forceSSL = true;
-        };
+      };
+      bghorn.proxy = {
+        enable = true;
+        domain = "cms.bu-ki.at";
+        acmeEmail = "markus@bu-ki.at";
+      };
+      bghorn.publisher = {
+        enable = true;
+        host = "wh3.asn-noe.ac.at";
+        user = "cms-publisher";
+        passwordFile = config.age.secrets.bghorn-cms-publisher-ftp-password.path;
+	caFile = ./asn-fortigate-ca.pem;
+        dryRun = false;
+      };
+      marmay-auth = {
+        enable = true;
+        port = 43000;
+        secretsFile = config.age.secrets.marmay-auth-security-config.path;
+        nginx.enable = true;
+        nginx.domain = "bu-ki.at";
       };
     };
   };
