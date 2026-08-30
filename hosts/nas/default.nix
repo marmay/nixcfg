@@ -68,6 +68,7 @@
     };
 
     hardware.enableAllFirmware = true;
+    services.openssh.settings.PermitRootLogin = "prohibit-password";
   };
 }
 
