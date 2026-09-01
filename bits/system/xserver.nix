@@ -22,11 +22,5 @@
     };
 
     services.openssh.settings.X11Forwarding = lib.mkDefault true;
-
-    services.xrdp = lib.mkIf config.marmar.xrdp {
-      enable = true;
-      openFirewall = true;
-      defaultWindowManager = "xsession";
-    };
   };
 }
