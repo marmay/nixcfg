@@ -7,7 +7,6 @@ in
 {
   imports = [ ./hm ./profiles ];
   config = {
-    home.file.".background.jpg".source = ./background.jpg;
     home.packages = [
       aspell
       pkgs.element-desktop

@@ -21,6 +21,7 @@
     ./sway.nix
     ./users.nix
     ./vpn_client.nix
+    ./xmonad
     ./xserver.nix
   ];
 }
