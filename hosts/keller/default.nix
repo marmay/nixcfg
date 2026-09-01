@@ -36,14 +36,13 @@
       swaySupport = true;
       steam = true;
       uefi = true;
-      xrdp = true;
+      xmonad = true;
     };
 
     marmar.users.markus.enable = true;
     marmar.users.markus.extraGroups = [ "cdrom" "video" "render" ];
     home-manager.users.markus.profiles.agda = true;
     home-manager.users.markus.profiles.dev = true;
-    home-manager.users.markus.profiles.xmonad = true;
     home-manager.users.markus.profiles.sway = true;
     home-manager.users.markus.profiles.photo = true;
     home-manager.users.markus.profiles.school = true;
