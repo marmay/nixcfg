@@ -1,6 +1,13 @@
 { config, lib, pkgs, ... }:
 {
   config = {
+    fonts.fontconfig.enable = true;
+
+    home.packages = with pkgs; [
+      fira-code
+      fira-code-symbols
+    ];
+
     services.emacs = {
       enable = true;
       client.enable = true;
@@ -196,7 +203,7 @@
           :bind
             (("M-y" . #'minuet-complete-with-minibuffer) ;; use minibuffer for completion
              ("M-i" . #'minuet-show-suggestion) ;; use overlay for completion
-        
+
              :map minuet-active-mode-map
              ;; These keymaps activate only when a minuet suggestion is displayed in the current buffer
              ("M-p" . #'minuet-previous-suggestion) ;; invoke completion or cycle to next completion
@@ -206,20 +213,20 @@
              ;; e.g. C-u 2 M-a will accepts 2 lines of completion.
              ("M-a" . #'minuet-accept-suggestion-line)
              ("M-e" . #'minuet-dismiss-suggestion))
-        
+
           :after evil-collection
           :init
             ;; if you want to enable auto suggestion.
             ;; Note that you can manually invoke completions without enable minuet-auto-suggestion-mode
             ;; (add-hook 'prog-mode-hook #'minuet-auto-suggestion-mode)
-        
+
           :config
             (setq minuet-provider 'codestral)
-        
+
             ;; Required when defining minuet-ative-mode-map in insert/normal states.
             ;; Not required when defining minuet-active-mode-map without evil state.
             (add-hook 'minuet-active-mode-hook #'evil-normalize-keymaps)
-        
+
             (minuet-set-optional-options minuet-openai-fim-compatible-options :max_tokens 256))
 
         (use-package treemacs-evil
@@ -340,12 +347,12 @@
           ;; Require trigger prefix before template name when completing.
           ;; :custom
           ;; (tempel-trigger-prefix "<")
-        
+
           :bind (("M-+" . tempel-complete) ;; Alternative tempel-expand
                  ("M-*" . tempel-insert))
-        
+
           :init
-        
+
           ;; Setup completion at point
           (defun tempel-setup-capf ()
             ;; Add the Tempel Capf to `completion-at-point-functions'.
@@ -358,11 +365,11 @@
             (setq-local completion-at-point-functions
                         (cons #'tempel-expand
                               completion-at-point-functions)))
-        
+
           (add-hook 'conf-mode-hook 'tempel-setup-capf)
           (add-hook 'prog-mode-hook 'tempel-setup-capf)
           (add-hook 'text-mode-hook 'tempel-setup-capf)
-        
+
           ;; Optionally make the Tempel templates available to Abbrev,
           ;; either locally or globally. `expand-abbrev' is bound to C-x '.
           ;; (add-hook 'prog-mode-hook #'tempel-abbrev-mode)
