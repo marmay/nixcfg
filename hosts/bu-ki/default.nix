@@ -44,6 +44,7 @@ in
     environment.systemPackages = with pkgs; [
       git
       htop
+      inputs.bghorn.packages.${pkgs.stdenv.hostPlatform.system}.bghorn-restore
     ];
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -84,6 +85,11 @@ in
         owner = "root";
         mode = "0400";
       };
+      competences-m2a-security-config = {
+        file = ../../secrets/markus/bu-ki/competences-m2a-security-config;
+	owner = "competences_m2a";
+	mode = "0400";
+      };
     };
 
     services = {
@@ -107,6 +113,9 @@ in
       bghorn.backend = {
         enable = true;
         securityConfigFile = config.age.secrets.bghorn-cms-security-config.path;
+	backup = {
+	  enable = true;
+	};
       };
       bghorn.builder = {
         enable = true;
@@ -134,6 +143,25 @@ in
         secretsFile = config.age.secrets.marmay-auth-security-config.path;
         nginx.enable = true;
         nginx.domain = "bu-ki.at";
+      };
+      competences = {
+        enable = true;
+	instances = {
+	  m2a = {
+	    port = 43210;
+	    subdomain = "m2a";
+	    database = "competences_m2a";
+	    secretsFile = config.age.secrets.competences-m2a-security-config.path;
+	    ensureTeacherO365 = "240fec71-f179-4a6d-9e81-b5f65a869ef4";
+	  };
+	};
+	nginx = {
+	  enable = true;
+	  domain = "bu-ki.at";
+	  enableACME = true;
+	  forceSSL = true;
+	};
+        postgresql.enable = true;
       };
     };
   };

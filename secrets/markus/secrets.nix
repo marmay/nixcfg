@@ -16,4 +16,5 @@ in
   "bu-ki/marmay-auth-security-config".publicKeys = [ keys.markus keys.bu-ki ];
   "bu-ki/bghorn-cms-security-config".publicKeys = [ keys.markus keys.bu-ki ];
   "bu-ki/bghorn-cms-publisher-ftp-password".publicKeys = [ keys.markus keys.bu-ki ];
+  "bu-ki/competences-m2a-security-config".publicKeys = [ keys.markus keys.bu-ki ];
 }
