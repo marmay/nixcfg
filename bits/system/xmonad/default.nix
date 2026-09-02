@@ -10,6 +10,7 @@
   config = lib.mkIf config.marmar.xmonad {
     environment.systemPackages = with pkgs; [
       dmenu
+      dunst
       feh
       flameshot
       kitty
@@ -36,14 +37,29 @@
 	};
       };
 
-      dunst.enable = true;
       udisks2.enable = true;
     };
 
     systemd.user.services = {
       # Only run dunst for the xmonad session:
-      dunst.unitConfig.ConditionEnvironment =
-        "XDG_CURRENT_DESKTOP=none+xmonad";
+      xmonad-dunst = {
+        enable = true;
+        description = "dunst desktop notifications service";
+        after = [ "graphical-session.target" ];
+        partOf = [ "graphical-session.target" ];
+        wantedBy = [ "graphical-session.target" ];
+
+        unitConfig.ConditionEnvironment =
+          "XDG_CURRENT_DESKTOP=none+xmonad";
+        path = with pkgs; [ dunst ];
+
+        serviceConfig = {
+          Type = "exec";
+          ExecStart = "${lib.getExe pkgs.dunst}";
+          Restart = "on-failure";
+          RestartSec = 5;
+        };
+      };
 
       # Define services for polybar, udiskie and feh:
       xmonad-polybar = {
@@ -68,15 +84,15 @@
       xmonad-udiskie = {
         enable = true;
         description = "udiskie removable disk automounter";
-      
+
         after = [ "graphical-session.target" "polybar.service" ];
         partOf = [ "graphical-session.target" ];
         wantedBy = [ "graphical-session.target" ];
-      
+
         unitConfig.ConditionEnvironment =
           "XDG_CURRENT_DESKTOP=none+xmonad";
         path = with pkgs; [ udisks2 libnotify ];
-      
+
         serviceConfig = {
           Type = "exec";
           ExecStart = "${lib.getExe' pkgs.udiskie "udiskie"} --automount --notify --tray";
@@ -92,9 +108,9 @@
         after = [ "graphical-session.target" ];
         partOf = [ "graphical-session.target" ];
         wantedBy = [ "graphical-session.target" ];
-        
+
         unitConfig.ConditionEnvironment = "XDG_CURRENT_DESKTOP=none+xmonad";
-        
+
         serviceConfig = {
           Type = "oneshot";
           RemainAfterExit = true;
