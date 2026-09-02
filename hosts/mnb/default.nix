@@ -61,6 +61,7 @@
     marmar.users.markus.enable = true;
 
     home-manager.users.markus.profiles.dev = true;
+    home-manager.users.markus.profiles.gui = true;
     home-manager.users.markus.profiles.photo = true;
     home-manager.users.markus.profiles.school = true;
     marmar.users.marion.enable = true;

@@ -42,6 +42,7 @@
     marmar.users.markus.enable = true;
     marmar.users.markus.extraGroups = [ "cdrom" "video" "render" ];
     home-manager.users.markus.profiles.agda = true;
+    home-manager.users.markus.profiles.gui = true;
     home-manager.users.markus.profiles.dev = true;
     home-manager.users.markus.profiles.sway = true;
     home-manager.users.markus.profiles.photo = true;
