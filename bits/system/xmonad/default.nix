@@ -68,14 +68,14 @@
         after = [ "graphical-session.target" ];
         partOf = [ "graphical-session.target" ];
         wantedBy = [ "graphical-session.target" ];
-      
+
         unitConfig.ConditionEnvironment =
           "XDG_CURRENT_DESKTOP=none+xmonad";
         path = with pkgs; [ xmonad-log ];
-      
+
         serviceConfig = {
           Type = "exec";
-          ExecStart = "${lib.getExe pkgs.polybar} -config=${./polybar_config.ini} top";
+          ExecStart = "${lib.getExe pkgs.polybarFull} -config=${./polybar_config.ini} top";
           Restart = "on-failure";
           RestartSec = 5;
         };
