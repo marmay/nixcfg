@@ -64,6 +64,10 @@
     nixpkgs.overlays = import ../../bits/overlays/all.nix;
 
     services.syncthing.enable = true;
+    services.postgresql.enable = true;
+    services.postgresql.ensureUsers = [ { name = "markus"; ensureDBOwnership = true; ensureClauses = { superuser = true; }; } ];
+    services.postgresql.ensureDatabases = [ "markus" ];
+
     environment.etc."sysctl.d/99-for-hogwarts-legacy.conf".text = ''
       vm.max_map_count=1048576
     '';
