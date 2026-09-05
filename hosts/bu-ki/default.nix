@@ -44,7 +44,6 @@ in
     environment.systemPackages = with pkgs; [
       git
       htop
-      inputs.bghorn.packages.${pkgs.stdenv.hostPlatform.system}.bghorn-restore
     ];
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
