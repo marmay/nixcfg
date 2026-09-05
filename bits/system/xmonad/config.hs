@@ -356,7 +356,8 @@ defaults hasSplitKbKeyboard = def {
       -- hooks, layouts
         layoutHook         = myLayout,
         manageHook         = namedScratchpadManageHook scratchpads <> myManageHook,
-        handleEventHook    = myEventHook
+        handleEventHook    = myEventHook,
+        startupHook        = setWMName "LG3D"
     }
 
 -- | Finally, a copy of the default bindings in simple textual tabular format.
