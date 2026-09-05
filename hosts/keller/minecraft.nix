@@ -24,6 +24,7 @@ in
   {
     nixpkgs.overlays = [ inputs.nix-minecraft.overlay ];
     nixpkgs.config.allowUnfree = true;
+    networking.firewall.allowedUDPPorts = [ 24454 ];
     services.minecraft-servers = {
       enable = true;
       eula = true;
@@ -31,7 +32,7 @@ in
       servers = {
         main = {
           enable = true;
-          package = forge-server; #pkgs.neoforgeServers.neoforge-1_20_4;
+          package = forge-server;
           serverProperties = {
             online-mode = false;
           };
@@ -61,6 +62,10 @@ in
               AnotherFurniture = pkgs.fetchurl {
                 url = "https://cdn.modrinth.com/data/ulloLmqG/versions/S9tNKT5R/another_furniture-forge-1.20.1-3.0.4.jar";
                 sha512 = "c57011a7e078cdb05ca05123d2ca3d01b1f3baca3555c067150e23d75268bb250b45a780da1488a49c08c46f6ed38e883f6cd47981babffe43b5f501984f1afc";
+              };
+	      SimpleVoiceChat = pkgs.fetchurl {
+	        url = "https://cdn.modrinth.com/data/9eGKb6K1/versions/S11m0QIb/voicechat-forge-1.20.1-2.6.22.jar";
+                sha512 = "I8izpZP+UGr42ODtwK+0U0l3fVzepB/8P6ma/C47m8d3C7mVH2dAF+pbPCPhEbDGAx69YYIMmgtRkeOZLZyHmA==";
               };
             });
           };
