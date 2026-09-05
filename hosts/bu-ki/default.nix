@@ -69,29 +69,6 @@ in
       acme.acceptTerms = true;
     };
 
-    age.secrets = {
-      marmay-auth-security-config = {
-        file = ../../secrets/markus/bu-ki/marmay-auth-security-config;
-        owner = "marmay-auth";
-        mode = "0400";
-      };
-      bghorn-cms-security-config = {
-        file = ../../secrets/markus/bu-ki/bghorn-cms-security-config;
-        owner = "bghorn";
-        mode = "0400";
-      };
-      bghorn-cms-publisher-ftp-password= {
-        file = ../../secrets/markus/bu-ki/bghorn-cms-publisher-ftp-password;
-        owner = "root";
-        mode = "0400";
-      };
-      competences-m2a-security-config = {
-        file = ../../secrets/markus/bu-ki/competences-m2a-security-config;
-	owner = "competences_m2a";
-	mode = "0400";
-      };
-    };
-
     services = {
       nginx = {
         enable = true;
@@ -109,60 +86,7 @@ in
           '';
         };
       };
-
-      bghorn.backend = {
-        enable = true;
-        securityConfigFile = config.age.secrets.bghorn-cms-security-config.path;
-	backup = {
-	  enable = true;
-	};
-      };
-      bghorn.builder = {
-        enable = true;
-        preview = {
-          enable = true;
-          domain = "preview.cms.bu-ki.at";
-        };
-      };
-      bghorn.proxy = {
-        enable = true;
-        domain = "cms.bu-ki.at";
-        acmeEmail = "markus@bu-ki.at";
-      };
-      bghorn.publisher = {
-        enable = true;
-        host = "wh3.asn-noe.ac.at";
-        user = "cms-publisher";
-        passwordFile = config.age.secrets.bghorn-cms-publisher-ftp-password.path;
-	caFile = ./asn-fortigate-ca.pem;
-        dryRun = false;
-      };
-      marmay-auth = {
-        enable = true;
-        port = 43000;
-        secretsFile = config.age.secrets.marmay-auth-security-config.path;
-        nginx.enable = true;
-        nginx.domain = "bu-ki.at";
-      };
-      competences = {
-        enable = true;
-	instances = {
-	  m2a = {
-	    port = 43210;
-	    subdomain = "m2a";
-	    database = "competences_m2a";
-	    secretsFile = config.age.secrets.competences-m2a-security-config.path;
-	    ensureTeacherO365 = "240fec71-f179-4a6d-9e81-b5f65a869ef4";
-	  };
-	};
-	nginx = {
-	  enable = true;
-	  domain = "bu-ki.at";
-	  enableACME = true;
-	  forceSSL = true;
-	};
-        postgresql.enable = true;
-      };
+      postgresql.enable = true;
     };
   };
 }
