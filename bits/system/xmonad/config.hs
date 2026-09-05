@@ -332,16 +332,6 @@ myManageHook = composeOne
 --
 myEventHook = ewmhDesktopsEventHook
 
-------------------------------------------------------------------------
--- Startup hook
-
--- Perform an arbitrary action each time xmonad starts or is restarted
--- with mod-q.  Used by, e.g., XMonad.Layout.PerWorkspace to initialize
--- per-workspace layout choices.
---
--- By default, do nothing.
-myStartupHook = setWMName "LG3D"
-
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
 -- use the defaults defined in xmonad/XMonad/Config.hs
@@ -366,8 +356,7 @@ defaults hasSplitKbKeyboard = def {
       -- hooks, layouts
         layoutHook         = myLayout,
         manageHook         = namedScratchpadManageHook scratchpads <> myManageHook,
-        handleEventHook    = myEventHook,
-        startupHook        = myStartupHook
+        handleEventHook    = myEventHook
     }
 
 -- | Finally, a copy of the default bindings in simple textual tabular format.
@@ -422,7 +411,10 @@ help = unlines ["The default modifier key is 'alt'. Default keybindings:",
     "mod-button3  Set the window to floating mode and resize by dragging"]
 
 main :: IO ()
-main = mkDbusClient >>= main'
+main = do
+  putStrLn "Running start hook to hit xmonad-session.target."
+  spawn "/run/current-system/systemd/bin/systemctl --user --no-block start xmonad-session.target"
+  mkDbusClient >>= main'
 
 detectSplitKbKeyboard :: IO Bool
 detectSplitKbKeyboard =

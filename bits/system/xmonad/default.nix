@@ -10,8 +10,6 @@
   config = lib.mkIf config.marmar.xmonad {
     environment.systemPackages = with pkgs; [
       dmenu
-      dunst
-      feh
       flameshot
       kitty
       lato
@@ -20,7 +18,6 @@
       pass
       polybar
       rofi
-      udiskie
     ];
 
     services = {
@@ -40,17 +37,22 @@
       udisks2.enable = true;
     };
 
+    systemd.user.targets.xmonad-session = {
+      description = "xmonad session";
+      documentation = [ "man:systemd.special(7)" ];
+      partOf = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+    };
+
     systemd.user.services = {
       # Only run dunst for the xmonad session:
       xmonad-dunst = {
         enable = true;
         description = "dunst desktop notifications service";
-        after = [ "graphical-session.target" ];
-        partOf = [ "graphical-session.target" ];
-        wantedBy = [ "graphical-session.target" ];
+        after = [ "xmonad-session.target" ];
+        partOf = [ "xmonad-session.target" ];
+        wantedBy = [ "xmonad-session.target" ];
 
-        unitConfig.ConditionEnvironment =
-          "XDG_CURRENT_DESKTOP=none+xmonad";
         path = with pkgs; [ dunst ];
 
         serviceConfig = {
@@ -65,12 +67,10 @@
       xmonad-polybar = {
         enable = true;
         description = "polybar navigation bar";
-        after = [ "graphical-session.target" ];
-        partOf = [ "graphical-session.target" ];
-        wantedBy = [ "graphical-session.target" ];
+        after = [ "xmonad-session.target" ];
+        partOf = [ "xmonad-session.target" ];
+        wantedBy = [ "xmonad-session.target" ];
 
-        unitConfig.ConditionEnvironment =
-          "XDG_CURRENT_DESKTOP=none+xmonad";
         path = with pkgs; [ xmonad-log ];
 
         serviceConfig = {
@@ -85,12 +85,10 @@
         enable = true;
         description = "udiskie removable disk automounter";
 
-        after = [ "graphical-session.target" "polybar.service" ];
-        partOf = [ "graphical-session.target" ];
-        wantedBy = [ "graphical-session.target" ];
+        after = [ "xmonad-session.target" "polybar.service" ];
+        partOf = [ "xmonad-session.target" ];
+        wantedBy = [ "xmonad-session.target" ];
 
-        unitConfig.ConditionEnvironment =
-          "XDG_CURRENT_DESKTOP=none+xmonad";
         path = with pkgs; [ udisks2 libnotify ];
 
         serviceConfig = {
@@ -105,11 +103,9 @@
         enable = true;
 	description = "Set desktop wallpaper";
 
-        after = [ "graphical-session.target" ];
-        partOf = [ "graphical-session.target" ];
-        wantedBy = [ "graphical-session.target" ];
-
-        unitConfig.ConditionEnvironment = "XDG_CURRENT_DESKTOP=none+xmonad";
+        after = [ "xmonad-session.target" ];
+        partOf = [ "xmonad-session.target" ];
+        wantedBy = [ "xmonad-session.target" ];
 
         serviceConfig = {
           Type = "oneshot";
