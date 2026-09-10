@@ -23,6 +23,7 @@
 	  collection-langgerman
 	  collection-latex
 	  collection-xetex
+	  csvsimple
 	  emoji
 	  enumitem
 	  environ
