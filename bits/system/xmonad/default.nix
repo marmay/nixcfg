@@ -9,15 +9,14 @@
 
   config = lib.mkIf config.marmar.xmonad {
     environment.systemPackages = with pkgs; [
-      dmenu
-      flameshot
       kitty
       lato
       nerd-fonts.iosevka-term
-      onboard
       pass
-      polybar
       rofi
+      flameshot
+      onboard
+      xlockmore
     ];
 
     services = {
@@ -26,7 +25,14 @@
           enable = true;
           extraPackages = haskellPackages: [ haskellPackages.dbus ];
           enableContribAndExtras = true;
-          config = ./config.hs;
+          config = ./Config.hs;
+	  xmonadCliArgs = [
+	    "--terminal-emulator=${pkgs.kitty}/bin/kitty"
+	    "--rofi=${pkgs.rofi}/bin/rofi"
+	    "--flameshot=${pkgs.flameshot}/bin/flameshot"
+	    "--onboard=${pkgs.onboard}/bin/onboard"
+	    "--screen-locker=${pkgs.xlockmore}/bin/xlock"
+	  ];
         };
 
         xautolock = {

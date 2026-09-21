@@ -83,6 +83,23 @@
 	];
       };
     };
+    devShells.x86_64-linux.xmonad = let pkgs = nixpkgs.legacyPackages.x86_64-linux; in pkgs.mkShell {
+      packages = [
+        (pkgs.runCommand "hls-links" {} ''
+	   mkdir -p $out/bin
+           ln -s ${pkgs.haskell-language-server}/bin/haskell-language-server-9.10.3 $out/bin/haskell-language-server
+         '')
+        (pkgs.haskellPackages.ghcWithPackages
+	  (let cfg = self.nixosConfigurations.mnb.config.services.xserver.windowManager.xmonad;
+	    in (hp: [ hp.xmonad ]
+                    ++ cfg.extraPackages hp
+                    ++ pkgs.lib.optionals cfg.enableContribAndExtras [ hp.xmonad-contrib hp.xmonad-extras ])))
+        pkgs.haskell-language-server
+        pkgs.ghcid
+        pkgs.haskellPackages.fourmolu
+        pkgs.haskellPackages.hlint
+      ];
+    };
   } // flake-utils.lib.eachDefaultSystem (system: {
     legacyPackages = import nixpkgs {
       inherit system;

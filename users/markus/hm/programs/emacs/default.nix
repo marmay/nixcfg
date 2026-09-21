@@ -193,6 +193,7 @@
             (setq lsp-ui-sideline-show-diagnostics t))
         (use-package lsp-haskell
           :config
+	    (setf lsp-haskell-plugin-stan-global-on nil)
             (setf lsp-haskell-formatting-provider "fourmolu")
             (setf lsp-haskell-server-path "haskell-language-server"))
         (use-package fira-code-mode

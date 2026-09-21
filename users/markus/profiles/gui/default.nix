@@ -11,6 +11,7 @@
     home.packages = with pkgs; [
       eog
       tutanota-desktop
+      spotify
     ];
 
     home.sessionVariables = {
