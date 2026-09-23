@@ -21,7 +21,6 @@ import System.Process (system)
 
 import qualified DBus as D
 import qualified DBus.Client as D
-import qualified Codec.Binary.UTF8.String              as UTF8
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -55,7 +54,6 @@ defaults hasSplitKbKeyboard config = ewmh $ ewmhFullscreen $ docks $ def {
       [ ((c.modMask .|. shiftMask, xK_Return), spawn config.terminalEmulator )
       , ((c.modMask .|. shiftMask, xK_p     ), spawn (config.rofi <> " -modi drun,window,ssh -show drun -show-icons"))
       , ((c.modMask .|. shiftMask, xK_l     ), spawn config.screenLocker )
-      , ((c.modMask .|. shiftMask, xK_q     ), restart "xmonad" True)
 
       -- Layout management:
       , ((c.modMask              , xK_space ), sendMessage NextLayout)
@@ -147,7 +145,7 @@ defaults hasSplitKbKeyboard config = ewmh $ ewmhFullscreen $ docks $ def {
                                          >> windows W.shiftMaster))
       ]
 
-    layout =
+    layout = avoidStruts $
           ResizableTall 1 (3 % 100) (1 % 2) [(2 % 3), (1 % 3)]
       ||| ThreeColMid 1 (3 % 100) (1 % 2)
       ||| Full
@@ -251,7 +249,7 @@ dbusOutput dbus str =
       iname  = D.interfaceName_ "org.xmonad.Log"
       mname  = D.memberName_ "Update"
       signal = D.signal opath iname mname
-      body   = [D.toVariant $ UTF8.decodeString str]
+      body   = [D.toVariant str]
   in  D.emit dbus $ signal { D.signalBody = body }
 
 polybarHook :: D.Client -> PP
