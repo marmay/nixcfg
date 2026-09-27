@@ -62,6 +62,8 @@
       };
     };
 
+    environment.sessionVariables.MOZ_USE_XINPUT2 = "1";
+
     marmar.users.markus.enable = true;
 
     home-manager.users.markus.profiles.dev = true;
