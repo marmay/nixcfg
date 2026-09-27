@@ -1,20 +1,20 @@
-{-# OPTIONS_GHC -Wall -Wno-missing-signatures #-}
-{-# LANGUAGE OverloadedRecordDot #-}
+{-# LANGUAGE OverloadedRecordDot, PartialTypeSignatures #-}
+{-# OPTIONS_GHC -Wno-partial-type-signatures #-}
 
 module Main (main) where
 
 import XMonad
-import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
-import XMonad.Hooks.SetWMName
+import XMonad.Hooks.StatusBar
+import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Layout.Tabbed
 import XMonad.Layout.ThreeColumns
-import XMonad.Layout.ResizableTile (ResizableTall(..))
 import XMonad.Prompt
 import XMonad.Prompt.Pass
 import XMonad.Prompt.FuzzyMatch
 import XMonad.Actions.OnScreen
+import XMonad.Actions.ToggleFullFloat
 import Control.Monad.Catch (catchAll)
 import System.Exit
 import System.Process (system)
@@ -26,8 +26,16 @@ import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 import Options.Applicative qualified as O
 import Data.Ratio ((%))
+import System.Environment (setEnv)
 
-defaults hasSplitKbKeyboard config = ewmh $ ewmhFullscreen $ docks $ def {
+defaults :: Bool -> Config -> D.Client -> XConfig _
+defaults hasSplitKbKeyboard config dbus =
+  ewmh
+  $ ewmhFullscreen
+  $ toggleFullFloatEwmhFullscreen
+  $ docks
+  $ withSB (polybar dbus)
+  $ def {
       -- simple stuff
         terminal           = config.terminalEmulator
       , focusFollowsMouse  = True
@@ -44,10 +52,6 @@ defaults hasSplitKbKeyboard config = ewmh $ ewmhFullscreen $ docks $ def {
 
       -- hooks, layouts
       , layoutHook         = layout
-      , manageHook         = manageDocks <+> def
-
-      -- Required for proper DPI scaling on the 4K display:
-      , startupHook        = setWMName "LG3D"
     }
   where
     keyBindings = \c -> M.fromList $
@@ -73,7 +77,7 @@ defaults hasSplitKbKeyboard config = ewmh $ ewmhFullscreen $ docks $ def {
       , ((c.modMask .|. shiftMask, xK_j     ), windows W.swapDown  )
       , ((c.modMask .|. shiftMask, xK_k     ), windows W.swapUp    )
       , ((c.modMask              , xK_t     ), withFocused $ windows . W.sink)
-      , ((c.modMask              , xK_f     ), toggleFull)
+      , ((c.modMask              , xK_f     ), withFocused toggleFullFloat)
 
       -- Screenshotter (flameshot):
       , ((0                      , xK_Print ), spawn (config.flameshot <> " gui"))
@@ -110,14 +114,6 @@ defaults hasSplitKbKeyboard config = ewmh $ ewmhFullscreen $ docks $ def {
       sorter = fuzzySort
     }
 
-    --Looks to see if focused window is floating and if it is the places it in the stack
-    --else it makes it floating but as full screen
-    toggleFull = withFocused (\windowId -> do
-        { floats <- gets (W.floating . windowset);
-            if windowId `M.member` floats
-            then withFocused $ windows . W.sink
-            else withFocused $ windows . (flip W.float $ W.RationalRect 0 0 1 1) })
-
     -- For moving windows to different workspaces on my split keyboard,
     -- a special mapping is required, due to a different keyboard layout:
     workspaceMoveKeys
@@ -146,7 +142,7 @@ defaults hasSplitKbKeyboard config = ewmh $ ewmhFullscreen $ docks $ def {
       ]
 
     layout = avoidStruts $
-          ResizableTall 1 (3 % 100) (1 % 2) [(2 % 3), (1 % 3)]
+          Tall 1 (3 % 100) (1 % 2)
       ||| ThreeColMid 1 (3 % 100) (1 % 2)
       ||| Full
       ||| simpleTabbed
@@ -206,12 +202,6 @@ parser =
 parserInfo :: O.ParserInfo Config
 parserInfo = O.info parser O.fullDesc
 
-main :: IO ()
-main = do
-  putStrLn "Running start hook to hit xmonad-session.target."
-  spawn "/run/current-system/systemd/bin/systemctl --user --no-block start xmonad-session.target"
-  mkDbusClient >>= main'
-
 detectSplitKbKeyboard :: IO Bool
 detectSplitKbKeyboard =
   do
@@ -223,13 +213,16 @@ detectSplitKbKeyboard =
     putStrLn $ "Error while detecting splitkb.com keyboard: " ++ show e
     return False
         
-main' :: D.Client -> IO ()
-main' dbus = do
+main :: IO ()
+main = do
+  setEnv "_JAVA_ATW_WM_NONREPARENTING" "1"
+  putStrLn "Running start hook to hit xmonad-session.target."
+  spawn "/run/current-system/systemd/bin/systemctl --user --no-block start xmonad-session.target"
+  dbus <- mkDbusClient
   config <- O.execParser parserInfo
   hasSplitkb <- detectSplitKbKeyboard
-  getDirectories >>=
-    launch ((defaults hasSplitkb config)
-             { logHook = dynamicLogWithPP (polybarHook dbus)})
+  directories <- getDirectories
+  launch (defaults hasSplitkb config dbus) directories
 
 ------------------------------------------------------------------------
 -- Polybar settings (needs DBus client).
@@ -252,25 +245,23 @@ dbusOutput dbus str =
       body   = [D.toVariant str]
   in  D.emit dbus $ signal { D.signalBody = body }
 
-polybarHook :: D.Client -> PP
-polybarHook dbus =
-  let nonNSP :: String -> Maybe String
-      nonNSP "NSP" = Nothing
-      nonNSP s     = Just s
-      toStr Nothing  = ""
-      toStr (Just s) = s
-      withForeground c = wrap ("%{F" <> c <> "}") "%{F-}"
-      withUnderline c = wrap ("%{u" <> c <> "}%{+u}") "%{-u}%{u-}"
-      blue   = "#2E9AFE"
-      gray   = "#7F7F7F"
-      orange = "#ea4300"
-      purple = "#9058c7"
-      darkGray = "#3F3F3F"
-  in  def { ppOutput          = dbusOutput dbus
-          , ppCurrent         = toStr . fmap (withUnderline blue . withForeground blue) . nonNSP
-          , ppVisible         = toStr . fmap (withUnderline darkGray . withForeground gray) . nonNSP
-          , ppUrgent          = toStr . fmap (withUnderline darkGray . withForeground orange) . nonNSP
-          , ppHidden          = toStr . fmap (withUnderline darkGray . withForeground gray) . nonNSP
-          , ppHiddenNoWindows = toStr . fmap (withUnderline darkGray  . withForeground darkGray) . nonNSP
-          , ppTitle           = toStr . fmap (withForeground purple) . nonNSP . shorten 90
-          }
+polybar :: D.Client -> StatusBarConfig
+polybar dbus =
+  def { sbLogHook = dynamicLogWithPP polybarConfig }
+  where
+    polybarConfig = def
+      { ppOutput          = dbusOutput dbus
+      , ppCurrent         = withUnderline blue . withForeground blue
+      , ppVisible         = withUnderline darkGray . withForeground gray
+      , ppUrgent          = withUnderline darkGray . withForeground orange
+      , ppHidden          = withUnderline darkGray . withForeground gray
+      , ppHiddenNoWindows = withUnderline darkGray  . withForeground darkGray
+      , ppTitle           = withForeground purple . shorten 90
+      }
+    withForeground c = wrap ("%{F" <> c <> "}") "%{F-}"
+    withUnderline c = wrap ("%{u" <> c <> "}%{+u}") "%{-u}%{u-}"
+    blue   = "#2E9AFE"
+    gray   = "#7F7F7F"
+    orange = "#ea4300"
+    purple = "#9058c7"
+    darkGray = "#3F3F3F"

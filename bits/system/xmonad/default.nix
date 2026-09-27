@@ -26,18 +26,14 @@
           extraPackages = haskellPackages: [ haskellPackages.dbus ];
           enableContribAndExtras = true;
           config = ./Config.hs;
-	  xmonadCliArgs = [
-	    "--terminal-emulator=${pkgs.kitty}/bin/kitty"
-	    "--rofi=${pkgs.rofi}/bin/rofi"
-	    "--flameshot=${pkgs.flameshot}/bin/flameshot"
-	    "--onboard=${pkgs.onboard}/bin/onboard"
-	    "--screen-locker=${pkgs.xlockmore}/bin/xlock"
-	  ];
+          xmonadCliArgs = [
+            "--terminal-emulator=${pkgs.kitty}/bin/kitty"
+            "--rofi=${pkgs.rofi}/bin/rofi"
+            "--flameshot=${pkgs.flameshot}/bin/flameshot"
+            "--onboard=${pkgs.onboard}/bin/onboard"
+            "--screen-locker=${pkgs.xlockmore}/bin/xlock"
+          ];
         };
-
-        xautolock = {
-	  enable = true;
-	};
       };
 
       udisks2.enable = true;
@@ -91,7 +87,7 @@
         enable = true;
         description = "udiskie removable disk automounter";
 
-        after = [ "xmonad-session.target" "polybar.service" ];
+        after = [ "xmonad-session.target" "xmonad-polybar.service" ];
         partOf = [ "xmonad-session.target" ];
         wantedBy = [ "xmonad-session.target" ];
 
@@ -107,7 +103,7 @@
 
       xmonad-feh-background = {
         enable = true;
-	description = "Set desktop wallpaper";
+        description = "Set desktop wallpaper";
 
         after = [ "xmonad-session.target" ];
         partOf = [ "xmonad-session.target" ];
@@ -115,8 +111,23 @@
 
         serviceConfig = {
           Type = "oneshot";
-          RemainAfterExit = true;
           ExecStart = "${lib.getExe pkgs.feh} --no-fehbg --bg-fill ${./wallpaper.jpeg}";
+        };
+      };
+
+      xmonad-xss-lock = {
+        enable = true;
+        description = "screen locking service";
+        after = [ "xmonad-session.target" ];
+        partOf = [ "xmonad-session.target" ];
+        wantedBy = [ "xmonad-session.target" ];
+
+        serviceConfig = {
+          Type = "exec";
+          ExecStartPre = "${lib.getExe pkgs.xset} s 600";
+          ExecStart = "${lib.getExe pkgs.xss-lock} --transfer-sleep-lock -- ${lib.getExe pkgs.xlockmore}";
+          Restart = "on-failure";
+          RestartSec = 5;
         };
       };
     };
