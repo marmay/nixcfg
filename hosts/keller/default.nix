@@ -36,7 +36,7 @@
       swaySupport = true;
       steam = true;
       uefi = true;
-      xmonad = true;
+      xmonad.enable = true;
     };
 
     marmar.users.markus.enable = true;

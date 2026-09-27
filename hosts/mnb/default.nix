@@ -55,7 +55,11 @@
       printingSupport = true;
       steam = true;
       uefi = true;
-      xmonad = true;
+      xmonad.enable = true;
+      xmonad.displays = {
+        internal = "eDP-1";
+        external = "HDMI-1";
+      };
     };
 
     marmar.users.markus.enable = true;
