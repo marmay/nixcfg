@@ -15,6 +15,7 @@ import XMonad.Prompt.Pass
 import XMonad.Prompt.FuzzyMatch
 import XMonad.Actions.OnScreen
 import XMonad.Actions.ToggleFullFloat
+import XMonad.Util.EZConfig (mkKeymap)
 import Control.Monad.Catch (catchAll)
 import System.Exit
 import System.Process (system)
@@ -54,58 +55,58 @@ defaults hasSplitKbKeyboard config dbus =
       , layoutHook         = layout
     }
   where
-    keyBindings = \c -> M.fromList $
-      [ ((c.modMask .|. shiftMask, xK_Return), spawn config.terminalEmulator )
-      , ((c.modMask .|. shiftMask, xK_p     ), spawn (config.rofi <> " -modi drun,window,ssh -show drun -show-icons"))
-      , ((c.modMask .|. shiftMask, xK_l     ), spawn config.screenLocker )
+    keyBindings = \c -> mkKeymap c $
+      [ ("M-S-<Return>", spawn config.terminalEmulator)
+      , ("M-S-p",        spawn (config.rofi <> " -modi drun,window,ssh -show drun -show-icons"))
+      , ("M-S-l",        spawn config.screenLocker)
 
       -- Layout management:
-      , ((c.modMask              , xK_space ), sendMessage NextLayout)
-      , ((c.modMask .|. shiftMask, xK_space ), setLayout $ c.layoutHook)
-      , ((c.modMask              , xK_h     ), sendMessage Shrink)
-      , ((c.modMask              , xK_l     ), sendMessage Expand)
-      , ((c.modMask              , xK_comma ), sendMessage (IncMasterN 1))
-      , ((c.modMask              , xK_period), sendMessage (IncMasterN (-1)))
+      , ("M-<Space>",    sendMessage NextLayout)
+      , ("M-S-<Space>",  setLayout $ c.layoutHook)
+      , ("M-h",          sendMessage Shrink)
+      , ("M-l",          sendMessage Expand)
+      , ("M-,",          sendMessage (IncMasterN 1))
+      , ("M-.",          sendMessage (IncMasterN (-1)))
 
       -- Window management:
-      , ((c.modMask .|. shiftMask, xK_c     ), kill)
-      , ((c.modMask              , xK_n     ), refresh)
-      , ((c.modMask              , xK_j     ), windows W.focusDown)
-      , ((c.modMask              , xK_k     ), windows W.focusUp  )
-      , ((c.modMask              , xK_m     ), windows W.focusMaster  )
-      , ((c.modMask              , xK_Return), windows W.swapMaster)
-      , ((c.modMask .|. shiftMask, xK_j     ), windows W.swapDown  )
-      , ((c.modMask .|. shiftMask, xK_k     ), windows W.swapUp    )
-      , ((c.modMask              , xK_t     ), withFocused $ windows . W.sink)
-      , ((c.modMask              , xK_f     ), withFocused toggleFullFloat)
+      , ("M-S-c",        kill)
+      , ("M-n",          refresh)
+      , ("M-j",          windows W.focusDown)
+      , ("M-k",          windows W.focusUp)
+      , ("M-m",          windows W.focusMaster)
+      , ("M-<Return>",   windows W.swapMaster)
+      , ("M-S-j",        windows W.swapDown)
+      , ("M-S-k",        windows W.swapUp)
+      , ("M-t",          withFocused $ windows . W.sink)
+      , ("M-f",          withFocused toggleFullFloat)
 
       -- Screenshotter (flameshot):
-      , ((0                      , xK_Print ), spawn (config.flameshot <> " gui"))
+      , ("<Print>",      spawn (config.flameshot <> " gui"))
 
       -- Pass integration:
-      , ((c.modMask                              , xK_s), passPrompt myXPConfig)
-      , ((c.modMask .|. controlMask              , xK_s), passEditPrompt myXPConfig)
-      , ((c.modMask                 .|. shiftMask, xK_s), passGeneratePrompt myXPConfig)
-      , ((c.modMask .|. controlMask .|. shiftMask, xK_s), passRemovePrompt myXPConfig)
+      , ("M-s",          passPrompt myXPConfig)
+      , ("M-C-s",        passEditPrompt myXPConfig)
+      , ("M-S-s",        passGeneratePrompt myXPConfig)
+      , ("M-C-S-s",      passRemovePrompt myXPConfig)
 
       -- On-screen keyboard
-      , ((c.modMask                              , xK_o), spawn config.onboard)
+      , ("M-o",          spawn config.onboard)
       ]
       ++
       -- mod-[1..9], Switch to workspace N
-      [ ((m .|. c.modMask, k), windows (f i))
-        | (i, k) <- zip c.workspaces ([xK_1 .. xK_9] ++ [xK_0])
-        , (f, m) <- [ (viewOnScreen 0, 0)
-                    , (viewOnScreen 1, controlMask)
-                    , (W.greedyView, controlMask .|. shiftMask) ]
+      [ ("M-" <> m <> k, windows (f i))
+        | (i, k) <- zip c.workspaces [[d] | d <- "1234567890"]
+        , (f, m) <- [ (viewOnScreen 0, "")
+                    , (viewOnScreen 1, "C-")
+                    , (W.greedyView, "C-S-") ]
       ]
       ++
-      [((m .|. c.modMask, k), windows $ W.shift i)
-          | (i, (m, k)) <- zip c.workspaces workspaceMoveKeys]
+      [ ("M-" <> k, windows $ W.shift i)
+          | (i, k) <- zip c.workspaces workspaceMoveKeys]
       ++
-      [((m .|. c.modMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
-          | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
-          , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+      [ ("M-" <> m <> k, screenWorkspace sc >>= flip whenJust (windows . f))
+          | (k, sc) <- zip ["w", "e", "r"] [0..]
+          , (f, m) <- [(W.view, ""), (W.shift, "S-")]]
 
     -- XMonad Prompt config for pass integration.
     myXPConfig :: XPConfig
@@ -117,17 +118,8 @@ defaults hasSplitKbKeyboard config dbus =
     -- For moving windows to different workspaces on my split keyboard,
     -- a special mapping is required, due to a different keyboard layout:
     workspaceMoveKeys
-      | hasSplitKbKeyboard = [ (shiftMask, xK_asciicircum)
-                             , (shiftMask, xK_3)
-                             , (mod5Mask, xK_n)
-                             , (mod5Mask, xK_x)
-                             , (mod5Mask, xK_v)
-                             , (shiftMask, xK_4)
-                             , (mod5Mask, xK_e)
-                             , (mod5Mask, xK_v)
-                             , (mod5Mask, xK_b)
-                             ] 
-      | otherwise =          [ (shiftMask, k) | k <- [xK_1 .. xK_9] ]
+      | hasSplitKbKeyboard = [ "S-^", "S-3", "M5-n", "M5-x", "M5-y", "S-4", "M5-e", "M5-v", "M5-b" ]
+      | otherwise          = [ "S-" <> [k] | k <- ['1'..'9'] ]
 
     mouseBindings = \c -> M.fromList
       -- mod-button1, Set the window to floating mode and move by dragging
