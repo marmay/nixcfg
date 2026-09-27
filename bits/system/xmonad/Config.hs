@@ -115,6 +115,7 @@ defaults hasSplitKbKeyboard config dbus =
             , -- Network menu and airplane mode:
               ("M-S-n", spawn config.networkMenu)
             , ("<XF86Favorites>", spawn config.networkMenu) -- the star key on the ThinkPad
+            , ("M-<XF86Favorites>", spawn config.bluetoothMenu)
             , ("M-S-a", spawn config.airplaneMode)
             ]
                 ++
@@ -216,6 +217,7 @@ data Config = Config
     , brightnessControl :: !FilePath
     , networkMenu :: !FilePath
     , airplaneMode :: !FilePath
+    , bluetoothMenu :: !FilePath
     , displayConfig :: !(Maybe DisplayConfig)
     }
     deriving (Eq, Show)
@@ -244,6 +246,7 @@ parser =
         <*> pathOption "brightness-control" 'b' "xmonad-brightness" "Path to the brightness control script (up|down)."
         <*> pathOption "network-menu" 'n' "networkmanager_dmenu" "Path to the network menu."
         <*> pathOption "airplane-mode" 'a' "xmonad-airplane-mode" "Path to the airplane mode toggle script."
+        <*> pathOption "bluetooth-menu" 'B' "rofi-bluetooth" "Path to the bluetooth menu."
         <*> O.optional
             ( DisplayConfig
                 <$> pathOption "xrandr" 'x' "xrandr" "Path to xrandr."

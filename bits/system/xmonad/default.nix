@@ -8,7 +8,7 @@ let
   # dependencies, so xmonad only needs their paths.
   volumeControl = pkgs.writeShellApplication {
     name = "xmonad-volume";
-    runtimeInputs = [ pkgs.wireplumber pkgs.libnotify ];
+    runtimeInputs = [ pkgs.wireplumber pkgs.libnotify pkgs.gawk ];
     text = ''
       target=@DEFAULT_AUDIO_SINK@
       label=Lautstärke
@@ -34,7 +34,7 @@ let
 
   brightnessControl = pkgs.writeShellApplication {
     name = "xmonad-brightness";
-    runtimeInputs = [ pkgs.brightnessctl pkgs.libnotify ];
+    runtimeInputs = [ pkgs.brightnessctl pkgs.libnotify pkgs.coreutils ];
     text = ''
       case "''${1:-}" in
         up)   brightnessctl -q set 5%+ ;;
@@ -49,7 +49,7 @@ let
 
   airplaneMode = pkgs.writeShellApplication {
     name = "xmonad-airplane-mode";
-    runtimeInputs = [ pkgs.util-linux ];
+    runtimeInputs = [ pkgs.util-linux pkgs.gnugrep ];
     text = ''
       # Same effect as the hardware airplane key, which the kernel handles
       # through rfkill. NetworkManager follows rfkill. The notification comes
@@ -64,7 +64,7 @@ let
 
   rfkillNotify = pkgs.writeShellApplication {
     name = "xmonad-rfkill-notify";
-    runtimeInputs = [ pkgs.util-linux pkgs.libnotify ];
+    runtimeInputs = [ pkgs.util-linux pkgs.libnotify pkgs.gnugrep ];
     text = ''
       airplane() {
         if LC_ALL=C rfkill --noheadings --output SOFT list wlan | grep -qx blocked; then
@@ -119,6 +119,91 @@ let
     highlight = "#2E9AFE,#9058C7"
     timeout = 2
   '';
+
+  # Bluetooth headset status for polybar, and a connect/disconnect toggle.
+  # "The headset" is the first paired device BlueZ classifies as audio.
+  headsetControl = pkgs.writeShellApplication {
+    name = "xmonad-headset";
+    runtimeInputs = [ pkgs.bluez pkgs.pulseaudio pkgs.libnotify pkgs.coreutils pkgs.gawk ];
+    text = ''
+      mac=""
+      for m in $(bluetoothctl devices Paired | cut -d' ' -f2); do
+        if [[ "$(bluetoothctl info "$m")" == *"Icon: audio-"* ]]; then
+          mac=$m
+          break
+        fi
+      done
+
+      connected() {
+        [ -n "$mac" ] && [[ "$(bluetoothctl info "$mac")" == *"Connected: yes"* ]]
+      }
+
+      # Active profile of the headset's card, e.g. a2dp-sink or headset-head-unit.
+      profile() {
+        LC_ALL=C pactl list cards | awk '/Name: bluez_card/ { p = 1 } p && /Active Profile:/ { print $3; exit }'
+      }
+
+      case "''${1:-}" in
+        status)
+          if connected; then
+            case "$(profile)" in
+              a2dp*)    echo "%{T3}󰋋%{T-}" ;;
+              headset*) echo "%{T3}󰋎%{T-}" ;;
+              *)        echo "%{T3}󰋋%{T-}" ;;
+            esac
+          else
+            echo "%{T3}%{F#3F3F3F}󰋋%{F-}%{T-}"
+          fi
+          ;;
+        toggle)
+          if [ -z "$mac" ]; then
+            notify-send -a xmonad -u critical "Kein Headset gekoppelt"
+            exit 1
+          fi
+          name=$(bluetoothctl info "$mac" | awk -F': ' '/Alias:/ { print $2; exit }')
+          if connected; then
+            if bluetoothctl disconnect "$mac" >/dev/null; then
+              notify-send -a xmonad "$name getrennt"
+            fi
+          elif bluetoothctl connect "$mac" >/dev/null; then
+            notify-send -a xmonad "$name verbunden"
+          else
+            notify-send -a xmonad -u critical "$name: Verbindung fehlgeschlagen"
+          fi
+          ;;
+        profile-toggle)
+          card=$(LC_ALL=C pactl list cards | awk '/Name: bluez_card/ { print $2; exit }')
+          if [ -z "$card" ] || ! connected; then
+            notify-send -a xmonad -u critical "Kein Headset verbunden"
+            exit 1
+          fi
+          # Remember the exact A2DP profile (codec) so that switching back
+          # restores it instead of the generic default.
+          memo="''${XDG_RUNTIME_DIR:-/tmp}/xmonad-headset-a2dp"
+          current=$(profile)
+          case "$current" in
+            a2dp*)
+              echo "$current" > "$memo"
+              pactl set-card-profile "$card" headset-head-unit
+              notify-send -a xmonad "Headset: HFP (Mikrofon)"
+              ;;
+            *)
+              wanted=a2dp-sink
+              if [ -r "$memo" ]; then
+                wanted=$(cat "$memo")
+              fi
+              pactl set-card-profile "$card" "$wanted"
+              notify-send -a xmonad "Headset: A2DP (Musik)"
+              ;;
+          esac
+          ;;
+        *)
+          echo "usage: $0 status|toggle|profile-toggle" >&2
+          exit 2
+          ;;
+      esac
+    '';
+  };
 
   networkMenuConfig = pkgs.writeText "networkmanager-dmenu.ini" ''
     [dmenu]
@@ -205,6 +290,7 @@ in
             "--brightness-control=${lib.getExe brightnessControl}"
             "--network-menu=${lib.getExe networkMenu}"
             "--airplane-mode=${lib.getExe airplaneMode}"
+            "--bluetooth-menu=${lib.getExe pkgs.rofi-bluetooth}"
           ] ++ lib.optionals displaysConfigured [
             "--xrandr=${lib.getExe pkgs.xrandr}"
             "--internal-display=${cfg.displays.internal}"
@@ -250,7 +336,7 @@ in
         partOf = [ "xmonad-session.target" ];
         wantedBy = [ "xmonad-session.target" ];
 
-        path = with pkgs; [ xmonad-log ];
+        path = with pkgs; [ xmonad-log headsetControl rofi-bluetooth rofi ];
 
         serviceConfig = {
           Type = "exec";
