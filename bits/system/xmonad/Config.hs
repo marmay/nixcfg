@@ -28,7 +28,7 @@ import XMonad.Util.ExtensibleState qualified as XS
 import DBus qualified as D
 import DBus.Client qualified as D
 
-import Control.Monad (unless, when)
+import Control.Monad (forM_, join, unless, when)
 import Data.Foldable (toList)
 import Data.List (find)
 import Data.Map qualified as M
@@ -74,7 +74,8 @@ defaults hasSplitKbKeyboard config dbus =
             }
   where
     keyBindings = \c ->
-        mkKeymap c $
+        M.insert (passthroughKey c.modMask) togglePassthrough $
+            mkKeymap c $
             [ ("M-S-<Return>", spawn config.terminalEmulator)
             , ("M-S-p", spawn (config.rofi <> " -modi drun,window,ssh -show drun -show-icons"))
             , ("M-S-l", spawn config.screenLocker)
@@ -116,7 +117,10 @@ defaults hasSplitKbKeyboard config dbus =
               ("M-S-n", spawn config.networkMenu)
             , ("<XF86Favorites>", spawn config.networkMenu) -- the star key on the ThinkPad
             , ("M-<XF86Favorites>", spawn config.bluetoothMenu)
+            , -- Remote desktops (the keyboard passthrough toggle is inserted above):
+              ("M-S-v", spawn config.remoteMenu)
             , ("M-S-a", spawn config.airplaneMode)
+            , ("M-<Control_R>", spawn config.touchpadToggle)
             ]
                 ++
                 -- External display menu, plus bindings for the dynamic workspace
@@ -218,6 +222,8 @@ data Config = Config
     , networkMenu :: !FilePath
     , airplaneMode :: !FilePath
     , bluetoothMenu :: !FilePath
+    , remoteMenu :: !FilePath
+    , touchpadToggle :: !FilePath
     , displayConfig :: !(Maybe DisplayConfig)
     }
     deriving (Eq, Show)
@@ -247,6 +253,8 @@ parser =
         <*> pathOption "network-menu" 'n' "networkmanager_dmenu" "Path to the network menu."
         <*> pathOption "airplane-mode" 'a' "xmonad-airplane-mode" "Path to the airplane mode toggle script."
         <*> pathOption "bluetooth-menu" 'B' "rofi-bluetooth" "Path to the bluetooth menu."
+        <*> pathOption "remote-menu" 'R' "xmonad-remote" "Path to the remote desktop menu."
+        <*> pathOption "touchpad-toggle" 'T' "xmonad-touchpad" "Path to the touchpad toggle script."
         <*> O.optional
             ( DisplayConfig
                 <$> pathOption "xrandr" 'x' "xrandr" "Path to xrandr."
@@ -428,6 +436,43 @@ syncWorkspaces = do
                 windows $ \s -> foldr (W.shiftWin "1") s wins
                 removeEmptyWorkspaceByTag "0"
 
+------------------------------------------------------------------------
+-- Keyboard passthrough: hand every key, Super combinations included, to
+-- the focused window (remote desktops, virtual machines). Only the toggle
+-- key itself stays grabbed while it is active.
+
+-- | The toggle chord, given the configured modifier. Used both for the key
+-- binding and for the grab that stays active during passthrough.
+passthroughKey :: KeyMask -> (KeyMask, KeySym)
+passthroughKey modm = (modm, xK_Escape)
+
+newtype Passthrough = Passthrough Bool
+
+instance ExtensionClass Passthrough where
+    initialValue = Passthrough False
+
+togglePassthrough :: X ()
+togglePassthrough = do
+    Passthrough active <- XS.get
+    dpy <- asks display
+    root <- asks theRoot
+    conf <- asks config
+    -- mkGrabs expands the key list the same way xmonad does at startup,
+    -- including the NumLock and CapsLock variants.
+    wanted <-
+        if active
+            then mkGrabs (M.keys (keys conf conf))
+            else mkGrabs [passthroughKey (modMask conf)]
+    io $ do
+        ungrabKey dpy anyKey anyModifier root
+        forM_ wanted $ \(m, kc) -> grabKey dpy kc m root True grabModeAsync grabModeAsync
+    XS.put (Passthrough (not active))
+    -- Re-run the log hook so the polybar indicator updates right away.
+    join (asks (logHook . config))
+    spawn $
+        "notify-send -a xmonad -h string:x-dunst-stack-tag:Tastatur "
+            <> if active then "'Tastatur: xmonad'" else "'Tastatur: Fenster'"
+
 main :: IO ()
 main = do
     setEnv "_JAVA_AWT_WM_NONREPARENTING" "1"
@@ -473,6 +518,7 @@ polybar dbus =
             , ppHidden = withUnderline darkGray . withForeground gray
             , ppHiddenNoWindows = withUnderline darkGray . withForeground darkGray
             , ppTitle = withForeground purple . shorten 90
+            , ppExtras = [passthroughIndicator]
             }
     withForeground c = wrap ("%{F" <> c <> "}") "%{F-}"
     withUnderline c = wrap ("%{u" <> c <> "}%{+u}") "%{-u}%{u-}"
@@ -481,3 +527,12 @@ polybar dbus =
     orange = "#ea4300"
     purple = "#9058c7"
     darkGray = "#3F3F3F"
+
+-- | Polybar item while the keyboard passthrough is active.
+passthroughIndicator :: X (Maybe String)
+passthroughIndicator = do
+    Passthrough active <- XS.get
+    pure $
+        if active
+            then Just "%{T3}%{F#ea4300}\xF030C%{F-}%{T-}" -- nf-md-keyboard; GHC rejects the raw glyph
+            else Nothing

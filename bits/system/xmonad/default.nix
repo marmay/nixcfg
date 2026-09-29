@@ -205,6 +205,31 @@ let
     '';
   };
 
+  # Enable/disable the touchpad; the TrackPoint is a separate device and
+  # keeps working.
+  touchpadToggle = pkgs.writeShellApplication {
+    name = "xmonad-touchpad";
+    runtimeInputs = [ pkgs.xinput pkgs.gnugrep pkgs.libnotify ];
+    text = ''
+      # xinput marks disabled devices with a leading "∼ " in its name list;
+      # strip it, since the device is still addressed by its plain name.
+      name=$(xinput list --name-only | grep -i -m1 touchpad || true)
+      name=''${name#"∼ "}
+      if [ -z "$name" ]; then
+        notify-send -a xmonad -u critical "Kein Touchpad gefunden"
+        exit 1
+      fi
+      props=$(xinput list-props "$name")
+      if [[ "$props" =~ Device\ Enabled[^:]*:[[:space:]]*1 ]]; then
+        xinput disable "$name"
+        notify-send -a xmonad -h string:x-dunst-stack-tag:Touchpad "Touchpad aus"
+      else
+        xinput enable "$name"
+        notify-send -a xmonad -h string:x-dunst-stack-tag:Touchpad "Touchpad an"
+      fi
+    '';
+  };
+
   networkMenuConfig = pkgs.writeText "networkmanager-dmenu.ini" ''
     [dmenu]
     dmenu_command = ${lib.getExe pkgs.rofi} -dmenu -i
@@ -223,6 +248,8 @@ let
   };
 in
 {
+  imports = [ ./remote.nix ];
+
   options = {
     marmar.xmonad = {
       enable = lib.mkEnableOption "xmonad";
@@ -268,6 +295,7 @@ in
       flameshot
       onboard
       xlockmore
+      libnotify # notify-send for the keyboard passthrough toggle in Config.hs
     ];
 
     # brightnessctl ships udev rules that let the video group write the backlight.
@@ -291,6 +319,7 @@ in
             "--network-menu=${lib.getExe networkMenu}"
             "--airplane-mode=${lib.getExe airplaneMode}"
             "--bluetooth-menu=${lib.getExe pkgs.rofi-bluetooth}"
+            "--touchpad-toggle=${lib.getExe touchpadToggle}"
           ] ++ lib.optionals displaysConfigured [
             "--xrandr=${lib.getExe pkgs.xrandr}"
             "--internal-display=${cfg.displays.internal}"
