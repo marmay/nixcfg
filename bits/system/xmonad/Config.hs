@@ -28,7 +28,7 @@ import XMonad.Util.ExtensibleState qualified as XS
 import DBus qualified as D
 import DBus.Client qualified as D
 
-import Control.Monad (forM_, join, unless, when)
+import Control.Monad (forM_, join, unless, void, when)
 import Data.Foldable (toList)
 import Data.List (find)
 import Data.Map qualified as M
@@ -76,82 +76,84 @@ defaults hasSplitKbKeyboard config dbus =
     keyBindings = \c ->
         M.insert (passthroughKey c.modMask) togglePassthrough $
             mkKeymap c $
-            [ ("M-S-<Return>", spawn config.terminalEmulator)
-            , ("M-S-p", spawn (config.rofi <> " -modi drun,window,ssh -show drun -show-icons"))
-            , ("M-S-l", spawn config.screenLocker)
-            , -- Layout management:
-              ("M-<Space>", sendMessage NextLayout)
-            , ("M-S-<Space>", setLayout $ c.layoutHook)
-            , ("M-h", sendMessage Shrink)
-            , ("M-l", sendMessage Expand)
-            , ("M-,", sendMessage (IncMasterN 1))
-            , ("M-.", sendMessage (IncMasterN (-1)))
-            , -- Window management:
-              ("M-S-c", kill)
-            , ("M-n", refresh)
-            , ("M-j", windows W.focusDown)
-            , ("M-k", windows W.focusUp)
-            , ("M-m", windows W.focusMaster)
-            , ("M-<Return>", windows W.swapMaster)
-            , ("M-S-j", windows W.swapDown)
-            , ("M-S-k", windows W.swapUp)
-            , ("M-t", withFocused $ windows . W.sink)
-            , ("M-f", withFocused toggleFullFloat)
-            , -- Screenshotter (flameshot):
-              ("<Print>", spawn (config.flameshot <> " gui"))
-            , -- Pass integration:
-              ("M-s", passPrompt myXPConfig)
-            , ("M-C-s", passEditPrompt myXPConfig)
-            , ("M-S-s", passGeneratePrompt myXPConfig)
-            , ("M-C-S-s", passRemovePrompt myXPConfig)
-            , -- On-screen keyboard
-              ("M-o", spawn config.onboard)
-            , -- Volume and brightness (feedback via dunst):
-              ("<XF86AudioRaiseVolume>", spawn (config.volumeControl <> " up"))
-            , ("<XF86AudioLowerVolume>", spawn (config.volumeControl <> " down"))
-            , ("<XF86AudioMute>", spawn (config.volumeControl <> " mute"))
-            , ("<XF86AudioMicMute>", spawn (config.volumeControl <> " mic-mute"))
-            , ("<XF86MonBrightnessUp>", spawn (config.brightnessControl <> " up"))
-            , ("<XF86MonBrightnessDown>", spawn (config.brightnessControl <> " down"))
-            , -- Network menu and airplane mode:
-              ("M-S-n", spawn config.networkMenu)
-            , ("<XF86Favorites>", spawn config.networkMenu) -- the star key on the ThinkPad
-            , ("M-<XF86Favorites>", spawn config.bluetoothMenu)
-            , -- Remote desktops (the keyboard passthrough toggle is inserted above):
-              ("M-S-v", spawn config.remoteMenu)
-            , ("M-S-a", spawn config.airplaneMode)
-            , ("M-<Control_R>", spawn config.touchpadToggle)
-            ]
-                ++
-                -- External display menu, plus bindings for the dynamic workspace
-                -- "0" it creates. View and shift ignore unknown tags, so these are
-                -- no-ops while "0" does not exist.
-                concat
-                    [ [ ("<XF86Display>", displayMenu c')
-                      , ("M-0", windows (viewOnScreen 0 "0"))
-                      , ("M-C-0", windows (viewOnScreen 1 "0"))
-                      , ("M-C-S-0", windows (W.greedyView "0"))
-                      , ("M-" <> workspaceZeroMoveKey, windows (W.shift "0"))
-                      ]
-                    | c' <- toList config.displayConfig
-                    ]
-                ++
-                -- mod-[1..9], Switch to workspace N
-                [ ("M-" <> m <> k, windows (f i))
-                | (i, k) <- zip c.workspaces [[d] | d <- "123456789"]
-                , (f, m) <-
-                    [ (viewOnScreen 0, "")
-                    , (viewOnScreen 1, "C-")
-                    , (W.greedyView, "C-S-")
-                    ]
+                [ ("M-S-<Return>", spawn config.terminalEmulator)
+                , ("M-S-p", spawn (config.rofi <> " -modi drun,window,ssh -show drun -show-icons"))
+                , ("M-S-l", spawn config.screenLocker)
+                , -- Layout management:
+                  ("M-<Space>", sendMessage NextLayout)
+                , ("M-S-<Space>", setLayout $ c.layoutHook)
+                , ("M-h", sendMessage Shrink)
+                , ("M-l", sendMessage Expand)
+                , ("M-,", sendMessage (IncMasterN 1))
+                , ("M-.", sendMessage (IncMasterN (-1)))
+                , -- Window management:
+                  ("M-S-c", kill)
+                , ("M-n", refresh)
+                , ("M-j", windows W.focusDown)
+                , ("M-k", windows W.focusUp)
+                , ("M-m", windows W.focusMaster)
+                , ("M-<Return>", windows W.swapMaster)
+                , ("M-S-j", windows W.swapDown)
+                , ("M-S-k", windows W.swapUp)
+                , ("M-t", withFocused $ windows . W.sink)
+                , ("M-f", withFocused toggleFullFloat)
+                , -- Screenshotter (flameshot):
+                  ("<Print>", spawn (config.flameshot <> " gui"))
+                , -- Pass integration:
+                  ("M-s", passPrompt myXPConfig)
+                , ("M-C-s", passEditPrompt myXPConfig)
+                , ("M-S-s", passGeneratePrompt myXPConfig)
+                , ("M-C-S-s", passRemovePrompt myXPConfig)
+                , -- On-screen keyboard
+                  ("M-o", spawn config.onboard)
+                , -- Volume and brightness (feedback via dunst):
+                  ("<XF86AudioRaiseVolume>", spawn (config.volumeControl <> " up"))
+                , ("<XF86AudioLowerVolume>", spawn (config.volumeControl <> " down"))
+                , ("<XF86AudioMute>", spawn (config.volumeControl <> " mute"))
+                , ("<XF86AudioMicMute>", spawn (config.volumeControl <> " mic-mute"))
+                , ("<XF86MonBrightnessUp>", spawn (config.brightnessControl <> " up"))
+                , ("<XF86MonBrightnessDown>", spawn (config.brightnessControl <> " down"))
+                , -- Network menu and airplane mode:
+                  ("M-S-n", spawn config.networkMenu)
+                , ("<XF86Favorites>", spawn config.networkMenu) -- the star key on the ThinkPad
+                , ("M-<XF86Favorites>", spawn config.bluetoothMenu)
+                , -- Remote desktops (the keyboard passthrough toggle is inserted above):
+                  ("M-S-v", spawn config.remoteMenu)
+                , ("M-S-a", spawn config.airplaneMode)
+                , ("M-<Control_R>", spawn config.touchpadToggle)
+                , ("M-S-m", spawn config.nasToggle)
                 ]
-                ++ [ ("M-" <> k, windows $ W.shift i)
-                   | (i, k) <- zip c.workspaces workspaceMoveKeys
-                   ]
-                ++ [ ("M-" <> m <> k, screenWorkspace sc >>= flip whenJust (windows . f))
-                   | (k, sc) <- zip ["w", "e", "r"] [0 ..]
-                   , (f, m) <- [(W.view, ""), (W.shift, "S-")]
-                   ]
+                    ++
+                    -- External display menu, plus bindings for the dynamic workspace
+                    -- "0" it creates. View and shift ignore unknown tags, so these are
+                    -- no-ops while "0" does not exist.
+                    concat
+                        [ [ ("<XF86Display>", displayMenu c')
+                          , ("M-<XF86Display>", displayRotateMenu c')
+                          , ("M-0", windows (viewOnScreen 0 "0"))
+                          , ("M-C-0", windows (viewOnScreen 1 "0"))
+                          , ("M-C-S-0", windows (W.greedyView "0"))
+                          , ("M-" <> workspaceZeroMoveKey, windows (W.shift "0"))
+                          ]
+                        | c' <- toList config.displayConfig
+                        ]
+                    ++
+                    -- mod-[1..9], Switch to workspace N
+                    [ ("M-" <> m <> k, windows (f i))
+                    | (i, k) <- zip c.workspaces [[d] | d <- "123456789"]
+                    , (f, m) <-
+                        [ (viewOnScreen 0, "")
+                        , (viewOnScreen 1, "C-")
+                        , (W.greedyView, "C-S-")
+                        ]
+                    ]
+                    ++ [ ("M-" <> k, windows $ W.shift i)
+                       | (i, k) <- zip c.workspaces workspaceMoveKeys
+                       ]
+                    ++ [ ("M-" <> m <> k, screenWorkspace sc >>= flip whenJust (windows . f))
+                       | (k, sc) <- zip ["w", "e", "r"] [0 ..]
+                       , (f, m) <- [(W.view, ""), (W.shift, "S-")]
+                       ]
 
     -- XMonad Prompt config for pass integration.
     myXPConfig :: XPConfig
@@ -224,6 +226,7 @@ data Config = Config
     , bluetoothMenu :: !FilePath
     , remoteMenu :: !FilePath
     , touchpadToggle :: !FilePath
+    , nasToggle :: !FilePath
     , displayConfig :: !(Maybe DisplayConfig)
     }
     deriving (Eq, Show)
@@ -255,6 +258,7 @@ parser =
         <*> pathOption "bluetooth-menu" 'B' "rofi-bluetooth" "Path to the bluetooth menu."
         <*> pathOption "remote-menu" 'R' "xmonad-remote" "Path to the remote desktop menu."
         <*> pathOption "touchpad-toggle" 'T' "xmonad-touchpad" "Path to the touchpad toggle script."
+        <*> pathOption "nas-toggle" 'N' "xmonad-nas" "Path to the NAS mount toggle script."
         <*> O.optional
             ( DisplayConfig
                 <$> pathOption "xrandr" 'x' "xrandr" "Path to xrandr."
@@ -327,6 +331,26 @@ displayChangeHook displayConfig = do
         XS.put (ExternalConnected now)
         if now then displayMenu displayConfig else externalGone displayConfig
 
+displayRotateMenu :: DisplayConfig -> X ()
+displayRotateMenu displayConfig = do
+    runSelectedAction
+        def
+        [ ("Normal", rotate "normal")
+        , ("Links", rotate "left")
+        , ("Rechts", rotate "right")
+        , ("Invertiert", rotate "inverted")
+        ]
+  where
+    rotate orientation =
+        void $
+            runXrandr
+                displayConfig
+                [ "--output"
+                , displayConfig.internalDisplay
+                , "--rotate"
+                , orientation
+                ]
+
 displayMenu :: DisplayConfig -> X ()
 displayMenu displayConfig = do
     -- GridSelect draws on the focused screen. Focus the primary one first;
@@ -376,8 +400,9 @@ displayMenu displayConfig = do
             , displayConfig.internalDisplay
             ]
 
--- | Switch the external output off and put the internal one back to its
--- preferred (native) mode. Used both from the menu and on unplug.
+{- | Switch the external output off and put the internal one back to its
+preferred (native) mode. Used both from the menu and on unplug.
+-}
 internalOnly :: DisplayConfig -> X ()
 internalOnly displayConfig =
     switchTo
@@ -395,16 +420,18 @@ internalOnly displayConfig =
 externalGone :: DisplayConfig -> X ()
 externalGone = internalOnly
 
--- | Run xrandr and record the new mode only if it succeeded, so a failed
--- switch (e.g. a mode the display does not offer) leaves the state alone.
+{- | Run xrandr and record the new mode only if it succeeded, so a failed
+switch (e.g. a mode the display does not offer) leaves the state alone.
+-}
 switchTo :: DisplayConfig -> DisplayMode -> [String] -> X ()
 switchTo displayConfig mode args = do
     ok <- runXrandr displayConfig args
     when ok (XS.put mode)
 
--- | Synchronous xrandr call. xmonad reaps child processes through its own
--- SIGCHLD handler, so the handlers are removed for the duration of the call;
--- otherwise waiting for the child fails even when xrandr succeeded.
+{- | Synchronous xrandr call. xmonad reaps child processes through its own
+SIGCHLD handler, so the handlers are removed for the duration of the call;
+otherwise waiting for the child fails even when xrandr succeeded.
+-}
 runXrandr :: DisplayConfig -> [String] -> X Bool
 runXrandr displayConfig args = io $ do
     (rc, _, err) <-
@@ -441,8 +468,9 @@ syncWorkspaces = do
 -- the focused window (remote desktops, virtual machines). Only the toggle
 -- key itself stays grabbed while it is active.
 
--- | The toggle chord, given the configured modifier. Used both for the key
--- binding and for the grab that stays active during passthrough.
+{- | The toggle chord, given the configured modifier. Used both for the key
+binding and for the grab that stays active during passthrough.
+-}
 passthroughKey :: KeyMask -> (KeyMask, KeySym)
 passthroughKey modm = (modm, xK_Escape)
 

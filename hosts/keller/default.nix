@@ -29,7 +29,7 @@
 
     marmar = {
       haskell = true;
-      nas_client = true;
+      nas_client.enable = true;
       nvidiaGpuSupport = true;
       printingSupport = true;
       scanningSupport = true;

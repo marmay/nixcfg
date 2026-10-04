@@ -56,7 +56,8 @@
 
     marmar = {
       haskell = true;
-      nas_client = true;
+      nas_client.enable = true;
+      nas_client.manual = true;
       intelGpuSupport = true;
       printingSupport = true;
       steam = true;

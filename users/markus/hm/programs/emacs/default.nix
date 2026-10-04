@@ -36,6 +36,7 @@
         epkgs.magit
         epkgs.org
         epkgs.org-roam
+        epkgs.org-roam-ui
 	epkgs.pdf-tools
         epkgs.quelpa
         epkgs.quelpa-use-package
@@ -43,6 +44,8 @@
         epkgs.treemacs
         epkgs.treemacs-evil
         epkgs.use-package
+	epkgs.citar
+	epkgs.citar-org-roam
 	(epkgs.callPackage ./minuet-ai.el.nix {})
       ];
       extraConfig = ''
@@ -74,20 +77,17 @@
 	  :config
             (pdf-tools-install)
             (setq pdf-view-display-size 'fit-page)
-            (add-hook 'pdf-view-mode-hook (lambda ()
-                                            (pdf-view-auto-slice-minor-mode)
-                                            (auto-revert-mode 1)))
+            (add-hook 'pdf-view-mode-hook (lambda () (auto-revert-mode 1)))
             ;; Ensure Evil window management keybindings work in pdf-view-mode
             (with-eval-after-load 'evil
               (evil-set-initial-state 'pdf-view-mode 'normal)
-              (evil-define-key 'normal pdf-view-mode-map
-                ;; Keybindings for window management
-                "C-w h" 'evil-window-left
-                "C-w l" 'evil-window-right
-                "C-w j" 'evil-window-down
-                "C-w k" 'evil-window-up
-                "C-w w" 'evil-window-next
-                "C-w o" 'delete-other-windows)))
+              (evil-define-key* 'normal pdf-view-mode-map
+                (kbd "C-w h") #'evil-window-left
+                (kbd "C-w l") #'evil-window-right
+                (kbd "C-w j") #'evil-window-down
+                (kbd "C-w k") #'evil-window-up
+                (kbd "C-w w") #'evil-window-next
+                (kbd "C-w o") #'delete-other-windows)))
         (use-package helm
           :bind  ("M-x" . helm-M-x)
                  ("M-y" . helm-show-kill-ring)
@@ -131,11 +131,33 @@
                     `(;; match those tagged with :inbox:, are not scheduled, are not DONE.
                       ("ii" "unscheduled tasks" tags "-SCHEDULED={.+}-DEADLINE={.+}/!+TODO|+STARTED|+WAITING")))
 	    )
+            (org-babel-do-load-languages
+             'org-babel-load-languages
+             '((haskell . t) (shell . t) (emacs-lisp . t)))
+            (with-eval-after-load 'ob-haskell
+              (defun org-babel-load-session:haskell (session body params)
+                "Load BODY into SESSION by sending :load to GHCi.
+                 Replaces the stock version, which calls `inferior-haskell-load-file',
+                 a function current haskell-mode no longer provides."
+                (save-window-excursion
+                  (org-babel-prep-session:haskell session params)
+                  (let ((buffer (org-babel-haskell-initiate-session session params))
+                        (load-file (concat (org-babel-temp-file "haskell-load-") ".hs")))
+                    (with-temp-file load-file (insert body))
+                    (org-babel-comint-in-buffer buffer
+                      (goto-char (process-mark (get-buffer-process buffer)))
+                      (insert (format ":load \"%s\"" load-file))
+                      (comint-send-input nil t))
+                    buffer))))
+            (setq haskell-process-args-cabal-repl
+                  '("--ghc-option=-ferror-spans"
+                    "--repl-options=-Wwarn -Wno-missing-home-modules"))
           )
         (use-package org-roam
           :ensure t
+	  :demand t
           :custom
-          (org-roam-directory (file-truename "~/Offline/Dokumente/Schule/Recherche/"))
+          (org-roam-directory (file-truename "~/roam/"))
           :bind (("C-c n l" . org-roam-buffer-toggle)
                  ("C-c n f" . org-roam-node-find)
                  ("C-c n g" . org-roam-graph)
@@ -145,10 +167,54 @@
                  ("C-c n j" . org-roam-dailies-capture-today))
           :config
           ;; If you're using a vertical completion framework, you might want a more informative completion interface
-          (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+          (setq org-roam-database-connector 'sqlite-builtin)
           (org-roam-db-autosync-mode)
+          (add-to-list 'org-roam-capture-templates
+            '("d" "default" plain "%?"
+              :target (file+head "%<%Y%m%d%H%M%S>-''${slug}.org"
+                                 "#+title: ''${title}\n")
+              :unnarrowed t))
+          (add-to-list 'org-roam-capture-templates
+             '("r" "reference" plain "%?"
+              :target (file+head "refs/''${citar-citekey}.org"
+                                 ":PROPERTIES:\n:AUTHORS: ''${citar-author}\n:YEAR: ''${citar-date}\n:END:\n#+title: ''${citar-title}\n#+filetags: :lit:\n\n* Zusammenfassung\n\n* Offene Fragen\n")
+              :unnarrowed t))
+          (add-to-list 'org-roam-capture-templates
+             '("c" "concept" plain "%?"
+              :target (file+head "concepts/''${slug}.org"
+                                 "#+title: ''${title}\n#+filetags: :konzept:\n\n")
+              :unnarrowed t))
+          ;; Standard task ("Aufgabe"): one testable row of the competence grid.
+          ;; Blueprint: mathe/aufgaben/4/pythagoras/01-direkte-anwendung.org
+          (add-to-list 'org-roam-capture-templates
+             '("a" "aufgabe" plain "%?"
+              :target (file+head "mathe/aufgaben/%^{Ordner (z. B. 4/pythagoras)}/''${slug}.org"
+                                 "#+title: ''${title}\n#+filetags: :mathe:aufgabe:\n\n* Typisches Aufgabenformat\n\n* Varianten\n\n* Erweiterungen\n\n* Lehrplanbezug\n\n* Voraussetzungen\n\n* Level\n\n** Wesentlich\n\n** Mittelstufe\n\n** Fortgeschritten\n\n* Thin-Sliced\n\n| # |   |   |   |\n|---+---+---+---|\n| 1 |   |   |   |\n\n* Sachanwendungen\n\n* Folgeaufgaben\n")
+              :unnarrowed t))
           ;; If using org-roam-protocol
           (require 'org-roam-protocol))
+        (use-package org-roam-ui
+          :straight
+            (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
+            :after org-roam
+        ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+        ;;         a hookable mode anymore, you're advised to pick something yourself
+        ;;         if you don't care about startup time, use this:
+            :hook (after-init . org-roam-ui-mode)
+            :config
+            (setq org-roam-ui-sync-theme t
+                  org-roam-ui-follow t
+                  org-roam-ui-update-on-save t
+                  org-roam-ui-open-on-start t))
+        (use-package citar
+          :custom
+	    (citar-bibliography '("~/roam/references.bib"))
+	    (citar-library-paths '("~/roam/library/")))
+        (use-package citar-org-roam
+          :after (citar org-roam)
+          :config
+          (setq citar-org-roam-capture-template-key "r")
+          (citar-org-roam-mode))
         (use-package evil-org
           :ensure t
           :after org

@@ -230,6 +230,45 @@ let
     '';
   };
 
+  # NAS switch: mount or unmount the shares (nas.target, see nas_client.nix)
+  # and report the state for polybar.
+  nasToggle = pkgs.writeShellApplication {
+    name = "xmonad-nas";
+    runtimeInputs = [ pkgs.systemd pkgs.libnotify ];
+    text = ''
+      mounted() { systemctl is-active --quiet media-nas.mount; }
+      case "''${1:-}" in
+        status)
+          if mounted; then
+            echo "%{T3}󰒍%{T-}"
+          else
+            echo "%{T3}%{F#3F3F3F}󰒍%{F-}%{T-}"
+          fi
+          ;;
+        toggle)
+          if mounted; then
+            if systemctl stop media-nas.mount; then
+              notify-send -a xmonad -h string:x-dunst-stack-tag:NAS "NAS getrennt"
+            else
+              notify-send -a xmonad -u critical -h string:x-dunst-stack-tag:NAS "NAS: Trennen fehlgeschlagen"
+            fi
+          else
+            notify-send -a xmonad -h string:x-dunst-stack-tag:NAS "NAS wird verbunden …"
+            if systemctl start nas.target; then
+              notify-send -a xmonad -h string:x-dunst-stack-tag:NAS "NAS verbunden"
+            else
+              notify-send -a xmonad -u critical -h string:x-dunst-stack-tag:NAS "NAS nicht erreichbar"
+            fi
+          fi
+          ;;
+        *)
+          echo "usage: $0 status|toggle" >&2
+          exit 2
+          ;;
+      esac
+    '';
+  };
+
   networkMenuConfig = pkgs.writeText "networkmanager-dmenu.ini" ''
     [dmenu]
     dmenu_command = ${lib.getExe pkgs.rofi} -dmenu -i
@@ -320,6 +359,7 @@ in
             "--airplane-mode=${lib.getExe airplaneMode}"
             "--bluetooth-menu=${lib.getExe pkgs.rofi-bluetooth}"
             "--touchpad-toggle=${lib.getExe touchpadToggle}"
+            "--nas-toggle=${lib.getExe nasToggle}"
           ] ++ lib.optionals displaysConfigured [
             "--xrandr=${lib.getExe pkgs.xrandr}"
             "--internal-display=${cfg.displays.internal}"
@@ -365,7 +405,7 @@ in
         partOf = [ "xmonad-session.target" ];
         wantedBy = [ "xmonad-session.target" ];
 
-        path = with pkgs; [ xmonad-log headsetControl rofi-bluetooth rofi ];
+        path = with pkgs; [ xmonad-log headsetControl nasToggle rofi-bluetooth rofi ];
 
         serviceConfig = {
           Type = "exec";

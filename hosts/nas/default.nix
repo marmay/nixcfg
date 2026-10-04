@@ -18,7 +18,7 @@
     # boot.extraModulePackages = [ pkgs.linuxPackages_6_11.tbs ];
 
     marmar = {
-      nas_client = true;
+      nas_client.enable = true;
       intelGpuSupport = true;
       printingSupport = true;
       steam = true;

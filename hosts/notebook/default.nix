@@ -20,7 +20,7 @@
     };
 
     marmar = {
-      nas_client = true;
+      nas_client.enable = true;
       intelGpuSupport = true;
       printingSupport = true;
       steam = true;
