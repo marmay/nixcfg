@@ -4,6 +4,6 @@
 # (decryption on the hosts), so adding a connection is one entry here plus
 # one `agenix -e` invocation.
 {
-  rdp = [ "dc01" "dc02" ];
+  rdp = [ "dc01" "dc02" "printserver" ];
   vnc = [ ];
 }
