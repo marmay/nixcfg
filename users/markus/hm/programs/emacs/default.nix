@@ -185,11 +185,12 @@
                                  "#+title: ''${title}\n#+filetags: :konzept:\n\n")
               :unnarrowed t))
           ;; Standard task ("Aufgabe"): one testable row of the competence grid.
-          ;; Blueprint: mathe/aufgaben/4/pythagoras/01-direkte-anwendung.org
+          ;; Blueprint: mathe/4/pythagoras/aufgaben/s-01-direkte-anwendung.org
+          ;; Layout: <fach>/<jahr>/<kapitel>/aufgaben/{s-,q-,}<slug>.org
           (add-to-list 'org-roam-capture-templates
              '("a" "aufgabe" plain "%?"
-              :target (file+head "mathe/aufgaben/%^{Ordner (z. B. 4/pythagoras)}/''${slug}.org"
-                                 "#+title: ''${title}\n#+filetags: :mathe:aufgabe:\n\n* Typisches Aufgabenformat\n\n* Varianten\n\n* Erweiterungen\n\n* Lehrplanbezug\n\n* Voraussetzungen\n\n* Level\n\n** Wesentlich\n\n** Mittelstufe\n\n** Fortgeschritten\n\n* Thin-Sliced\n\n| # |   |   |   |\n|---+---+---+---|\n| 1 |   |   |   |\n\n* Sachanwendungen\n\n* Folgeaufgaben\n")
+              :target (file+head "%^{Kapitel (z. B. mathe/4/pythagoras)}/aufgaben/%^{Präfix (s- Standard, q- Querschnitt, leer)|s-|q-|}''${slug}.org"
+                                 "#+title: ''${title}\n#+filetags: :%^{Fach|mathe|informatik|dgb}:aufgabe:\n\n* Typisches Aufgabenformat\n\n* Varianten\n\n* Erweiterungen\n\n* Lehrplanbezug\n\n* Voraussetzungen\n\n* Level\n\n** Wesentlich\n\n** Mittelstufe\n\n** Fortgeschritten\n\n* Thin-Sliced\n\n| # |   |   |   |\n|---+---+---+---|\n| 1 |   |   |   |\n\n* Sachanwendungen\n\n* Folgeaufgaben\n")
               :unnarrowed t))
           ;; If using org-roam-protocol
           (require 'org-roam-protocol))
