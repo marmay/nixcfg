@@ -2,6 +2,7 @@
 
 let
   cfg = config.marmar.nas_client;
+  server = "10.0.0.80";
   nfsUnit = "media-nas.mount";
 
   # Two modes. Automatic: every mount is behind an automount and comes up on
@@ -11,12 +12,16 @@ let
   automountOpts = [ "x-systemd.automount" "x-systemd.device-timeout=10s" "noauto" ];
 
   nfsOpts =
-    if cfg.manual then [
+    # Pin NFSv4: without it mount.nfs silently falls back to v3 (lockd, statd,
+    # mountd) whenever the v4 path lookup fails. Requires the server to export
+    # the shares in its v4 pseudo root under their real paths (no fsid=0).
+    [ "vers=4.2" ]
+    ++ (if cfg.manual then [
       "noauto" "nofail" "_netdev"
       # Fail fast when the server is unreachable instead of hanging:
       "soft" "timeo=100" "retrans=3" "retry=0" "x-systemd.mount-timeout=20s"
       "x-systemd.required-by=nas.target"
-    ] else automountOpts;
+    ] else automountOpts);
 
   linkOpts =
     [ "bind" "_netdev" "comment=x-gvfs-hide" ]
@@ -65,25 +70,80 @@ in
     fileSystems =
       {
         "/media/nas" = {
-          device = "10.0.0.80:/export/media";
+          device = "${server}:/export/media";
           fsType = "nfs";
           options = nfsOpts;
         };
       }
       // builtins.listToAttrs (lib.lists.concatMap mkLinks users);
 
-    # Manual mode: one target that pulls in every mount, a clean unmount even
-    # when the server is gone, and permission for the users to switch.
+    # Manual mode: one target that pulls in every mount, a real unmount, and
+    # permission for the users to switch.
     systemd.targets.nas = lib.mkIf cfg.manual {
       description = "NAS shares mounted";
     };
 
+    # ForceUnmount aborts outstanding requests when the server is gone. No
+    # LazyUnmount on purpose: a lazy unmount only hides the mount point while
+    # the NFS superblock lives on behind every open file, working directory
+    # or inotify watch (Firefox in ~/Downloads, Emacs in ~/Dokumente). The
+    # kernel then keeps talking to an unreachable server, and such a ghost
+    # mount has frozen this notebook around suspend more than once. A busy
+    # mount now fails to unmount instead, and the NAS switch names the
+    # processes holding it.
     systemd.units."${nfsUnit}" = lib.mkIf cfg.manual {
       overrideStrategy = "asDropin";
       text = ''
         [Mount]
-        LazyUnmount=yes
         ForceUnmount=yes
+      '';
+    };
+
+    # Never carry an NFS mount through a suspend: detach before sleeping and
+    # reattach after resume once the server answers again. Only a mount that
+    # was active at bedtime is restored; an explicit disconnect stays
+    # disconnected.
+    systemd.services.nas-sleep = lib.mkIf cfg.manual {
+      description = "Detach the NAS shares around system sleep";
+      before = [ "sleep.target" ];
+      wantedBy = [ "sleep.target" ];
+      unitConfig.StopWhenUnneeded = true;
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+        TimeoutStopSec = 30;
+      };
+      path = [ pkgs.systemd pkgs.coreutils pkgs.util-linux pkgs.gnugrep pkgs.bash ];
+      script = ''
+        marker=/run/nas-sleep.remount
+        rm -f "$marker"
+        if systemctl is-active --quiet ${nfsUnit}; then
+          touch "$marker"
+          systemctl stop ${nfsUnit} || true
+        fi
+        # Bind mounts whose unmount failed (busy) are tried once more; what
+        # remains is logged, it keeps the NFS superblock alive through sleep.
+        for t in $(findmnt -rn -t nfs,nfs4 -o TARGET || true); do
+          systemctl stop "$(systemd-escape -p --suffix=mount "$t")" || true
+        done
+        if left=$(grep -v '^NV' /proc/fs/nfsfs/volumes 2>/dev/null) && [ -n "$left" ]; then
+          echo "NFS superblocks still alive before sleep:" >&2
+          echo "$left" >&2
+        fi
+      '';
+      preStop = ''
+        marker=/run/nas-sleep.remount
+        [ -e "$marker" ] || exit 0
+        rm -f "$marker"
+        # The network needs a moment after resume; give the server 15 s.
+        for _ in $(seq 1 15); do
+          if timeout 2 bash -c 'exec 3<>/dev/tcp/${server}/2049' 2>/dev/null; then
+            systemctl start --no-block nas.target
+            exit 0
+          fi
+          sleep 1
+        done
+        echo "NAS not reachable after resume, shares stay detached." >&2
       '';
     };
 

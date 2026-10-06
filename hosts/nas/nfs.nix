@@ -36,7 +36,7 @@
       mountdPort = 4002;
       statdPort = 4003;
       exports = ''
-        /export               10.0.0.0/24(rw,fsid=0,no_subtree_check,crossmnt)
+        /export               10.0.0.0/24(rw,no_subtree_check,crossmnt)
         /export/media         10.0.0.0/24(rw,no_subtree_check,nohide,insecure)
         /export/recordings    10.0.0.0/24(rw,no_subtree_check)
       '';

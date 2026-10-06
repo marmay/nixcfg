@@ -231,38 +231,82 @@ let
   };
 
   # NAS switch: mount or unmount the shares (nas.target, see nas_client.nix)
-  # and report the state for polybar.
+  # and report the state for polybar. Three states: mounted, off, and ghost:
+  # the mount is gone but an NFS superblock is still alive because some
+  # process holds a file, a working directory or an inotify watch on it. A
+  # ghost keeps the kernel talking to the (possibly unreachable) server and
+  # has frozen the notebook around suspend, so it is shown in the alert colour
+  # and the switch names the processes to close.
   nasToggle = pkgs.writeShellApplication {
     name = "xmonad-nas";
-    runtimeInputs = [ pkgs.systemd pkgs.libnotify ];
+    runtimeInputs = [ pkgs.systemd pkgs.libnotify pkgs.coreutils pkgs.util-linux pkgs.gawk pkgs.gnugrep ];
     text = ''
+      notify() { notify-send -a xmonad -h string:x-dunst-stack-tag:NAS "$@"; }
       mounted() { systemctl is-active --quiet media-nas.mount; }
+
+      # Live NFS superblocks as "major:minor", mounted or not.
+      nfs_devs() { awk 'NR > 1 { print $4 }' /proc/fs/nfsfs/volumes 2>/dev/null || true; }
+      ghost() { [ -n "$(nfs_devs)" ]; }
+
+      # Processes referencing a live NFS superblock: open files, working
+      # directory, inotify watches (whose fdinfo carries the kernel dev_t in
+      # hex, major in the top 12 bits). Only the caller's processes are
+      # visible, which covers the desktop applications.
+      holders() {
+        local devs pid
+        devs=$(nfs_devs)
+        [ -n "$devs" ] || return 0
+        for pid in /proc/[0-9]*; do
+          {
+            stat -L -c '%Hd:%Ld' "$pid"/cwd "$pid"/fd/* 2>/dev/null
+            grep -ho 'sdev:[0-9a-f]*' "$pid"/fdinfo/* 2>/dev/null | sort -u | while read -r s; do
+              d=$((16#''${s#sdev:}))
+              echo "$((d >> 20)):$((d & 0xfffff))"
+            done
+          } | grep -xF -f <(echo "$devs") >/dev/null && cat "$pid"/comm 2>/dev/null
+        done | sort | uniq -c | awk '{ printf "%s%s", (NR > 1 ? ", " : ""), $2 ($1 > 1 ? " (" $1 ")" : "") }'
+      }
+
+      disconnect() {
+        systemctl stop media-nas.mount || true
+        # Bind mounts whose unmount failed (busy) once more, explicitly:
+        for t in $(findmnt -rn -t nfs,nfs4 -o TARGET || true); do
+          systemctl stop "$(systemd-escape -p --suffix=mount "$t")" || true
+        done
+        if ghost; then
+          notify -u critical "NAS: Trennen unvollständig" "Noch in Verwendung durch: $(holders)"
+          return 1
+        fi
+        notify "NAS getrennt"
+      }
+
       case "''${1:-}" in
         status)
           if mounted; then
             echo "%{T3}󰒍%{T-}"
+          elif ghost; then
+            echo "%{T3}%{F#D70000}󰒍%{F-}%{T-}"
           else
             echo "%{T3}%{F#3F3F3F}󰒍%{F-}%{T-}"
           fi
           ;;
         toggle)
-          if mounted; then
-            if systemctl stop media-nas.mount; then
-              notify-send -a xmonad -h string:x-dunst-stack-tag:NAS "NAS getrennt"
-            else
-              notify-send -a xmonad -u critical -h string:x-dunst-stack-tag:NAS "NAS: Trennen fehlgeschlagen"
-            fi
+          if mounted || ghost; then
+            disconnect
           else
-            notify-send -a xmonad -h string:x-dunst-stack-tag:NAS "NAS wird verbunden …"
+            notify "NAS wird verbunden …"
             if systemctl start nas.target; then
-              notify-send -a xmonad -h string:x-dunst-stack-tag:NAS "NAS verbunden"
+              notify "NAS verbunden"
             else
-              notify-send -a xmonad -u critical -h string:x-dunst-stack-tag:NAS "NAS nicht erreichbar"
+              notify -u critical "NAS nicht erreichbar"
             fi
           fi
           ;;
+        holders)
+          holders; echo
+          ;;
         *)
-          echo "usage: $0 status|toggle" >&2
+          echo "usage: $0 status|toggle|holders" >&2
           exit 2
           ;;
       esac
