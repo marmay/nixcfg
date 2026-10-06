@@ -23,6 +23,12 @@
     services.fprintd.tod.enable = true;
     services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
 
+    # Password or fingerprint: PAM asks sequentially, so put the password first.
+    # Typing it unlocks at once; Enter on an empty prompt fails pam_unix
+    # immediately and hands over to fprintd. (unix has order 11700.)
+    security.pam.services.xlock.rules.auth.fprintd.order = 11750;
+    security.pam.services.sudo.rules.auth.fprintd.order = 11750;
+
     services.postgresql.enable = true;
     services.postgresql.ensureUsers = [ { name = "markus"; ensureDBOwnership = true; ensureClauses = { superuser = true; }; } ];
     services.postgresql.ensureDatabases = [ "markus" "competences_test" ];
