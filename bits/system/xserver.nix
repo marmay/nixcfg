@@ -19,6 +19,8 @@
 
     services.libinput = {
       enable = true;
+      # Ignore the touchpad while typing (NixOS defaults this to off).
+      touchpad.disableWhileTyping = true;
     };
 
     services.openssh.settings.X11Forwarding = lib.mkDefault true;
