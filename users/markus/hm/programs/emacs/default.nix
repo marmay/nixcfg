@@ -117,8 +117,13 @@
         (use-package org
           :mode (("org$" . org-mode))
           :ensure org-mode
+          :bind (("C-c l" . org-store-link))
           :config
             (add-hook 'org-mode-hook 'display-line-numbers-mode)
+            ;; Links to org headlines (e.g. from roam dailies) use id: links and
+            ;; create the ID on demand, also inside capture templates (%a).
+            (require (quote org-id))
+            (setq org-id-link-to-org-use-id t)
             (progn
               (load-library "find-lisp")
               (setq org-agenda-files
